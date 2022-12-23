@@ -1,34 +1,35 @@
-﻿using FastColoredTextBoxNS;
+﻿using ClVi.Properties;
+using FastColoredTextBoxNS;
 namespace ClVi
 {
-    partial class MainForm
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	partial class MainForm
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -63,7 +64,6 @@ namespace ClVi
 			this.startStopMacroRecordingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.executeMacroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.miLanguage = new System.Windows.Forms.ToolStripMenuItem();
-			this.miCSharp = new System.Windows.Forms.ToolStripMenuItem();
 			this.cSharpbuiltinHighlighterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.miVB = new System.Windows.Forms.ToolStripMenuItem();
 			this.hTMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,6 +77,8 @@ namespace ClVi
 			this.hTMLToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.rTFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this._textBox = new FastColoredTextBoxNS.FastColoredTextBox();
+			this._splitter = new System.Windows.Forms.Splitter();
+			this._documentMap = new FastColoredTextBoxNS.DocumentMap();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this._textBox)).BeginInit();
 			this.SuspendLayout();
@@ -85,9 +87,9 @@ namespace ClVi
 			// 
 			this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editToolStripMenuItem,
-            this.miLanguage,
-            this.miExport});
+				this.editToolStripMenuItem,
+				this.miLanguage,
+				this.miExport});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(1042, 24);
@@ -97,35 +99,35 @@ namespace ClVi
 			// editToolStripMenuItem
 			// 
 			this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.findToolStripMenuItem,
-            this.replaceToolStripMenuItem,
-            this.toolStripMenuItem1,
-            this.setSelectedAsReadonlyToolStripMenuItem,
-            this.setSelectedAsWritableToolStripMenuItem,
-            this.toolStripMenuItem8,
-            this.collapseSelectedBlockToolStripMenuItem,
-            this.toolStripMenuItem3,
-            this.collapseAllregionToolStripMenuItem,
-            this.exapndAllregionToolStripMenuItem,
-            this.toolStripMenuItem2,
-            this.increaseIndentSiftTabToolStripMenuItem,
-            this.decreaseIndentTabToolStripMenuItem,
-            this.toolStripMenuItem10,
-            this.commentSelectedLinesToolStripMenuItem,
-            this.uncommentSelectedLinesToolStripMenuItem,
-            this.toolStripMenuItem4,
-            this.goBackwardCtrlToolStripMenuItem,
-            this.goForwardCtrlShiftToolStripMenuItem,
-            this.toolStripMenuItem5,
-            this.autoIndentToolStripMenuItem,
-            this.toolStripMenuItem6,
-            this.goLeftBracketToolStripMenuItem,
-            this.goRightBracketToolStripMenuItem,
-            this.toolStripMenuItem7,
-            this.miPrint,
-            this.toolStripMenuItem9,
-            this.startStopMacroRecordingToolStripMenuItem,
-            this.executeMacroToolStripMenuItem});
+				this.findToolStripMenuItem,
+				this.replaceToolStripMenuItem,
+				this.toolStripMenuItem1,
+				this.setSelectedAsReadonlyToolStripMenuItem,
+				this.setSelectedAsWritableToolStripMenuItem,
+				this.toolStripMenuItem8,
+				this.collapseSelectedBlockToolStripMenuItem,
+				this.toolStripMenuItem3,
+				this.collapseAllregionToolStripMenuItem,
+				this.exapndAllregionToolStripMenuItem,
+				this.toolStripMenuItem2,
+				this.increaseIndentSiftTabToolStripMenuItem,
+				this.decreaseIndentTabToolStripMenuItem,
+				this.toolStripMenuItem10,
+				this.commentSelectedLinesToolStripMenuItem,
+				this.uncommentSelectedLinesToolStripMenuItem,
+				this.toolStripMenuItem4,
+				this.goBackwardCtrlToolStripMenuItem,
+				this.goForwardCtrlShiftToolStripMenuItem,
+				this.toolStripMenuItem5,
+				this.autoIndentToolStripMenuItem,
+				this.toolStripMenuItem6,
+				this.goLeftBracketToolStripMenuItem,
+				this.goRightBracketToolStripMenuItem,
+				this.toolStripMenuItem7,
+				this.miPrint,
+				this.toolStripMenuItem9,
+				this.startStopMacroRecordingToolStripMenuItem,
+				this.executeMacroToolStripMenuItem});
 			this.editToolStripMenuItem.Name = "editToolStripMenuItem";
 			this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
 			this.editToolStripMenuItem.Text = "&Edit";
@@ -316,96 +318,88 @@ namespace ClVi
 			// miLanguage
 			// 
 			this.miLanguage.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miCSharp,
-            this.cSharpbuiltinHighlighterToolStripMenuItem,
-            this.miVB,
-            this.hTMLToolStripMenuItem,
-            this.xmlToolStripMenuItem,
-            this.sQLToolStripMenuItem,
-            this.pHPToolStripMenuItem,
-            this.jSToolStripMenuItem,
-            this.luaToolStripMenuItem,
-            this.jSONToolStripMenuItem});
+				this.cSharpbuiltinHighlighterToolStripMenuItem,
+				this.miVB,
+				this.hTMLToolStripMenuItem,
+				this.xmlToolStripMenuItem,
+				this.sQLToolStripMenuItem,
+				this.pHPToolStripMenuItem,
+				this.jSToolStripMenuItem,
+				this.luaToolStripMenuItem,
+				this.jSONToolStripMenuItem});
 			this.miLanguage.Name = "miLanguage";
 			this.miLanguage.Size = new System.Drawing.Size(71, 20);
 			this.miLanguage.Text = "Language";
 			this.miLanguage.DropDownOpening += new System.EventHandler(this.miLanguage_DropDownOpening);
 			// 
-			// miCSharp
-			// 
-			this.miCSharp.Name = "miCSharp";
-			this.miCSharp.Size = new System.Drawing.Size(224, 22);
-			this.miCSharp.Text = "CSharp (custom highlighter)";
-			this.miCSharp.Click += new System.EventHandler(this.miCSharp_Click);
-			// 
 			// cSharpbuiltinHighlighterToolStripMenuItem
 			// 
 			this.cSharpbuiltinHighlighterToolStripMenuItem.Name = "cSharpbuiltinHighlighterToolStripMenuItem";
-			this.cSharpbuiltinHighlighterToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
-			this.cSharpbuiltinHighlighterToolStripMenuItem.Text = "CSharp (built-in highlighter)";
+			this.cSharpbuiltinHighlighterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.cSharpbuiltinHighlighterToolStripMenuItem.Text = "CSharp";
 			this.cSharpbuiltinHighlighterToolStripMenuItem.Click += new System.EventHandler(this.miCSharp_Click);
 			// 
 			// miVB
 			// 
 			this.miVB.Name = "miVB";
-			this.miVB.Size = new System.Drawing.Size(224, 22);
+			this.miVB.Size = new System.Drawing.Size(180, 22);
 			this.miVB.Text = "VB";
 			this.miVB.Click += new System.EventHandler(this.miCSharp_Click);
 			// 
 			// hTMLToolStripMenuItem
 			// 
 			this.hTMLToolStripMenuItem.Name = "hTMLToolStripMenuItem";
-			this.hTMLToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+			this.hTMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.hTMLToolStripMenuItem.Text = "HTML";
 			this.hTMLToolStripMenuItem.Click += new System.EventHandler(this.miCSharp_Click);
 			// 
 			// xmlToolStripMenuItem
 			// 
 			this.xmlToolStripMenuItem.Name = "xmlToolStripMenuItem";
-			this.xmlToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+			this.xmlToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.xmlToolStripMenuItem.Text = "XML";
 			this.xmlToolStripMenuItem.Click += new System.EventHandler(this.miCSharp_Click);
 			// 
 			// sQLToolStripMenuItem
 			// 
 			this.sQLToolStripMenuItem.Name = "sQLToolStripMenuItem";
-			this.sQLToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+			this.sQLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.sQLToolStripMenuItem.Text = "SQL";
 			this.sQLToolStripMenuItem.Click += new System.EventHandler(this.miCSharp_Click);
 			// 
 			// pHPToolStripMenuItem
 			// 
 			this.pHPToolStripMenuItem.Name = "pHPToolStripMenuItem";
-			this.pHPToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+			this.pHPToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.pHPToolStripMenuItem.Text = "PHP";
 			this.pHPToolStripMenuItem.Click += new System.EventHandler(this.miCSharp_Click);
 			// 
 			// jSToolStripMenuItem
 			// 
 			this.jSToolStripMenuItem.Name = "jSToolStripMenuItem";
-			this.jSToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+			this.jSToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.jSToolStripMenuItem.Text = "JS";
 			this.jSToolStripMenuItem.Click += new System.EventHandler(this.miCSharp_Click);
 			// 
 			// luaToolStripMenuItem
 			// 
 			this.luaToolStripMenuItem.Name = "luaToolStripMenuItem";
-			this.luaToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+			this.luaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.luaToolStripMenuItem.Text = "Lua";
 			this.luaToolStripMenuItem.Click += new System.EventHandler(this.miCSharp_Click);
 			// 
 			// jSONToolStripMenuItem
 			// 
 			this.jSONToolStripMenuItem.Name = "jSONToolStripMenuItem";
-			this.jSONToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+			this.jSONToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.jSONToolStripMenuItem.Text = "JSON";
 			this.jSONToolStripMenuItem.Click += new System.EventHandler(this.miCSharp_Click);
 			// 
 			// miExport
 			// 
 			this.miExport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.hTMLToolStripMenuItem1,
-            this.rTFToolStripMenuItem});
+				this.hTMLToolStripMenuItem1,
+				this.rTFToolStripMenuItem});
 			this.miExport.Name = "miExport";
 			this.miExport.Size = new System.Drawing.Size(53, 20);
 			this.miExport.Text = "Export";
@@ -424,21 +418,30 @@ namespace ClVi
 			this.rTFToolStripMenuItem.Text = "RTF";
 			this.rTFToolStripMenuItem.Click += new System.EventHandler(this.rTFToolStripMenuItem_Click);
 			// 
+			// _splitter
+			// 
+			this._splitter.Dock = System.Windows.Forms.DockStyle.Right;
+			this._splitter.Location = new System.Drawing.Point(654, 0);
+			this._splitter.Name = "_splitter";
+			this._splitter.Size = new System.Drawing.Size(3, 481);
+			this._splitter.TabIndex = 3;
+			this._splitter.TabStop = false;
+			// 
 			// _textBox
 			// 
 			this._textBox.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
+		  '(',
+		  ')',
+		  '{',
+		  '}',
+		  '[',
+		  ']',
+		  '\"',
+		  '\"',
+		  '\'',
+		  '\''};
 			this._textBox.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*" +
-    "(?<range>:)\\s*(?<range>[^;]+);";
+	 "(?<range>:)\\s*(?<range>[^;]+);";
 			this._textBox.AutoIndentExistingLines = false;
 			this._textBox.AutoScrollMinSize = new System.Drawing.Size(32, 15);
 			this._textBox.BackBrush = null;
@@ -457,18 +460,28 @@ namespace ClVi
 			this._textBox.Location = new System.Drawing.Point(0, 24);
 			this._textBox.Name = "_textBox";
 			this._textBox.Paddings = new System.Windows.Forms.Padding(0);
-			this._textBox.PreferredLineWidth = 80;
+			//this._textBox.PreferredLineWidth = 80;
 			this._textBox.ReservedCountOfLineNumberChars = 2;
 			this._textBox.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
 			this._textBox.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("_textBox.ServiceColors")));
 			this._textBox.Size = new System.Drawing.Size(1042, 962);
 			this._textBox.TabIndex = 3;
 			this._textBox.Zoom = 100;
-			this._textBox.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.fctb_TextChanged);
+			this._textBox.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.textBox_TextChanged);
 			this._textBox.SelectionChangedDelayed += new System.EventHandler(this.fctb_SelectionChangedDelayed);
-			this._textBox.AutoIndentNeeded += new System.EventHandler<FastColoredTextBoxNS.AutoIndentEventArgs>(this.fctb_AutoIndentNeeded);
+			this._textBox.AutoIndentNeeded += new System.EventHandler<FastColoredTextBoxNS.AutoIndentEventArgs>(this.textBox_AutoIndentNeeded);
 			this._textBox.CustomAction += new System.EventHandler<FastColoredTextBoxNS.CustomActionEventArgs>(this.fctb_CustomAction);
-			this._textBox.Load += new System.EventHandler(this.fctb_Load);
+			// 
+			// _documentMap
+			// 
+			this._documentMap.Dock = System.Windows.Forms.DockStyle.Right;
+			this._documentMap.ForeColor = System.Drawing.Color.Maroon;
+			this._documentMap.Location = new System.Drawing.Point(657, 0);
+			this._documentMap.Name = "_documentMap";
+			this._documentMap.Size = new System.Drawing.Size(184, 481);
+			this._documentMap.TabIndex = 1;
+			this._documentMap.Target = this._textBox;
+			this._documentMap.Text = "_documentMap";
 			// 
 			// MainForm
 			// 
@@ -477,6 +490,8 @@ namespace ClVi
 			this.AutoSize = true;
 			this.ClientSize = new System.Drawing.Size(1042, 986);
 			this.Controls.Add(this._textBox);
+			this.Controls.Add(this._splitter);
+			this.Controls.Add(this._documentMap);
 			this.Controls.Add(this.menuStrip1);
 			this.ImeMode = System.Windows.Forms.ImeMode.Hiragana;
 			this.MainMenuStrip = this.menuStrip1;
@@ -489,56 +504,57 @@ namespace ClVi
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
-        private FastColoredTextBox _textBox;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem findToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem replaceToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem miLanguage;
-        private System.Windows.Forms.ToolStripMenuItem miCSharp;
-        private System.Windows.Forms.ToolStripMenuItem miVB;
-        private System.Windows.Forms.ToolStripMenuItem collapseAllregionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exapndAllregionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem increaseIndentSiftTabToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem decreaseIndentTabToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem hTMLToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem miExport;
-        private System.Windows.Forms.ToolStripMenuItem hTMLToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem collapseSelectedBlockToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sQLToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pHPToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
-        private System.Windows.Forms.ToolStripMenuItem goBackwardCtrlToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem goForwardCtrlShiftToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
-        private System.Windows.Forms.ToolStripMenuItem autoIndentToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
-        private System.Windows.Forms.ToolStripMenuItem goLeftBracketToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem goRightBracketToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem jSToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem7;
-        private System.Windows.Forms.ToolStripMenuItem miPrint;
-        private System.Windows.Forms.ToolStripMenuItem cSharpbuiltinHighlighterToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem setSelectedAsReadonlyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem setSelectedAsWritableToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem8;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem9;
-        private System.Windows.Forms.ToolStripMenuItem startStopMacroRecordingToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem executeMacroToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rTFToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem10;
-        private System.Windows.Forms.ToolStripMenuItem commentSelectedLinesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem uncommentSelectedLinesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem luaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem xmlToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem jSONToolStripMenuItem;
-    }
+		private FastColoredTextBox _textBox;
+		private FastColoredTextBoxNS.DocumentMap _documentMap;
+		private System.Windows.Forms.Splitter _splitter;
+		private System.Windows.Forms.MenuStrip menuStrip1;
+		private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem findToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem replaceToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem miLanguage;
+		private System.Windows.Forms.ToolStripMenuItem miVB;
+		private System.Windows.Forms.ToolStripMenuItem collapseAllregionToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem exapndAllregionToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+		private System.Windows.Forms.ToolStripMenuItem increaseIndentSiftTabToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem decreaseIndentTabToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem hTMLToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+		private System.Windows.Forms.ToolStripMenuItem miExport;
+		private System.Windows.Forms.ToolStripMenuItem hTMLToolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem collapseSelectedBlockToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem sQLToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem pHPToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
+		private System.Windows.Forms.ToolStripMenuItem goBackwardCtrlToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem goForwardCtrlShiftToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
+		private System.Windows.Forms.ToolStripMenuItem autoIndentToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
+		private System.Windows.Forms.ToolStripMenuItem goLeftBracketToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem goRightBracketToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem jSToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem7;
+		private System.Windows.Forms.ToolStripMenuItem miPrint;
+		private System.Windows.Forms.ToolStripMenuItem cSharpbuiltinHighlighterToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem setSelectedAsReadonlyToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem setSelectedAsWritableToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem8;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem9;
+		private System.Windows.Forms.ToolStripMenuItem startStopMacroRecordingToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem executeMacroToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem rTFToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem10;
+		private System.Windows.Forms.ToolStripMenuItem commentSelectedLinesToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem uncommentSelectedLinesToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem luaToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem xmlToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem jSONToolStripMenuItem;
+	}
 }
 

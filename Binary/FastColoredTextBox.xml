@@ -1412,6 +1412,11 @@
             Occurs when mouse is moving over text and tooltip is needed
             </summary>
         </member>
+        <member name="P:FastColoredTextBoxNS.FastColoredTextBox.DefaultMarkerSize">
+            <summary>
+            Default size of the markers
+            </summary>
+        </member>
         <member name="M:FastColoredTextBoxNS.FastColoredTextBox.ClearHints">
             <summary>
             Removes all hints

@@ -37,10 +37,6 @@ namespace ClVi
 		public MainForm()
 		{
 			InitializeComponent();
-			_sharpClipboard = new SharpClipboard(this.components);
-			_sharpClipboard.MonitorClipboard = true;
-			_sharpClipboard.ObservableFormats.Texts = true;
-			_sharpClipboard.ClipboardChanged += new EventHandler<SharpClipboard.ClipboardChangedEventArgs>(this.clipboardChanged);
 		}
 
 		private void InitStylesPriority()
@@ -412,9 +408,13 @@ namespace ClVi
 					//case "Lua": _textBox.Language = Language.Lua; 
 					//	break;
 					case "JSON": _textBox.Language = Language.JSON;
-						var doc = System.Text.Json.JsonDocument.Parse(text);
-						var options = new JsonSerializerOptions { WriteIndented = true };
-						text = JsonSerializer.Serialize(doc, options);
+						{
+							var options = new JsonSerializerOptions { WriteIndented = true };
+							using (var doc = System.Text.Json.JsonDocument.Parse(text))
+							{
+								text = JsonSerializer.Serialize(doc, options);
+							}
+						}
 						break;
 				}
 

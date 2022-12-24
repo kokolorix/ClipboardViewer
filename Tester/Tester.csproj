@@ -524,7 +524,7 @@
   <PropertyGroup>
     <PostBuildEvent>copy "$(TargetDir)Tester.exe" "$(SolutionDir)Binary"
 copy "$(TargetDir)*.dll" "$(SolutionDir)Binary"
-copy "$(TargetDir)*.xml" "$(SolutionDir)Binary"
+REM copy "$(TargetDir)*.xml" "$(SolutionDir)Binary"
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

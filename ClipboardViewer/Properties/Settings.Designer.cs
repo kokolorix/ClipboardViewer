@@ -22,5 +22,41 @@ namespace ClVi.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
+        public global::System.Windows.Forms.FormWindowState AppState {
+            get {
+                return ((global::System.Windows.Forms.FormWindowState)(this["AppState"]));
+            }
+            set {
+                this["AppState"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("500, 500")]
+        public global::System.Drawing.Size AppSize {
+            get {
+                return ((global::System.Drawing.Size)(this["AppSize"]));
+            }
+            set {
+                this["AppSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50, 50")]
+        public global::System.Drawing.Point AppLocation {
+            get {
+                return ((global::System.Drawing.Point)(this["AppLocation"]));
+            }
+            set {
+                this["AppLocation"] = value;
+            }
+        }
     }
 }

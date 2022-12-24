@@ -421,5 +421,32 @@ namespace ClVi
 				_textBox.Text = text;
 			}
 		}
+
+		private void MainForm_Load(object sender, EventArgs e)
+		{
+			this.WindowState = Properties.Settings.Default.AppState;
+			this.Location = Properties.Settings.Default.AppLocation;
+			this.Size = Properties.Settings.Default.AppSize;
+		}
+
+		private void MainForm_Closing(object sender, FormClosingEventArgs e)
+		{
+			Properties.Settings.Default.AppState = this.WindowState;
+			if (this.WindowState == FormWindowState.Normal)
+			{
+				// save location and size if the state is normal
+				Properties.Settings.Default.AppLocation = this.Location;
+				Properties.Settings.Default.AppSize = this.Size;
+			}
+			else
+			{
+				// save the RestoreBounds if the form is minimized or maximized!
+				Properties.Settings.Default.AppLocation = this.RestoreBounds.Location;
+				Properties.Settings.Default.AppSize = this.RestoreBounds.Size;
+			}
+
+			// don't forget to save the settings
+			Properties.Settings.Default.Save();
+		}
 	}
 }

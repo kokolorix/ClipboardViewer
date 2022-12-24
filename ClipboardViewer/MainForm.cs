@@ -14,6 +14,9 @@ using System.Text;
 using WK.Libraries.SharpClipboardNS;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Windows.Input;
+using System.Runtime.InteropServices;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ClVi
 {
@@ -397,7 +400,8 @@ namespace ClVi
 					//	break;
 					//case "HTML": _textBox.Language = Language.HTML; 
 					//	break;
-					case "XML": _textBox.Language = Language.XML; 
+					case "XML":
+						_textBox.Language = Language.XML;
 						break;
 					//case "SQL": _textBox.Language = Language.SQL; 
 					//	break;
@@ -407,7 +411,8 @@ namespace ClVi
 					//	break;
 					//case "Lua": _textBox.Language = Language.Lua; 
 					//	break;
-					case "JSON": _textBox.Language = Language.JSON;
+					case "JSON":
+						_textBox.Language = Language.JSON;
 						{
 							var options = new JsonSerializerOptions { WriteIndented = true };
 							using (var doc = System.Text.Json.JsonDocument.Parse(text))
@@ -424,6 +429,9 @@ namespace ClVi
 
 		private void MainForm_Load(object sender, EventArgs e)
 		{
+			if (Keyboard.IsKeyDown(Key.LeftShift))
+				return;
+
 			this.WindowState = Properties.Settings.Default.AppState;
 			this.Location = Properties.Settings.Default.AppLocation;
 			this.Size = Properties.Settings.Default.AppSize;
@@ -448,5 +456,95 @@ namespace ClVi
 			// don't forget to save the settings
 			Properties.Settings.Default.Save();
 		}
+
+		private void foldAllToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			//for (int i = _textBox.LinesCount - 1; i >= 0; i--)
+			//{
+			//	if (_textBox.TextSource.LineHasFoldingStartMarker(i))
+			//		_textBox.CollapseFoldingBlock(i);
+			//}
+			Dictionary<int, List<int>> nestedFoldingMarkers = getNesteFoldingMarkerDictionary();
+
+			var layers = nestedFoldingMarkers.Keys.ToList();
+			layers.RemoveAt(0); // Top layer not
+			layers.Reverse();   // Backwards
+
+			foreach (int i in layers)
+				foldNestedLayer(i);
+
+			_textBox.OnVisibleRangeChanged();
+			_textBox.UpdateScrollbars();
+		}
+
+		private void unfoldAllToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			_textBox.ExpandAllFoldingBlocks();
+		}
+
+		private void foldNestedLayer(int layer)
+		{
+			Dictionary<int, List<int>> nestedFoldingMarkers = getNesteFoldingMarkerDictionary();
+
+			if (nestedFoldingMarkers.ContainsKey(layer))
+			{
+				foreach (int i in nestedFoldingMarkers[layer])
+					_textBox.CollapseFoldingBlock(i);
+			}
+		}
+
+		private Dictionary<int, List<int>> getNesteFoldingMarkerDictionary()
+		{
+			Dictionary<int, List<int>> nestedFoldingMarkers = new Dictionary<int, List<int>>();
+			int nesting = 0;
+			for (int i = 0; i < _textBox.LinesCount; i++)
+			{
+				if (_textBox.TextSource.LineHasFoldingStartMarker(i))
+				{
+					if (nestedFoldingMarkers.ContainsKey(nesting))
+						nestedFoldingMarkers[nesting].Add(i);
+					else
+						nestedFoldingMarkers.Add(nesting, new List<int> { i });
+
+					nesting++;
+				}
+				if (_textBox.TextSource.LineHasFoldingEndMarker(i))
+					nesting--;
+			}
+
+			return nestedFoldingMarkers;
+		}
+		private void fold1LayerToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			foldNestedLayer(1);
+
+			_textBox.OnVisibleRangeChanged();
+			_textBox.UpdateScrollbars();
+		}
+
+		private void fold2LayerToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			foldNestedLayer(2);
+
+			_textBox.OnVisibleRangeChanged();
+			_textBox.UpdateScrollbars();
+		}
+
+		private void fold3LayerToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			foldNestedLayer(3);
+
+			_textBox.OnVisibleRangeChanged();
+			_textBox.UpdateScrollbars();
+		}
+
+		private void fold4LayerToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			foldNestedLayer(4);
+
+			_textBox.OnVisibleRangeChanged();
+			_textBox.UpdateScrollbars();
+		}
+
 	}
 }

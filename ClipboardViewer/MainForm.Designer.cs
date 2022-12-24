@@ -37,6 +37,7 @@ namespace ClVi
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.findToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.replaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
@@ -76,6 +77,13 @@ namespace ClVi
 			this.jSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.luaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.jSONToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.foldingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.unfoldAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.foldAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.fold1LayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.fold2LayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.fold3LayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.fold4LayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this._textBox = new FastColoredTextBoxNS.FastColoredTextBox();
 			this._splitter = new System.Windows.Forms.Splitter();
 			this._documentMap = new FastColoredTextBoxNS.DocumentMap();
@@ -89,7 +97,8 @@ namespace ClVi
 			this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editToolStripMenuItem,
-            this.miLanguage});
+            this.miLanguage,
+            this.foldingToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(484, 24);
@@ -99,6 +108,7 @@ namespace ClVi
 			// editToolStripMenuItem
 			// 
 			this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator1,
             this.findToolStripMenuItem,
             this.replaceToolStripMenuItem,
             this.toolStripMenuItem1,
@@ -131,6 +141,11 @@ namespace ClVi
 			this.editToolStripMenuItem.Name = "editToolStripMenuItem";
 			this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
 			this.editToolStripMenuItem.Text = "&Edit";
+			// 
+			// toolStripSeparator1
+			// 
+			this.toolStripSeparator1.Name = "toolStripSeparator1";
+			this.toolStripSeparator1.Size = new System.Drawing.Size(264, 6);
 			// 
 			// findToolStripMenuItem
 			// 
@@ -395,6 +410,61 @@ namespace ClVi
 			this.jSONToolStripMenuItem.Text = "JSON";
 			this.jSONToolStripMenuItem.Click += new System.EventHandler(this.miCSharp_Click);
 			// 
+			// foldingToolStripMenuItem
+			// 
+			this.foldingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.unfoldAllToolStripMenuItem,
+            this.foldAllToolStripMenuItem,
+            this.fold1LayerToolStripMenuItem,
+            this.fold2LayerToolStripMenuItem,
+            this.fold3LayerToolStripMenuItem,
+            this.fold4LayerToolStripMenuItem});
+			this.foldingToolStripMenuItem.Name = "foldingToolStripMenuItem";
+			this.foldingToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+			this.foldingToolStripMenuItem.Text = "Folding";
+			// 
+			// unfoldAllToolStripMenuItem
+			// 
+			this.unfoldAllToolStripMenuItem.Name = "unfoldAllToolStripMenuItem";
+			this.unfoldAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.unfoldAllToolStripMenuItem.Text = "Unfold All";
+			this.unfoldAllToolStripMenuItem.Click += new System.EventHandler(this.unfoldAllToolStripMenuItem_Click);
+			// 
+			// foldAllToolStripMenuItem
+			// 
+			this.foldAllToolStripMenuItem.Name = "foldAllToolStripMenuItem";
+			this.foldAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.foldAllToolStripMenuItem.Text = "Fold All";
+			this.foldAllToolStripMenuItem.Click += new System.EventHandler(this.foldAllToolStripMenuItem_Click);
+			// 
+			// fold1LayerToolStripMenuItem
+			// 
+			this.fold1LayerToolStripMenuItem.Name = "fold1LayerToolStripMenuItem";
+			this.fold1LayerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.fold1LayerToolStripMenuItem.Text = "Fold 1 layer";
+			this.fold1LayerToolStripMenuItem.Click += new System.EventHandler(this.fold1LayerToolStripMenuItem_Click);
+			// 
+			// fold2LayerToolStripMenuItem
+			// 
+			this.fold2LayerToolStripMenuItem.Name = "fold2LayerToolStripMenuItem";
+			this.fold2LayerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.fold2LayerToolStripMenuItem.Text = "Fold 2 layer";
+			this.fold2LayerToolStripMenuItem.Click += new System.EventHandler(this.fold2LayerToolStripMenuItem_Click);
+			// 
+			// fold3LayerToolStripMenuItem
+			// 
+			this.fold3LayerToolStripMenuItem.Name = "fold3LayerToolStripMenuItem";
+			this.fold3LayerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.fold3LayerToolStripMenuItem.Text = "Fold 3 layer";
+			this.fold3LayerToolStripMenuItem.Click += new System.EventHandler(this.fold3LayerToolStripMenuItem_Click);
+			// 
+			// fold4LayerToolStripMenuItem
+			// 
+			this.fold4LayerToolStripMenuItem.Name = "fold4LayerToolStripMenuItem";
+			this.fold4LayerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.fold4LayerToolStripMenuItem.Text = "Fold 4 layer";
+			this.fold4LayerToolStripMenuItem.Click += new System.EventHandler(this.fold4LayerToolStripMenuItem_Click);
+			// 
 			// _textBox
 			// 
 			this._textBox.AutoCompleteBracketsList = new char[] {
@@ -417,7 +487,7 @@ namespace ClVi
 			this._textBox.CharHeight = 15;
 			this._textBox.CharWidth = 7;
 			this._textBox.Cursor = System.Windows.Forms.Cursors.IBeam;
-			this._textBox.DefaultMarkerSize = 8;
+			this._textBox.DefaultMarkerSize = 10;
 			this._textBox.DelayedEventsInterval = 200;
 			this._textBox.DelayedTextChangedInterval = 500;
 			this._textBox.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
@@ -428,7 +498,7 @@ namespace ClVi
 			this._textBox.Location = new System.Drawing.Point(0, 24);
 			this._textBox.Name = "_textBox";
 			this._textBox.Paddings = new System.Windows.Forms.Padding(0);
-			this._textBox.ReservedCountOfLineNumberChars = 2;
+			this._textBox.ReservedCountOfLineNumberChars = 3;
 			this._textBox.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
 			this._textBox.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("_textBox.ServiceColors")));
 			this._textBox.Size = new System.Drawing.Size(381, 437);
@@ -542,6 +612,14 @@ namespace ClVi
 		private System.Windows.Forms.ToolStripMenuItem luaToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem xmlToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem jSONToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+		private System.Windows.Forms.ToolStripMenuItem foldingToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem unfoldAllToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem foldAllToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem fold1LayerToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem fold2LayerToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem fold3LayerToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem fold4LayerToolStripMenuItem;
 	}
 }
 

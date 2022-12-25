@@ -17,6 +17,8 @@ using System.Text.Json.Serialization;
 using System.Windows.Input;
 using System.Runtime.InteropServices;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Xml;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ClVi
 {
@@ -40,7 +42,22 @@ namespace ClVi
 		public MainForm()
 		{
 			InitializeComponent();
+
+			//AdjustClientWidthToDPIScale();
 		}
+
+		private void AdjustClientWidthToDPIScale()
+		{
+			double dpiKoef = Graphics.FromHdc(GetDC(IntPtr.Zero)).DpiX / 96f;
+
+			int compansatedWidth = (int)(ClientSize.Width * dpiKoef);
+
+
+			this.ClientSize = new Size(compansatedWidth, this.ClientSize.Height);
+		}
+
+		[DllImport("User32.dll")]
+		private static extern IntPtr GetDC(IntPtr hWnd);
 
 		private void InitStylesPriority()
 		{
@@ -73,19 +90,24 @@ namespace ClVi
 
 		private void textBox_TextChanged(object sender, TextChangedEventArgs e)
 		{
-			_lang = getLanguageFromText(_textBox.Text);
-			setLanguage();
+			if(_textBox.Text.Length > 0)
+			{
+				_lang = getLanguageFromText(_textBox.Text.Substring(0, Math.Min(_textBox.Text.Length, 500)));
+				setLanguage();
+			}
 		}
 
 		private static string getLanguageFromText(string text)
 		{
 			string lang = "CSharp";
+			Regex xmlRx = new Regex(@"^<");
+			Regex jsonRx = new Regex(@"^[{[]");
 
-			if (text.Trim().StartsWith("<?xml"))
-			{
+			if (xmlRx.Match(text.Trim()).Success)
+				{
 				lang = "XML";
 			}
-			else if (text.Trim().StartsWith("{"))
+			else if (jsonRx.Match(text.Trim()).Success)
 			{
 				lang = "JSON";
 			}
@@ -387,12 +409,26 @@ namespace ClVi
 
 		private void clipboardChanged(object sender, SharpClipboard.ClipboardChangedEventArgs e)
 		{
-			if (e.ContentType == SharpClipboard.ContentTypes.Text)
+			string text = null;
+			try
 			{
-				string lang = getLanguageFromText(_sharpClipboard.ClipboardText.Substring(0, Math.Min(_sharpClipboard.ClipboardText.Length, 500)));
-				string text = _sharpClipboard.ClipboardText;
 
-				switch (lang)
+				switch (e.ContentType)
+				{
+					case SharpClipboard.ContentTypes.Text:
+						text = _sharpClipboard.ClipboardText;
+						break;
+
+					case SharpClipboard.ContentTypes.Files:
+
+						text = File.ReadAllText(_sharpClipboard.ClipboardFile);
+						break;
+				}
+
+
+				_lang = getLanguageFromText(text.Substring(0, Math.Min(text.Length, 500)));
+	
+				switch (_lang)
 				{
 					//case "CSharp": _textBox.Language = Language.CSharp;
 					//	break;
@@ -401,7 +437,7 @@ namespace ClVi
 					//case "HTML": _textBox.Language = Language.HTML; 
 					//	break;
 					case "XML":
-						_textBox.Language = Language.XML;
+						text = System.Xml.Linq.XDocument.Parse(text).ToString();
 						break;
 					//case "SQL": _textBox.Language = Language.SQL; 
 					//	break;
@@ -412,25 +448,29 @@ namespace ClVi
 					//case "Lua": _textBox.Language = Language.Lua; 
 					//	break;
 					case "JSON":
-						_textBox.Language = Language.JSON;
+						var serializerOptions = new JsonSerializerOptions { WriteIndented = true };
+						var documentOptions = new JsonDocumentOptions { AllowTrailingCommas = true };
+						using (var doc = System.Text.Json.JsonDocument.Parse(text, documentOptions))
 						{
-							var options = new JsonSerializerOptions { WriteIndented = true };
-							using (var doc = System.Text.Json.JsonDocument.Parse(text))
-							{
-								text = JsonSerializer.Serialize(doc, options);
-							}
+							text = JsonSerializer.Serialize(doc, serializerOptions);
 						}
 						break;
 				}
-
+			}
+			catch (System.Exception ex)
+			{
+				
+			}
+			finally
+			{
 				_textBox.Text = text;
 			}
 		}
 
 		private void MainForm_Load(object sender, EventArgs e)
 		{
-			if (Keyboard.IsKeyDown(Key.LeftShift))
-				return;
+			//if (Keyboard.IsKeyDown(Key.LeftShift))
+			//	return;
 
 			this.WindowState = Properties.Settings.Default.AppState;
 			this.Location = Properties.Settings.Default.AppLocation;

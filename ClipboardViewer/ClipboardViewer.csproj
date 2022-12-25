@@ -127,6 +127,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClipboardViewer.ico" />
+    <None Include="Resources\layer--plus.png" />
+    <None Include="Resources\layer--minus.png" />
+    <None Include="Resources\bookmark--plus.png" />
+    <None Include="Resources\forward_16x16.png" />
+    <None Include="Resources\backward0_16x16.png" />
+    <None Include="Resources\redo_16x16.png" />
+    <None Include="Resources\undo_16x16.png" />
+    <None Include="Resources\edit-padding-top.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

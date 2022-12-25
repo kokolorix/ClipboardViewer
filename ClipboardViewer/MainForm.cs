@@ -586,5 +586,14 @@ namespace ClVi
 			_textBox.UpdateScrollbars();
 		}
 
+		private void _documentMap_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void tbFind_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }

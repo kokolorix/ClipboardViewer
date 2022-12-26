@@ -35,14 +35,20 @@ namespace ClVi
 		TextStyle BrownStyle = new TextStyle(Brushes.Brown, null, FontStyle.Italic);
 		TextStyle MaroonStyle = new TextStyle(Brushes.Maroon, null, FontStyle.Regular);
 		MarkerStyle SameWordsStyle = new MarkerStyle(new SolidBrush(Color.FromArgb(40, Color.Gray)));
+		Style invisibleCharsStyle = new InvisibleCharsRenderer(Pens.Gray);
+		Color currentLineColor = Color.Orange;
 
-		private SharpClipboard _sharpClipboard;
+		private SharpClipboard sharpClipboard;
 
 
 		public MainForm()
 		{
 			InitializeComponent();
 
+			textBox.CurrentLineColor = btHighlightCurrentLine.Checked ? currentLineColor : Color.Transparent;
+			textBox.ShowFoldingLines = btShowFoldingLines.Checked;
+			copyToolStripButton.Enabled = !toolObserveClipboard.Checked;
+			pasteToolStripButton.Enabled = !toolObserveClipboard.Checked;
 			//AdjustClientWidthToDPIScale();
 		}
 
@@ -407,27 +413,61 @@ namespace ClVi
 			textBox.RemoveLinePrefix(textBox.CommentPrefix);
 		}
 
+		private enum ClipboardType
+		{
+			Unknown = 0,
+			Text = 1,
+			File = 2,
+			Image = 3,
+		}
+
 		private void clipboardChanged(object sender, SharpClipboard.ClipboardChangedEventArgs e)
+		{
+			ClipboardType ct = ClipboardType.Unknown;
+
+			switch (e.ContentType)
+			{
+				case SharpClipboard.ContentTypes.Text:
+					ct = ClipboardType.Text;
+					break;
+
+				case SharpClipboard.ContentTypes.Files:
+					ct = ClipboardType.File;
+					break;
+
+				case SharpClipboard.ContentTypes.Image:
+					ct = ClipboardType.Image;
+					break;
+			}
+
+			string text = getTextFromClipboard(ct);
+			textBox.Text = text;
+		}
+
+		private string getTextFromClipboard(ClipboardType ct)
 		{
 			string text = String.Empty;
 			try
 			{
 
-				switch (e.ContentType)
+				switch (ct)
 				{
-					case SharpClipboard.ContentTypes.Text:
-						text = _sharpClipboard.ClipboardText;
+					case ClipboardType.Text:
+						text = Clipboard.GetText();
 						break;
 
-					case SharpClipboard.ContentTypes.Files:
-
-						text = File.ReadAllText(_sharpClipboard.ClipboardFile);
+					case ClipboardType.File:
+						foreach(var fp in Clipboard.GetFileDropList())
+						{
+							text += File.ReadAllText(fp);
+						}
+						
 						break;
 				}
 
 
 				_lang = getLanguageFromText(text.Substring(0, Math.Min(text.Length, 500)));
-	
+
 				switch (_lang)
 				{
 					//case "CSharp": textBox.Language = Language.CSharp;
@@ -459,12 +499,9 @@ namespace ClVi
 			}
 			catch (System.Exception ex)
 			{
-				
+
 			}
-			finally
-			{
-				textBox.Text = text;
-			}
+			return text;
 		}
 
 		private void MainForm_Load(object sender, EventArgs e)
@@ -603,5 +640,113 @@ namespace ClVi
 		{
 			documentMap.Scale = ((float)documentMap.Width) / ((float)400);
 		}
+
+		private void btInvisibleChars_Click(object sender, EventArgs e)
+		{
+			HighlightInvisibleChars(this.textBox.Range);
+			this.textBox.Invalidate();
+		}
+
+
+		private void HighlightInvisibleChars(Range range)
+		{
+			range.ClearStyle(invisibleCharsStyle);
+			if (btInvisibleChars.Checked)
+				range.SetStyle(invisibleCharsStyle, @".$|.\r\n|\s");
+		}
+
+		private void btHighlightCurrentLine_Click(object sender, EventArgs e)
+		{
+			textBox.CurrentLineColor = btHighlightCurrentLine.Checked ? currentLineColor : Color.Transparent;
+		}
+
+		private void btShowFoldingLines_Click(object sender, EventArgs e)
+		{
+			textBox.ShowFoldingLines = btShowFoldingLines.Checked;
+		}
+
+		private void undoStripButton_Click(object sender, EventArgs e)
+		{
+			textBox.Undo();
+		}
+
+		private void redoStripButton_Click(object sender, EventArgs e)
+		{
+			textBox.Redo();
+		}
+
+		private void toolObserveClipboard_Click(object sender, EventArgs e)
+		{
+			sharpClipboard.MonitorClipboard = toolObserveClipboard.Checked;
+			copyToolStripButton.Enabled = !toolObserveClipboard.Checked;
+			pasteToolStripButton.Enabled = !toolObserveClipboard.Checked;
+
+			if (toolObserveClipboard.Checked)
+			{
+				toolObserveClipboard.Image = global::ClVi.Properties.Resources.eye;
+				textBox.Text = getClipboardText();
+			}
+			else
+			{
+				toolObserveClipboard.Image = global::ClVi.Properties.Resources.eye_blind;
+			}
+		}
+
+		private string getClipboardText()
+		{
+			ClipboardType ct = ClipboardType.Unknown;
+			if (Clipboard.ContainsFileDropList())
+				ct = ClipboardType.File;
+			else if (Clipboard.ContainsText())
+				ct = ClipboardType.Text;
+			else if (Clipboard.ContainsImage())
+				ct = ClipboardType.Image;
+			return getTextFromClipboard(ct);
+		}
+
+		private void copyToolStripButton_Click(object sender, EventArgs e)
+		{
+			Clipboard.SetText(textBox.Text);
+		}
+
+		private void pasteToolStripButton_Click(object sender, EventArgs e)
+		{
+			textBox.Text = getClipboardText();
+		}
 	}
+
+	public class InvisibleCharsRenderer : Style
+	{
+		Pen pen;
+
+		public InvisibleCharsRenderer(Pen pen)
+		{
+			this.pen = pen;
+		}
+
+		public override void Draw(Graphics gr, Point position, Range range)
+		{
+			var tb = range.tb;
+			using (Brush brush = new SolidBrush(pen.Color))
+				foreach (var place in range)
+				{
+					switch (tb[place].c)
+					{
+						case ' ':
+							var point = tb.PlaceToPoint(place);
+							point.Offset(tb.CharWidth / 2, tb.CharHeight / 2);
+							gr.DrawLine(pen, point.X, point.Y, point.X + 1, point.Y);
+							break;
+					}
+
+					if (tb[place.iLine].Count - 1 == place.iChar)
+					{
+						var point = tb.PlaceToPoint(place);
+						point.Offset(tb.CharWidth, 0);
+						gr.DrawString("¶", tb.Font, brush, point);
+					}
+				}
+		}
+	}
+
 }

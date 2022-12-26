@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="_sharpClipboard.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>125, 17</value>
+  <metadata name="sharpClipboard.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
   </metadata>
   <data name="textBox.ServiceColors" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
@@ -138,139 +138,11 @@
         CgAAAAAAAAAAjwABAAH4/////P///woAAAAAAAAAAKQAAQAB9/////z///8KAAAAAAAAAACWAAEACw==
 </value>
   </data>
-  <data name="textBox.Text" xml:space="preserve">
-    <value>{
-   "version": "2.0.0",
-   "tasks": [
-      {
-         "label": "build",
-         "command": "dotnet",
-         "type": "process",
-         "args": [
-            "build",
-            "${workspaceFolder}/wEBcMD.csproj",
-            "/property:GenerateFullPaths=true",
-            "/consoleloggerparameters:NoSummary"
-         ],
-         "problemMatcher": "$msCompile"
-      },
-      {
-         "label": "publish",
-         "command": "dotnet",
-         "type": "process",
-         "args": [
-            "publish",
-            "${workspaceFolder}/wEBcMD.csproj",
-            "/property:GenerateFullPaths=true",
-            "/consoleloggerparameters:NoSummary"
-         ],
-         "problemMatcher": "$msCompile"
-      },
-      {
-         "label": "watch",
-         "command": "dotnet",
-         "type": "process",
-         "args": [
-            "watch",
-            "run",
-            "${workspaceFolder}/wEBcMD.csproj",
-            "/property:GenerateFullPaths=true",
-            "/consoleloggerparameters:NoSummary"
-         ],
-         "problemMatcher": "$msCompile"
-      },
-      {
-         "label": "types",
-         "command": "${workspaceFolder}/tools/generate-types.cmd",
-         "type": "process",
-         "args": [],
-         "options": {
-            "cwd": "${workspaceFolder}/tools"
-         },
-         "problemMatcher": [
-            "$saxon-xslt"
-         ]
-      },
-      {
-         "type": "xslt",
-         "label": "xslt: types.xsltm (current file)",
-         "saxonJar": "${config:XSLT.tasks.saxonJar}",
-         "xsltFile": "${workspaceFolder}/tools/types.xslt",
-         "xmlSource": "${file}",
-         "resultPath": "${env:tmp}/Types.xml",
-         "group": {
-            "kind": "build",
-            "isDefault": false
-         },
-         "problemMatcher": [
-            "$saxon-xslt"
-         ]
-      },
-      {
-         "type": "xslt",
-         "label": "xslt: Saxon Transform (BaseTypes)",
-         "saxonJar": "${config:XSLT.tasks.saxonJar}",
-         "xsltFile": "${file}",
-         "xmlSource": "${workspaceFolder}/Types/BaseTypes.xml",
-         "resultPath": "${env:tmp}/Types.xml",
-         "group": {
-            "kind": "build",
-            "isDefault": false
-         },
-         "problemMatcher": [
-            "$saxon-xslt"
-         ]
-      },
-      {
-         "type": "xslt",
-         "label": "xslt: Saxon Transform (CommandTypes)",
-         "saxonJar": "${config:XSLT.tasks.saxonJar}",
-         "xsltFile": "${file}",
-         "xmlSource": "${workspaceFolder}/Types/CommandTypes.xml",
-         "resultPath": "${env:tmp}/Types.xml",
-         "group": {
-            "kind": "build",
-            "isDefault": true
-         },
-         "problemMatcher": [
-            "$saxon-xslt"
-         ]
-      },
-      {
-         "type": "xslt",
-         "label": "xslt: Saxon Transform (AdressTypes)",
-         "saxonJar": "${config:XSLT.tasks.saxonJar}",
-         "xsltFile": "${file}",
-         "xmlSource": "${workspaceFolder}/Types/AdressTypes.xml",
-         "resultPath": "${env:tmp}/Types.xml",
-         "group": {
-            "kind": "build",
-            "isDefault": false
-         },
-         "problemMatcher": [
-            "$saxon-xslt"
-         ]
-      },
-      {
-         "type": "shell",
-         "label": "test xslt",
-         "command": "${workspaceFolder}/tools/run-saxon",
-         "args": [
-            "${workspaceFolder}/tools/test.xslt",
-            "${workspaceFolder}\\Types\\*.xml"
-         ],
-         "problemMatcher": [
-            "$saxon-xslt"
-         ]
-      },
-   ]
-}</value>
-  </data>
   <metadata name="menuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
+    <value>152, 17</value>
   </metadata>
   <metadata name="tsMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>265, 17</value>
+    <value>260, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="printToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -286,19 +158,6 @@
         VpWeyStVfCUNf3AZ4zNhfHCFMEDMgye+hYr6FrDLzxQAUuVTpr0ocn74mchg5vsKRt1RcHp2Qv9+kZ78
         UcE17KkWFgHNN/uQzgBkGKLJPBZiecyGchjzrmFwPIF++xJUbDbUQzEacIArLpopSRSP4CUN1Obf1Abz
         uqob5KjiXwWH/GVl5HPt5zZh37GL2H1EiF1VZ7GDI6CNW5r/TSzWbwHYL0mKJ5czAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="cutToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGDSURBVDhPrZFNSwJRGIX9NYGbFoUlFElY1EJQKEYhCJsi
-        LaVsERnRF5iCaSZJO1toCDVGFkgoFpWQWWRR2aIvUxm1BKN1wSnHCFw4TOCzue+9nPNw4eVVnav4Izzb
-        QfxeGZ5TWaxT/rK3irzmC7CsusvC1G4IkbNLboIiDieF4GGUKeTeClDpppF8eeEu2PIfwfrzizSdw3Hk
-        EnKlFpkMzV2wH77AosOFTV8A+vkl9CiHuJeLJNNZjM8tYWB0FkTvMAwmy/8ERTR6CwjlGAi1Ccence6C
-        1NsXzN4PKIxJLLgeIJ2MoXvmFraNBKK3eXZRIveJPvs7FIYniEkXZENOdE+GIZ2Ko10TwLK7tJmKmL0F
-        EEYarYM+NMnt0C1sQzpx/lcSEnZ2gcKY/gs0dlmZuWvmjjmpwA1qxVp2AWFIMAF/OAGBzMjMI7ZrtJCb
-        4Df3o4Zfxy7QrdxDRFKol5khkpR2H4qmIOzUQNBGwrsXYxccnNOQqNbQ0KGGZ+eEPVwdeLxvqqrf4wGh
-        TNAAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="copyToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -332,33 +191,6 @@
 </value>
   </data>
   <data name="btInvisibleChars.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIDSURBVDhPpZLrS5NhGMb3j4SWh0oRQVExD4gonkDpg4hG
-        YKxG6WBogkMZKgPNCEVJFBGdGETEvgwyO9DJE5syZw3PIlPEE9pgBCLZ5XvdMB8Ew8gXbl54nuf63dd9
-        0OGSnwCahxbPRNPAPMw9Xpg6ZmF46kZZ0xSKzJPIrhpDWsVnpBhGkKx3nAX8Pv7z1zg8OoY/cITdn4fw
-        bf/C0kYAN3Ma/w3gWfZL5kzTKBxjWyK2DftwI9tyMYCZKXbNHaD91bLYJrDXsYbrWfUKwJrPE9M2M1Oc
-        VzOOpHI7Jr376Hi9ogHqFIANO0/MmmmbmSmm9a8ze+I4MrNWAdjtoJgWcx+PSzg166yZZ8xM8XvXDix9
-        c4jIqFYAjoriBV9AhEPv1mH/sonogha0afbZMMZz+yreTGyhpusHwtNNCsA5U1zS4BLxzJIfg299qO32
-        Ir7UJtZfftyATqeT+8o2D8JSjQrAJblrncYL7ZJ2+bfaFnC/1S1NjL3diRat7qrO7wLRP3HjWsojBeCo
-        mDEo5mNjuweFGvjWg2EBhCbpkW78htSHHwRyNdmgAFzPEee2iFkzayy2OLXzT4gr6UdUnlXrullsxxQ+
-        kx0g8BTA3aZlButjSTyjODq/WcQcW/B/Je4OQhLvKQDnzN1mp0nnkvAhR8VuMzNrpm1mpjgkoVwB/v8D
-        TgDQASA1MVpwzwAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="btShowFoldingLines.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFlSURBVDhP7VO7SsRAFB3cTGYmG3dd8YWvBUUEFSzEwtJO
-        sbJUFLFTUbRwUbcwMfEBbi/4BWLnD+aO5w5JSBuw9MJw575O7pBzhLPQjnmaIpwHrWlOhDQum7QmhA0R
-        d32flhqKtkXHtnFfEYJa8MuiRaMlgDRZ4hm6hH+Tmk48k3152t4jfsJ5Re0K5wK1A/hr7uXj5nHZxMA3
-        Gp+lsXEjoB3f0D422soBXtBTBbjhjTjnALCqz1tgNWMMTSMeKp4AkB4ABqJJE/wE5FfZo3fY5QpL07Qb
-        RdFRHta3JEk24jj+zMP69g/wBwD4hQH/yjysaRUtiLbtOJ4XpBHUVIoWUbvT2s6DaDOujj7cZ0sAsK3Q
-        wrunsx8M3IK2h/CPyJ9znSkNmu862uvsA7Wem0dDqQXH84D2MHzMX0JuUABgoC8DWpeKTlkvJUBVCyzR
-        fMUR5DX4PqmUXWBZi8BOsU5cnZ9t6OwXcpW8Yu3TA4YAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="gotoButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIDSURBVDhPpZLrS5NhGMb3j4SWh0oRQVExD4gonkDpg4hG

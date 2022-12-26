@@ -127,6 +127,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClipboardViewer.ico" />
+    <None Include="Resources\magnifying_glass.png" />
+    <None Include="Resources\navigate_cross.png" />
+    <None Include="Resources\navigate_up.png" />
+    <None Include="Resources\navigate_down.png" />
+    <None Include="Resources\navigate_minus.png" />
+    <None Include="Resources\navigate_plus.png" />
+    <None Include="Resources\eye.png" />
+    <None Include="Resources\eye_blind.png" />
+    <None Include="Resources\text_tree.png" />
+    <None Include="Resources\code_line.png" />
+    <None Include="Resources\layer--plus.png" />
+    <None Include="Resources\layer--minus.png" />
+    <None Include="Resources\bookmark--plus.png" />
+    <None Include="Resources\forward_16x16.png" />
+    <None Include="Resources\backward0_16x16.png" />
+    <None Include="Resources\redo_16x16.png" />
+    <None Include="Resources\undo_16x16.png" />
+    <None Include="Resources\edit-padding-top.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -19,6 +19,7 @@ using System.Runtime.InteropServices;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Xml;
 using static System.Net.Mime.MediaTypeNames;
+using MouseEventArgs = System.Windows.Forms.MouseEventArgs;
 
 namespace ClVi
 {
@@ -35,14 +36,20 @@ namespace ClVi
 		TextStyle BrownStyle = new TextStyle(Brushes.Brown, null, FontStyle.Italic);
 		TextStyle MaroonStyle = new TextStyle(Brushes.Maroon, null, FontStyle.Regular);
 		MarkerStyle SameWordsStyle = new MarkerStyle(new SolidBrush(Color.FromArgb(40, Color.Gray)));
+		Style invisibleCharsStyle = new InvisibleCharsRenderer(Pens.Gray);
+		Color currentLineColor = Color.Orange;
 
-		private SharpClipboard _sharpClipboard;
+		private SharpClipboard sharpClipboard;
 
 
 		public MainForm()
 		{
 			InitializeComponent();
 
+			textBox.CurrentLineColor = btHighlightCurrentLine.Checked ? currentLineColor : Color.Transparent;
+			textBox.ShowFoldingLines = btShowFoldingLines.Checked;
+			copyToolStripButton.Enabled = !toolObserveClipboard.Checked;
+			pasteToolStripButton.Enabled = !toolObserveClipboard.Checked;
 			//AdjustClientWidthToDPIScale();
 		}
 
@@ -62,17 +69,17 @@ namespace ClVi
 		private void InitStylesPriority()
 		{
 			//add this style explicitly for drawing under other styles
-			_textBox.AddStyle(SameWordsStyle);
+			textBox.AddStyle(SameWordsStyle);
 		}
 
 		private void findToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.ShowFindDialog();
+			textBox.ShowFindDialog();
 		}
 
 		private void replaceToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.ShowReplaceDialog();
+			textBox.ShowReplaceDialog();
 		}
 
 		private void miLanguage_DropDownOpening(object sender, EventArgs e)
@@ -90,9 +97,9 @@ namespace ClVi
 
 		private void textBox_TextChanged(object sender, TextChangedEventArgs e)
 		{
-			if(_textBox.Text.Length > 0)
+			if(textBox.Text.Length > 0)
 			{
-				_lang = getLanguageFromText(_textBox.Text.Substring(0, Math.Min(_textBox.Text.Length, 500)));
+				_lang = getLanguageFromText(textBox.Text.Substring(0, Math.Min(textBox.Text.Length, 500)));
 				setLanguage();
 			}
 		}
@@ -117,39 +124,39 @@ namespace ClVi
 
 		private void setLanguage()
 		{
-			_textBox.ClearStylesBuffer();
-			_textBox.Range.ClearStyle(StyleIndex.All);
+			textBox.ClearStylesBuffer();
+			textBox.Range.ClearStyle(StyleIndex.All);
 			InitStylesPriority();
-			_textBox.AutoIndentNeeded -= textBox_AutoIndentNeeded;
+			textBox.AutoIndentNeeded -= textBox_AutoIndentNeeded;
 			//
 			switch (_lang)
 			{
-				case "CSharp": _textBox.Language = Language.CSharp; break;
-				case "VB": _textBox.Language = Language.VB; break;
-				case "HTML": _textBox.Language = Language.HTML; break;
-				case "XML": _textBox.Language = Language.XML; break;
-				case "SQL": _textBox.Language = Language.SQL; break;
-				case "PHP": _textBox.Language = Language.PHP; break;
-				case "JS": _textBox.Language = Language.JS; break;
-				case "Lua": _textBox.Language = Language.Lua; break;
-				case "JSON": _textBox.Language = Language.JSON; break;
+				case "CSharp": textBox.Language = Language.CSharp; break;
+				case "VB": textBox.Language = Language.VB; break;
+				case "HTML": textBox.Language = Language.HTML; break;
+				case "XML": textBox.Language = Language.XML; break;
+				case "SQL": textBox.Language = Language.SQL; break;
+				case "PHP": textBox.Language = Language.PHP; break;
+				case "JS": textBox.Language = Language.JS; break;
+				case "Lua": textBox.Language = Language.Lua; break;
+				case "JSON": textBox.Language = Language.JSON; break;
 			}
-			_textBox.OnSyntaxHighlight(new TextChangedEventArgs(_textBox.Range));
+			textBox.OnSyntaxHighlight(new TextChangedEventArgs(textBox.Range));
 		}
 
 		private void collapseSelectedBlockToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.CollapseBlock(_textBox.Selection.Start.iLine, _textBox.Selection.End.iLine);
+			textBox.CollapseBlock(textBox.Selection.Start.iLine, textBox.Selection.End.iLine);
 		}
 
 		private void collapseAllregionToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			//this example shows how to collapse all #region blocks (C#)
 			if (!_lang.StartsWith("CSharp")) return;
-			for (int iLine = 0; iLine < _textBox.LinesCount; iLine++)
+			for (int iLine = 0; iLine < textBox.LinesCount; iLine++)
 			{
-				if (_textBox[iLine].FoldingStartMarker == @"#region\b")//marker @"#region\b" was used in SetFoldingMarkers()
-					_textBox.CollapseFoldingBlock(iLine);
+				if (textBox[iLine].FoldingStartMarker == @"#region\b")//marker @"#region\b" was used in SetFoldingMarkers()
+					textBox.CollapseFoldingBlock(iLine);
 			}
 		}
 
@@ -157,21 +164,21 @@ namespace ClVi
 		{
 			//this example shows how to expand all #region blocks (C#)
 			if (!_lang.StartsWith("CSharp")) return;
-			for (int iLine = 0; iLine < _textBox.LinesCount; iLine++)
+			for (int iLine = 0; iLine < textBox.LinesCount; iLine++)
 			{
-				if (_textBox[iLine].FoldingStartMarker == @"#region\b")//marker @"#region\b" was used in SetFoldingMarkers()
-					_textBox.ExpandFoldedBlock(iLine);
+				if (textBox[iLine].FoldingStartMarker == @"#region\b")//marker @"#region\b" was used in SetFoldingMarkers()
+					textBox.ExpandFoldedBlock(iLine);
 			}
 		}
 
 		private void increaseIndentSiftTabToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.IncreaseIndent();
+			textBox.IncreaseIndent();
 		}
 
 		private void decreaseIndentTabToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.DecreaseIndent();
+			textBox.DecreaseIndent();
 		}
 
 		private void hTMLToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -184,7 +191,7 @@ namespace ClVi
 
 				if (sfd.FilterIndex == 1)
 				{
-					html = _textBox.Html;
+					html = textBox.Html;
 				}
 				if (sfd.FilterIndex == 2)
 				{
@@ -194,7 +201,7 @@ namespace ClVi
 					exporter.UseNbsp = false;
 					exporter.UseForwardNbsp = true;
 					exporter.UseStyleTag = true;
-					html = exporter.GetHtml(_textBox);
+					html = exporter.GetHtml(textBox);
 				}
 				File.WriteAllText(sfd.FileName, html);
 			}
@@ -202,17 +209,17 @@ namespace ClVi
 
 		private void fctb_SelectionChangedDelayed(object sender, EventArgs e)
 		{
-			_textBox.VisibleRange.ClearStyle(SameWordsStyle);
-			if (!_textBox.Selection.IsEmpty)
+			textBox.VisibleRange.ClearStyle(SameWordsStyle);
+			if (!textBox.Selection.IsEmpty)
 				return;//user selected diapason
 
 			//get fragment around caret
-			var fragment = _textBox.Selection.GetFragment(@"\w");
+			var fragment = textBox.Selection.GetFragment(@"\w");
 			string text = fragment.Text;
 			if (text.Length == 0)
 				return;
 			//highlight same words
-			var ranges = _textBox.VisibleRange.GetRanges("\\b" + text + "\\b").ToArray();
+			var ranges = textBox.VisibleRange.GetRanges("\\b" + text + "\\b").ToArray();
 			if (ranges.Length > 1)
 				foreach (var r in ranges)
 					r.SetStyle(SameWordsStyle);
@@ -220,17 +227,17 @@ namespace ClVi
 
 		private void goForwardCtrlShiftToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.NavigateForward();
+			textBox.NavigateForward();
 		}
 
 		private void goBackwardCtrlToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.NavigateBackward();
+			textBox.NavigateBackward();
 		}
 
 		private void autoIndentToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.DoAutoIndent();
+			textBox.DoAutoIndent();
 		}
 
 		const int maxBracketSearchIterations = 2000;
@@ -285,12 +292,12 @@ namespace ClVi
 
 		private void goLeftBracketToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			GoLeftBracket(_textBox, '{', '}');
+			GoLeftBracket(textBox, '{', '}');
 		}
 
 		private void goRightBracketToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			GoRightBracket(_textBox, '{', '}');
+			GoRightBracket(textBox, '{', '}');
 		}
 
 		private void textBox_AutoIndentNeeded(object sender, AutoIndentEventArgs args)
@@ -335,50 +342,50 @@ namespace ClVi
 
 		private void miPrint_Click(object sender, EventArgs e)
 		{
-			_textBox.Print(new PrintDialogSettings() { ShowPrintPreviewDialog = true });
+			textBox.Print(new PrintDialogSettings() { ShowPrintPreviewDialog = true });
 		}
 
 		Random rnd = new Random();
 
 		private void miChangeColors_Click(object sender, EventArgs e)
 		{
-			var styles = new Style[] { _textBox.SyntaxHighlighter.BlueBoldStyle, _textBox.SyntaxHighlighter.BlueStyle, _textBox.SyntaxHighlighter.BoldStyle, _textBox.SyntaxHighlighter.BrownStyle, _textBox.SyntaxHighlighter.GrayStyle, _textBox.SyntaxHighlighter.GreenStyle, _textBox.SyntaxHighlighter.MagentaStyle, _textBox.SyntaxHighlighter.MaroonStyle, _textBox.SyntaxHighlighter.RedStyle };
-			_textBox.SyntaxHighlighter.AttributeStyle = styles[rnd.Next(styles.Length)];
-			_textBox.SyntaxHighlighter.ClassNameStyle = styles[rnd.Next(styles.Length)];
-			_textBox.SyntaxHighlighter.CommentStyle = styles[rnd.Next(styles.Length)];
-			_textBox.SyntaxHighlighter.CommentTagStyle = styles[rnd.Next(styles.Length)];
-			_textBox.SyntaxHighlighter.KeywordStyle = styles[rnd.Next(styles.Length)];
-			_textBox.SyntaxHighlighter.NumberStyle = styles[rnd.Next(styles.Length)];
-			_textBox.SyntaxHighlighter.StringStyle = styles[rnd.Next(styles.Length)];
+			var styles = new Style[] { textBox.SyntaxHighlighter.BlueBoldStyle, textBox.SyntaxHighlighter.BlueStyle, textBox.SyntaxHighlighter.BoldStyle, textBox.SyntaxHighlighter.BrownStyle, textBox.SyntaxHighlighter.GrayStyle, textBox.SyntaxHighlighter.GreenStyle, textBox.SyntaxHighlighter.MagentaStyle, textBox.SyntaxHighlighter.MaroonStyle, textBox.SyntaxHighlighter.RedStyle };
+			textBox.SyntaxHighlighter.AttributeStyle = styles[rnd.Next(styles.Length)];
+			textBox.SyntaxHighlighter.ClassNameStyle = styles[rnd.Next(styles.Length)];
+			textBox.SyntaxHighlighter.CommentStyle = styles[rnd.Next(styles.Length)];
+			textBox.SyntaxHighlighter.CommentTagStyle = styles[rnd.Next(styles.Length)];
+			textBox.SyntaxHighlighter.KeywordStyle = styles[rnd.Next(styles.Length)];
+			textBox.SyntaxHighlighter.NumberStyle = styles[rnd.Next(styles.Length)];
+			textBox.SyntaxHighlighter.StringStyle = styles[rnd.Next(styles.Length)];
 
-			_textBox.OnSyntaxHighlight(new TextChangedEventArgs(_textBox.Range));
+			textBox.OnSyntaxHighlight(new TextChangedEventArgs(textBox.Range));
 		}
 
 		private void setSelectedAsReadonlyToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.Selection.ReadOnly = true;
+			textBox.Selection.ReadOnly = true;
 		}
 
 		private void setSelectedAsWritableToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.Selection.ReadOnly = false;
+			textBox.Selection.ReadOnly = false;
 		}
 
 		private void startStopMacroRecordingToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.MacrosManager.IsRecording = !_textBox.MacrosManager.IsRecording;
+			textBox.MacrosManager.IsRecording = !textBox.MacrosManager.IsRecording;
 		}
 
 		private void executeMacroToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.MacrosManager.ExecuteMacros();
+			textBox.MacrosManager.ExecuteMacros();
 		}
 
 		private void changeHotkeysToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			var form = new HotkeysEditorForm(_textBox.HotkeysMapping);
+			var form = new HotkeysEditorForm(textBox.HotkeysMapping);
 			if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-				_textBox.HotkeysMapping = form.GetHotkeys();
+				textBox.HotkeysMapping = form.GetHotkeys();
 		}
 
 		private void rTFToolStripMenuItem_Click(object sender, EventArgs e)
@@ -387,65 +394,122 @@ namespace ClVi
 			sfd.Filter = "RTF|*.rtf";
 			if (sfd.ShowDialog() == DialogResult.OK)
 			{
-				string rtf = _textBox.Rtf;
+				string rtf = textBox.Rtf;
 				File.WriteAllText(sfd.FileName, rtf);
 			}
 		}
 
-		private void fctb_CustomAction(object sender, CustomActionEventArgs e)
+		private void textBox_CustomAction(object sender, CustomActionEventArgs e)
 		{
-			MessageBox.Show(e.Action.ToString());
+			if(e.Action.ToString() == "CustomAction1")
+				ToggleBookmark(textBox.Selection.Start.iLine);
+
+			else if (e.Action.ToString() == "CustomAction2")
+			{
+				toolFindNext_Click(sender, e);
+			}
+
+			else if (e.Action.ToString() == "CustomAction3")
+			{
+				toolFindNextSelected_Click(sender, e);
+			}
+
+			else if (e.Action.ToString() == "CustomAction4")
+			{
+				toolFindPrevious_Click(sender, e);
+			}
+
+			else if (e.Action.ToString() == "CustomAction5")
+			{
+				toolFindPreviousSelected_Click(sender, e);
+			}
+
+			//MessageBox.Show(e.Action.ToString());
 		}
 
 		private void commentSelectedLinesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.InsertLinePrefix(_textBox.CommentPrefix);
+			textBox.InsertLinePrefix(textBox.CommentPrefix);
 		}
 
 		private void uncommentSelectedLinesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.RemoveLinePrefix(_textBox.CommentPrefix);
+			textBox.RemoveLinePrefix(textBox.CommentPrefix);
+		}
+
+		private enum ClipboardType
+		{
+			Unknown = 0,
+			Text = 1,
+			File = 2,
+			Image = 3,
 		}
 
 		private void clipboardChanged(object sender, SharpClipboard.ClipboardChangedEventArgs e)
 		{
-			string text = null;
+			ClipboardType ct = ClipboardType.Unknown;
+
+			switch (e.ContentType)
+			{
+				case SharpClipboard.ContentTypes.Text:
+					ct = ClipboardType.Text;
+					break;
+
+				case SharpClipboard.ContentTypes.Files:
+					ct = ClipboardType.File;
+					break;
+
+				case SharpClipboard.ContentTypes.Image:
+					ct = ClipboardType.Image;
+					break;
+			}
+
+			string text = getTextFromClipboard(ct);
+			textBox.Text = text;
+		}
+
+		private string getTextFromClipboard(ClipboardType ct)
+		{
+			string text = String.Empty;
 			try
 			{
 
-				switch (e.ContentType)
+				switch (ct)
 				{
-					case SharpClipboard.ContentTypes.Text:
-						text = _sharpClipboard.ClipboardText;
+					case ClipboardType.Text:
+						text = Clipboard.GetText();
 						break;
 
-					case SharpClipboard.ContentTypes.Files:
-
-						text = File.ReadAllText(_sharpClipboard.ClipboardFile);
+					case ClipboardType.File:
+						foreach(var fp in Clipboard.GetFileDropList())
+						{
+							text += File.ReadAllText(fp);
+						}
+						
 						break;
 				}
 
 
 				_lang = getLanguageFromText(text.Substring(0, Math.Min(text.Length, 500)));
-	
+
 				switch (_lang)
 				{
-					//case "CSharp": _textBox.Language = Language.CSharp;
+					//case "CSharp": textBox.Language = Language.CSharp;
 					//	break;
-					//case "VB": _textBox.Language = Language.VB;
+					//case "VB": textBox.Language = Language.VB;
 					//	break;
-					//case "HTML": _textBox.Language = Language.HTML; 
+					//case "HTML": textBox.Language = Language.HTML; 
 					//	break;
 					case "XML":
 						text = System.Xml.Linq.XDocument.Parse(text).ToString();
 						break;
-					//case "SQL": _textBox.Language = Language.SQL; 
+					//case "SQL": textBox.Language = Language.SQL; 
 					//	break;
-					//case "PHP": _textBox.Language = Language.PHP; 
+					//case "PHP": textBox.Language = Language.PHP; 
 					//	break;
-					//case "JS": _textBox.Language = Language.JS; 
+					//case "JS": textBox.Language = Language.JS; 
 					//	break;
-					//case "Lua": _textBox.Language = Language.Lua; 
+					//case "Lua": textBox.Language = Language.Lua; 
 					//	break;
 					case "JSON":
 						var serializerOptions = new JsonSerializerOptions { WriteIndented = true };
@@ -459,27 +523,27 @@ namespace ClVi
 			}
 			catch (System.Exception ex)
 			{
-				
+
 			}
-			finally
-			{
-				_textBox.Text = text;
-			}
+			return text;
 		}
 
 		private void MainForm_Load(object sender, EventArgs e)
 		{
+			this.textBox.Text = String.Empty;
 			//if (Keyboard.IsKeyDown(Key.LeftShift))
 			//	return;
 
 			this.WindowState = Properties.Settings.Default.AppState;
 			this.Location = Properties.Settings.Default.AppLocation;
 			this.Size = Properties.Settings.Default.AppSize;
+			this.documentMap.Size = Properties.Settings.Default.DocumentMapSize;
 		}
 
 		private void MainForm_Closing(object sender, FormClosingEventArgs e)
 		{
 			Properties.Settings.Default.AppState = this.WindowState;
+			Properties.Settings.Default.DocumentMapSize = this.documentMap.Size;
 			if (this.WindowState == FormWindowState.Normal)
 			{
 				// save location and size if the state is normal
@@ -499,10 +563,10 @@ namespace ClVi
 
 		private void foldAllToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			//for (int i = _textBox.LinesCount - 1; i >= 0; i--)
+			//for (int i = textBox.LinesCount - 1; i >= 0; i--)
 			//{
-			//	if (_textBox.TextSource.LineHasFoldingStartMarker(i))
-			//		_textBox.CollapseFoldingBlock(i);
+			//	if (textBox.TextSource.LineHasFoldingStartMarker(i))
+			//		textBox.CollapseFoldingBlock(i);
 			//}
 			Dictionary<int, List<int>> nestedFoldingMarkers = getNesteFoldingMarkerDictionary();
 
@@ -513,13 +577,13 @@ namespace ClVi
 			foreach (int i in layers)
 				foldNestedLayer(i);
 
-			_textBox.OnVisibleRangeChanged();
-			_textBox.UpdateScrollbars();
+			textBox.OnVisibleRangeChanged();
+			textBox.UpdateScrollbars();
 		}
 
 		private void unfoldAllToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.ExpandAllFoldingBlocks();
+			textBox.ExpandAllFoldingBlocks();
 		}
 
 		private void foldNestedLayer(int layer)
@@ -529,7 +593,7 @@ namespace ClVi
 			if (nestedFoldingMarkers.ContainsKey(layer))
 			{
 				foreach (int i in nestedFoldingMarkers[layer])
-					_textBox.CollapseFoldingBlock(i);
+					textBox.CollapseFoldingBlock(i);
 			}
 		}
 
@@ -537,9 +601,9 @@ namespace ClVi
 		{
 			Dictionary<int, List<int>> nestedFoldingMarkers = new Dictionary<int, List<int>>();
 			int nesting = 0;
-			for (int i = 0; i < _textBox.LinesCount; i++)
+			for (int i = 0; i < textBox.LinesCount; i++)
 			{
-				if (_textBox.TextSource.LineHasFoldingStartMarker(i))
+				if (textBox.TextSource.LineHasFoldingStartMarker(i))
 				{
 					if (nestedFoldingMarkers.ContainsKey(nesting))
 						nestedFoldingMarkers[nesting].Add(i);
@@ -548,7 +612,7 @@ namespace ClVi
 
 					nesting++;
 				}
-				if (_textBox.TextSource.LineHasFoldingEndMarker(i))
+				if (textBox.TextSource.LineHasFoldingEndMarker(i))
 					nesting--;
 			}
 
@@ -558,33 +622,336 @@ namespace ClVi
 		{
 			foldNestedLayer(1);
 
-			_textBox.OnVisibleRangeChanged();
-			_textBox.UpdateScrollbars();
+			textBox.OnVisibleRangeChanged();
+			textBox.UpdateScrollbars();
 		}
 
 		private void fold2LayerToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			foldNestedLayer(2);
 
-			_textBox.OnVisibleRangeChanged();
-			_textBox.UpdateScrollbars();
+			textBox.OnVisibleRangeChanged();
+			textBox.UpdateScrollbars();
 		}
 
 		private void fold3LayerToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			foldNestedLayer(3);
 
-			_textBox.OnVisibleRangeChanged();
-			_textBox.UpdateScrollbars();
+			textBox.OnVisibleRangeChanged();
+			textBox.UpdateScrollbars();
 		}
 
 		private void fold4LayerToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			foldNestedLayer(4);
 
-			_textBox.OnVisibleRangeChanged();
-			_textBox.UpdateScrollbars();
+			textBox.OnVisibleRangeChanged();
+			textBox.UpdateScrollbars();
 		}
 
+		private void _documentMap_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void tbFind_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void documentMap1_Resize(object sender, EventArgs e)
+		{
+			documentMap.Scale = ((float)documentMap.Width) / ((float)400);
+		}
+
+		private void btInvisibleChars_Click(object sender, EventArgs e)
+		{
+			HighlightInvisibleChars(this.textBox.Range);
+			this.textBox.Invalidate();
+		}
+
+
+		private void HighlightInvisibleChars(Range range)
+		{
+			range.ClearStyle(invisibleCharsStyle);
+			if (btInvisibleChars.Checked)
+				range.SetStyle(invisibleCharsStyle, @".$|.\r\n|\s");
+		}
+
+		private void btHighlightCurrentLine_Click(object sender, EventArgs e)
+		{
+			textBox.CurrentLineColor = btHighlightCurrentLine.Checked ? currentLineColor : Color.Transparent;
+		}
+
+		private void btShowFoldingLines_Click(object sender, EventArgs e)
+		{
+			textBox.ShowFoldingLines = btShowFoldingLines.Checked;
+		}
+
+		private void undoStripButton_Click(object sender, EventArgs e)
+		{
+			textBox.Undo();
+		}
+
+		private void redoStripButton_Click(object sender, EventArgs e)
+		{
+			textBox.Redo();
+		}
+
+		private void toolObserveClipboard_Click(object sender, EventArgs e)
+		{
+			sharpClipboard.MonitorClipboard = toolObserveClipboard.Checked;
+			copyToolStripButton.Enabled = !toolObserveClipboard.Checked;
+			pasteToolStripButton.Enabled = !toolObserveClipboard.Checked;
+
+			if (toolObserveClipboard.Checked)
+			{
+				toolObserveClipboard.Image = global::ClVi.Properties.Resources.eye;
+				textBox.Text = getClipboardText();
+			}
+			else
+			{
+				toolObserveClipboard.Image = global::ClVi.Properties.Resources.eye_blind;
+			}
+		}
+
+		private string getClipboardText()
+		{
+			ClipboardType ct = ClipboardType.Unknown;
+			if (Clipboard.ContainsFileDropList())
+				ct = ClipboardType.File;
+			else if (Clipboard.ContainsText())
+				ct = ClipboardType.Text;
+			else if (Clipboard.ContainsImage())
+				ct = ClipboardType.Image;
+			return getTextFromClipboard(ct);
+		}
+
+		private void copyToolStripButton_Click(object sender, EventArgs e)
+		{
+			Clipboard.SetText(textBox.Text);
+		}
+
+		private void pasteToolStripButton_Click(object sender, EventArgs e)
+		{
+			textBox.Text = getClipboardText();
+		}
+
+		private void btAddBookmark_Click(object sender, EventArgs e)
+		{
+			textBox.Bookmarks.Add(textBox.Selection.Start.iLine);
+		}
+
+		private void btRemoveBookmark_Click(object sender, EventArgs e)
+		{
+			textBox.Bookmarks.Remove(textBox.Selection.Start.iLine);
+		}
+
+		private void btGo_DropDownOpening(object sender, EventArgs e)
+		{
+			btGo.DropDownItems.Clear();
+			foreach (var bookmark in textBox.Bookmarks)
+			{
+				string name = textBox.Lines[bookmark.LineIndex];
+				ToolStripItem item = btGo.DropDownItems.Add(name.Substring(0, Math.Min(name.Length, 80)));
+				item.Tag = bookmark;
+				item.Click += (o, a) => ((Bookmark)(o as ToolStripItem).Tag).DoVisible();
+			}
+		}
+
+		private void textBox_DoubleClick(object sender, MouseEventArgs e)
+		{
+			if (e.X < textBox.LeftIndent)
+			{
+				var place = textBox.PointToPlace(e.Location);
+				var iLine = place.iLine;
+				ToggleBookmark(iLine);
+			}
+		}
+
+		private void ToggleBookmark(int iLine)
+		{
+			if (textBox.Bookmarks.Contains(iLine))
+				textBox.Bookmarks.Remove(iLine);
+			else
+				textBox.Bookmarks.Add(iLine);
+		}
+
+		private void btNextBookmark_Click(object sender, EventArgs e)
+		{
+			textBox.GotoNextBookmark(textBox.Selection.Start.iLine);
+		}
+
+		private void btPreviousBookmark_Click(object sender, EventArgs e)
+		{
+			textBox.GotoPrevBookmark(textBox.Selection.Start.iLine);
+		}
+
+		private void tsClearBookmarks_Click(object sender, EventArgs e)
+		{
+			textBox.Bookmarks.Clear();
+			textBox.Invalidate();
+		}
+
+		private bool tbFindChanged = false;
+		private void tbFind_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (e.KeyChar == '\r')
+			{
+				string findText = tbFind.Text;
+				Range range = tbFindChanged ? textBox.Range.Clone() : textBox.Selection.Clone();
+				tbFindChanged = false;
+				bool found = FindNextPattern(findText, range);
+				if (!found)
+					MessageBox.Show("Not found.");
+			}
+			else
+				tbFindChanged = true;
+		}
+
+		private bool FindNextPattern(string findText, Range range)
+		{
+			range.End = new Place(textBox[textBox.LinesCount - 1].Count, textBox.LinesCount - 1);
+			var pattern = Regex.Escape(findText);
+			foreach (var f in range.GetRanges(pattern))
+			{
+				f.Inverse();
+				textBox.Selection = f;
+				textBox.DoSelectionVisible();
+				return true;
+			}
+
+			return false;
+		}
+
+		private bool FindPreviousPattern(string findText, Range range)
+		{
+			 range = new Range(textBox, 0, 0, range.Start.iChar, range.Start.iLine );
+			var pattern = Regex.Escape(findText);
+			var ranges = range.GetRanges(pattern).ToList();
+			ranges.Reverse();
+			foreach (var f in ranges)
+			{
+				f.Inverse();
+				textBox.Selection = f;
+				textBox.DoSelectionVisible();
+				return true;
+			}
+
+			return false;
+		}
+
+		private void toolFindNext_Click(object sender, EventArgs e)
+		{
+			string findText = tbFind.Text;
+
+			Range range = textBox.Selection.Clone();
+			bool found = FindNextPattern(findText, range);
+			if(!found)
+			{
+				range = textBox.Range.Clone();
+				FindNextPattern(findText, range);
+			}
+		}
+
+		private void toolFindNextSelected_Click(object sender, EventArgs e)
+		{
+			string findText = tbFind.Text;
+			if(findText != textBox.Selection.Text)
+				findText = tbFind.Text = textBox.Selection.Text;
+
+			Range range = textBox.Selection.Clone();
+			bool found = FindNextPattern(findText, range);
+			if(!found)
+			{
+				range = textBox.Range.Clone();
+				FindNextPattern(findText, range);
+			}
+		}
+
+		private void toolFindPrevious_Click(object sender, EventArgs e)
+		{
+			string findText = tbFind.Text;
+
+			Range range = textBox.Selection.Clone();
+			range.Normalize();
+			bool found = FindPreviousPattern(findText, range);
+			if(!found)
+			{
+				range = textBox.Range.Clone();
+				range.Normalize();
+				range.Start = range.End;
+				FindPreviousPattern(findText, range);
+			}
+		}
+
+		private void toolFindPreviousSelected_Click(object sender, EventArgs e)
+		{
+			string findText = tbFind.Text;
+			if(findText != textBox.Selection.Text)
+				findText = tbFind.Text = textBox.Selection.Text;
+
+			Range range = textBox.Selection.Clone();
+			range.Normalize();
+			bool found = FindPreviousPattern(findText, range);
+			if(!found)
+			{
+				range = textBox.Range.Clone();
+				range.Normalize();
+				range.Start = range.End;
+				FindPreviousPattern(findText, range);
+			}
+		}
+
+		private void tbContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			mainToolStripMenuItem.Checked = tsMain.Visible;
+			bookmarksToolStripMenuItem.Checked = tsBookmark.Visible;
+		}
+
+		private void mainToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			tsMain.Visible = !tsMain.Visible;
+		}
+
+		private void bookmarksToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			tsBookmark.Visible = !tsBookmark.Visible;
+		}
+	}
+
+	public class InvisibleCharsRenderer : Style
+	{
+		Pen pen;
+
+		public InvisibleCharsRenderer(Pen pen)
+		{
+			this.pen = pen;
+		}
+
+		public override void Draw(Graphics gr, Point position, Range range)
+		{
+			var tb = range.tb;
+			using (Brush brush = new SolidBrush(pen.Color))
+				foreach (var place in range)
+				{
+					switch (tb[place].c)
+					{
+						case ' ':
+							var point = tb.PlaceToPoint(place);
+							point.Offset(tb.CharWidth / 2, tb.CharHeight / 2);
+							gr.DrawLine(pen, point.X, point.Y, point.X + 1, point.Y);
+							break;
+					}
+
+					if (tb[place.iLine].Count - 1 == place.iChar)
+					{
+						var point = tb.PlaceToPoint(place);
+						point.Offset(tb.CharWidth, 0);
+						gr.DrawString("¶", tb.Font, brush, point);
+					}
+				}
+		}
 	}
 }

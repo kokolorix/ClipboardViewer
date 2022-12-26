@@ -409,7 +409,7 @@ namespace ClVi
 
 		private void clipboardChanged(object sender, SharpClipboard.ClipboardChangedEventArgs e)
 		{
-			string text = null;
+			string text = String.Empty;
 			try
 			{
 
@@ -469,6 +469,7 @@ namespace ClVi
 
 		private void MainForm_Load(object sender, EventArgs e)
 		{
+			_textBox.Text = String.Empty;
 			//if (Keyboard.IsKeyDown(Key.LeftShift))
 			//	return;
 

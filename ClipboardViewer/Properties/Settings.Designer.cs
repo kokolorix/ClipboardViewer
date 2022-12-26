@@ -58,5 +58,17 @@ namespace ClVi.Properties {
                 this["AppLocation"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("80, 412")]
+        public global::System.Drawing.Size DocumentMapSize {
+            get {
+                return ((global::System.Drawing.Size)(this["DocumentMapSize"]));
+            }
+            set {
+                this["DocumentMapSize"] = value;
+            }
+        }
     }
 }

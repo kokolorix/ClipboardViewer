@@ -36,9 +36,11 @@ namespace ClVi
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this._sharpClipboard = new WK.Libraries.SharpClipboardNS.SharpClipboard(this.components);
-			this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-			this._textBox = new FastColoredTextBoxNS.FastColoredTextBox();
-			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+			this.toolStripContainer = new System.Windows.Forms.ToolStripContainer();
+			this.textBox = new FastColoredTextBoxNS.FastColoredTextBox();
+			this.splitter = new System.Windows.Forms.Splitter();
+			this.documentMap = new FastColoredTextBoxNS.DocumentMap();
+			this.menuStrip = new System.Windows.Forms.MenuStrip();
 			this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.findToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -108,13 +110,11 @@ namespace ClVi
 			this.bookmarkPlusButton = new System.Windows.Forms.ToolStripButton();
 			this.bookmarkMinusButton = new System.Windows.Forms.ToolStripButton();
 			this.gotoButton = new System.Windows.Forms.ToolStripDropDownButton();
-			this.splitter1 = new System.Windows.Forms.Splitter();
-			this.documentMap1 = new FastColoredTextBoxNS.DocumentMap();
-			this.toolStripContainer1.ContentPanel.SuspendLayout();
-			this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
-			this.toolStripContainer1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this._textBox)).BeginInit();
-			this.menuStrip1.SuspendLayout();
+			this.toolStripContainer.ContentPanel.SuspendLayout();
+			this.toolStripContainer.TopToolStripPanel.SuspendLayout();
+			this.toolStripContainer.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.textBox)).BeginInit();
+			this.menuStrip.SuspendLayout();
 			this.tsMain.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -130,30 +130,30 @@ namespace ClVi
 			this._sharpClipboard.Tag = null;
 			this._sharpClipboard.ClipboardChanged += new System.EventHandler<WK.Libraries.SharpClipboardNS.SharpClipboard.ClipboardChangedEventArgs>(this.clipboardChanged);
 			// 
-			// toolStripContainer1
+			// toolStripContainer
 			// 
 			// 
-			// toolStripContainer1.ContentPanel
+			// toolStripContainer.ContentPanel
 			// 
-			this.toolStripContainer1.ContentPanel.Controls.Add(this._textBox);
-			this.toolStripContainer1.ContentPanel.Controls.Add(this.splitter1);
-			this.toolStripContainer1.ContentPanel.Controls.Add(this.documentMap1);
-			this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(544, 412);
-			this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
-			this.toolStripContainer1.Name = "toolStripContainer1";
-			this.toolStripContainer1.Size = new System.Drawing.Size(544, 461);
-			this.toolStripContainer1.TabIndex = 6;
-			this.toolStripContainer1.Text = "toolStripContainer1";
+			this.toolStripContainer.ContentPanel.Controls.Add(this.textBox);
+			this.toolStripContainer.ContentPanel.Controls.Add(this.splitter);
+			this.toolStripContainer.ContentPanel.Controls.Add(this.documentMap);
+			this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(544, 412);
+			this.toolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.toolStripContainer.Location = new System.Drawing.Point(0, 0);
+			this.toolStripContainer.Name = "toolStripContainer";
+			this.toolStripContainer.Size = new System.Drawing.Size(544, 461);
+			this.toolStripContainer.TabIndex = 6;
+			this.toolStripContainer.Text = "toolStripContainer";
 			// 
-			// toolStripContainer1.TopToolStripPanel
+			// toolStripContainer.TopToolStripPanel
 			// 
-			this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.menuStrip1);
-			this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.tsMain);
+			this.toolStripContainer.TopToolStripPanel.Controls.Add(this.menuStrip);
+			this.toolStripContainer.TopToolStripPanel.Controls.Add(this.tsMain);
 			// 
-			// _textBox
+			// textBox
 			// 
-			this._textBox.AutoCompleteBracketsList = new char[] {
+			this.textBox.AutoCompleteBracketsList = new char[] {
         '(',
         ')',
         '{',
@@ -164,55 +164,77 @@ namespace ClVi
         '\"',
         '\'',
         '\''};
-			this._textBox.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*" +
+			this.textBox.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*" +
     "(?<range>:)\\s*(?<range>[^;]+);";
-			this._textBox.AutoIndentExistingLines = false;
-			this._textBox.AutoScrollMinSize = new System.Drawing.Size(501, 1890);
-			this._textBox.AutoSize = true;
-			this._textBox.BackBrush = null;
-			this._textBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this._textBox.CharHeight = 15;
-			this._textBox.CharWidth = 7;
-			this._textBox.Cursor = System.Windows.Forms.Cursors.IBeam;
-			this._textBox.DefaultMarkerSize = 10;
-			this._textBox.DelayedEventsInterval = 200;
-			this._textBox.DelayedTextChangedInterval = 500;
-			this._textBox.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-			this._textBox.Dock = System.Windows.Forms.DockStyle.Fill;
-			this._textBox.Font = new System.Drawing.Font("Consolas", 9.75F);
-			this._textBox.ImeMode = System.Windows.Forms.ImeMode.Off;
-			this._textBox.IsReplaceMode = false;
-			this._textBox.Location = new System.Drawing.Point(0, 0);
-			this._textBox.Margin = new System.Windows.Forms.Padding(4);
-			this._textBox.Name = "_textBox";
-			this._textBox.Paddings = new System.Windows.Forms.Padding(0);
-			this._textBox.ReservedCountOfLineNumberChars = 3;
-			this._textBox.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-			this._textBox.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("_textBox.ServiceColors")));
-			this._textBox.Size = new System.Drawing.Size(458, 412);
-			this._textBox.TabIndex = 8;
-			this._textBox.Text = resources.GetString("_textBox.Text");
-			this._textBox.Zoom = 100;
-			this._textBox.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.textBox_TextChanged);
-			this._textBox.SelectionChangedDelayed += new System.EventHandler(this.fctb_SelectionChangedDelayed);
-			this._textBox.AutoIndentNeeded += new System.EventHandler<FastColoredTextBoxNS.AutoIndentEventArgs>(this.textBox_AutoIndentNeeded);
-			this._textBox.CustomAction += new System.EventHandler<FastColoredTextBoxNS.CustomActionEventArgs>(this.fctb_CustomAction);
+			this.textBox.AutoIndentExistingLines = false;
+			this.textBox.AutoScrollMinSize = new System.Drawing.Size(501, 1890);
+			this.textBox.AutoSize = true;
+			this.textBox.BackBrush = null;
+			this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.textBox.CharHeight = 15;
+			this.textBox.CharWidth = 7;
+			this.textBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+			this.textBox.DefaultMarkerSize = 10;
+			this.textBox.DelayedEventsInterval = 200;
+			this.textBox.DelayedTextChangedInterval = 500;
+			this.textBox.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+			this.textBox.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.textBox.Font = new System.Drawing.Font("Consolas", 9.75F);
+			this.textBox.ImeMode = System.Windows.Forms.ImeMode.Off;
+			this.textBox.IsReplaceMode = false;
+			this.textBox.Location = new System.Drawing.Point(0, 0);
+			this.textBox.Margin = new System.Windows.Forms.Padding(4);
+			this.textBox.Name = "textBox";
+			this.textBox.Paddings = new System.Windows.Forms.Padding(0);
+			this.textBox.ReservedCountOfLineNumberChars = 3;
+			this.textBox.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+			this.textBox.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("textBox.ServiceColors")));
+			this.textBox.Size = new System.Drawing.Size(461, 412);
+			this.textBox.TabIndex = 8;
+			this.textBox.Text = resources.GetString("textBox.Text");
+			this.textBox.Zoom = 100;
+			this.textBox.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.textBox_TextChanged);
+			this.textBox.SelectionChangedDelayed += new System.EventHandler(this.fctb_SelectionChangedDelayed);
+			this.textBox.AutoIndentNeeded += new System.EventHandler<FastColoredTextBoxNS.AutoIndentEventArgs>(this.textBox_AutoIndentNeeded);
+			this.textBox.CustomAction += new System.EventHandler<FastColoredTextBoxNS.CustomActionEventArgs>(this.fctb_CustomAction);
 			// 
-			// menuStrip1
+			// splitter
 			// 
-			this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
-			this.menuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
-			this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.splitter.Dock = System.Windows.Forms.DockStyle.Right;
+			this.splitter.Location = new System.Drawing.Point(461, 0);
+			this.splitter.Name = "splitter";
+			this.splitter.Size = new System.Drawing.Size(3, 412);
+			this.splitter.TabIndex = 9;
+			this.splitter.TabStop = false;
+			// 
+			// documentMap
+			// 
+			this.documentMap.Dock = System.Windows.Forms.DockStyle.Right;
+			this.documentMap.ForeColor = System.Drawing.Color.Maroon;
+			this.documentMap.Location = new System.Drawing.Point(464, 0);
+			this.documentMap.Name = "documentMap";
+			this.documentMap.Scale = 0.2F;
+			this.documentMap.Size = new System.Drawing.Size(80, 412);
+			this.documentMap.TabIndex = 10;
+			this.documentMap.Target = this.textBox;
+			this.documentMap.Text = "documentMap";
+			this.documentMap.Resize += new System.EventHandler(this.documentMap1_Resize);
+			// 
+			// menuStrip
+			// 
+			this.menuStrip.Dock = System.Windows.Forms.DockStyle.None;
+			this.menuStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
+			this.menuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+			this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editToolStripMenuItem,
             this.miLanguage,
             this.foldingToolStripMenuItem});
-			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-			this.menuStrip1.Size = new System.Drawing.Size(544, 24);
-			this.menuStrip1.TabIndex = 10;
-			this.menuStrip1.Text = "menuStrip1";
+			this.menuStrip.Location = new System.Drawing.Point(0, 0);
+			this.menuStrip.Name = "menuStrip";
+			this.menuStrip.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+			this.menuStrip.Size = new System.Drawing.Size(544, 24);
+			this.menuStrip.TabIndex = 10;
+			this.menuStrip.Text = "menuStrip";
 			// 
 			// editToolStripMenuItem
 			// 
@@ -573,7 +595,6 @@ namespace ClVi
 			this.fold4LayerToolStripMenuItem.Text = "Fold 4 layer";
 			this.fold4LayerToolStripMenuItem.Click += new System.EventHandler(this.fold4LayerToolStripMenuItem_Click);
 			// 
-			// 
 			// tsMain
 			// 
 			this.tsMain.Dock = System.Windows.Forms.DockStyle.None;
@@ -775,49 +796,28 @@ namespace ClVi
 			this.gotoButton.Size = new System.Drawing.Size(55, 22);
 			this.gotoButton.Text = "Goto...";
 			// 
-			// splitter1
-			// 
-			this.splitter1.Dock = System.Windows.Forms.DockStyle.Right;
-			this.splitter1.Location = new System.Drawing.Point(458, 0);
-			this.splitter1.Name = "splitter1";
-			this.splitter1.Size = new System.Drawing.Size(6, 412);
-			this.splitter1.TabIndex = 9;
-			this.splitter1.TabStop = false;
-			// 
-			// documentMap1
-			// 
-			this.documentMap1.Dock = System.Windows.Forms.DockStyle.Right;
-			this.documentMap1.ForeColor = System.Drawing.Color.Maroon;
-			this.documentMap1.Location = new System.Drawing.Point(464, 0);
-			this.documentMap1.Name = "documentMap1";
-			this.documentMap1.Scale = 0.4F;
-			this.documentMap1.Size = new System.Drawing.Size(80, 412);
-			this.documentMap1.TabIndex = 10;
-			this.documentMap1.Target = this._textBox;
-			this.documentMap1.Text = "documentMap1";
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.ClientSize = new System.Drawing.Size(544, 461);
-			this.Controls.Add(this.toolStripContainer1);
+			this.Controls.Add(this.toolStripContainer);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.ImeMode = System.Windows.Forms.ImeMode.Hiragana;
 			this.Name = "MainForm";
 			this.Text = "ClipboardViewer";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_Closing);
 			this.Load += new System.EventHandler(this.MainForm_Load);
-			this.toolStripContainer1.ContentPanel.ResumeLayout(false);
-			this.toolStripContainer1.ContentPanel.PerformLayout();
-			this.toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
-			this.toolStripContainer1.TopToolStripPanel.PerformLayout();
-			this.toolStripContainer1.ResumeLayout(false);
-			this.toolStripContainer1.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this._textBox)).EndInit();
-			this.menuStrip1.ResumeLayout(false);
-			this.menuStrip1.PerformLayout();
+			this.toolStripContainer.ContentPanel.ResumeLayout(false);
+			this.toolStripContainer.ContentPanel.PerformLayout();
+			this.toolStripContainer.TopToolStripPanel.ResumeLayout(false);
+			this.toolStripContainer.TopToolStripPanel.PerformLayout();
+			this.toolStripContainer.ResumeLayout(false);
+			this.toolStripContainer.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.textBox)).EndInit();
+			this.menuStrip.ResumeLayout(false);
+			this.menuStrip.PerformLayout();
 			this.tsMain.ResumeLayout(false);
 			this.tsMain.PerformLayout();
 			this.ResumeLayout(false);
@@ -825,9 +825,9 @@ namespace ClVi
 		}
 
 		#endregion
-		private System.Windows.Forms.ToolStripContainer toolStripContainer1;
-		private FastColoredTextBox _textBox;
-		private System.Windows.Forms.MenuStrip menuStrip1;
+		private System.Windows.Forms.ToolStripContainer toolStripContainer;
+		private FastColoredTextBox textBox;
+		private System.Windows.Forms.MenuStrip menuStrip;
 		private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.ToolStripMenuItem findToolStripMenuItem;
@@ -897,8 +897,8 @@ namespace ClVi
 		private System.Windows.Forms.ToolStripButton bookmarkPlusButton;
 		private System.Windows.Forms.ToolStripButton bookmarkMinusButton;
 		private System.Windows.Forms.ToolStripDropDownButton gotoButton;
-		private System.Windows.Forms.Splitter splitter1;
-		private DocumentMap documentMap1;
+		private System.Windows.Forms.Splitter splitter;
+		private DocumentMap documentMap;
 	}
 }
 

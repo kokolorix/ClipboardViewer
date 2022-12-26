@@ -62,17 +62,17 @@ namespace ClVi
 		private void InitStylesPriority()
 		{
 			//add this style explicitly for drawing under other styles
-			_textBox.AddStyle(SameWordsStyle);
+			textBox.AddStyle(SameWordsStyle);
 		}
 
 		private void findToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.ShowFindDialog();
+			textBox.ShowFindDialog();
 		}
 
 		private void replaceToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.ShowReplaceDialog();
+			textBox.ShowReplaceDialog();
 		}
 
 		private void miLanguage_DropDownOpening(object sender, EventArgs e)
@@ -90,9 +90,9 @@ namespace ClVi
 
 		private void textBox_TextChanged(object sender, TextChangedEventArgs e)
 		{
-			if(_textBox.Text.Length > 0)
+			if(textBox.Text.Length > 0)
 			{
-				_lang = getLanguageFromText(_textBox.Text.Substring(0, Math.Min(_textBox.Text.Length, 500)));
+				_lang = getLanguageFromText(textBox.Text.Substring(0, Math.Min(textBox.Text.Length, 500)));
 				setLanguage();
 			}
 		}
@@ -117,39 +117,39 @@ namespace ClVi
 
 		private void setLanguage()
 		{
-			_textBox.ClearStylesBuffer();
-			_textBox.Range.ClearStyle(StyleIndex.All);
+			textBox.ClearStylesBuffer();
+			textBox.Range.ClearStyle(StyleIndex.All);
 			InitStylesPriority();
-			_textBox.AutoIndentNeeded -= textBox_AutoIndentNeeded;
+			textBox.AutoIndentNeeded -= textBox_AutoIndentNeeded;
 			//
 			switch (_lang)
 			{
-				case "CSharp": _textBox.Language = Language.CSharp; break;
-				case "VB": _textBox.Language = Language.VB; break;
-				case "HTML": _textBox.Language = Language.HTML; break;
-				case "XML": _textBox.Language = Language.XML; break;
-				case "SQL": _textBox.Language = Language.SQL; break;
-				case "PHP": _textBox.Language = Language.PHP; break;
-				case "JS": _textBox.Language = Language.JS; break;
-				case "Lua": _textBox.Language = Language.Lua; break;
-				case "JSON": _textBox.Language = Language.JSON; break;
+				case "CSharp": textBox.Language = Language.CSharp; break;
+				case "VB": textBox.Language = Language.VB; break;
+				case "HTML": textBox.Language = Language.HTML; break;
+				case "XML": textBox.Language = Language.XML; break;
+				case "SQL": textBox.Language = Language.SQL; break;
+				case "PHP": textBox.Language = Language.PHP; break;
+				case "JS": textBox.Language = Language.JS; break;
+				case "Lua": textBox.Language = Language.Lua; break;
+				case "JSON": textBox.Language = Language.JSON; break;
 			}
-			_textBox.OnSyntaxHighlight(new TextChangedEventArgs(_textBox.Range));
+			textBox.OnSyntaxHighlight(new TextChangedEventArgs(textBox.Range));
 		}
 
 		private void collapseSelectedBlockToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.CollapseBlock(_textBox.Selection.Start.iLine, _textBox.Selection.End.iLine);
+			textBox.CollapseBlock(textBox.Selection.Start.iLine, textBox.Selection.End.iLine);
 		}
 
 		private void collapseAllregionToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			//this example shows how to collapse all #region blocks (C#)
 			if (!_lang.StartsWith("CSharp")) return;
-			for (int iLine = 0; iLine < _textBox.LinesCount; iLine++)
+			for (int iLine = 0; iLine < textBox.LinesCount; iLine++)
 			{
-				if (_textBox[iLine].FoldingStartMarker == @"#region\b")//marker @"#region\b" was used in SetFoldingMarkers()
-					_textBox.CollapseFoldingBlock(iLine);
+				if (textBox[iLine].FoldingStartMarker == @"#region\b")//marker @"#region\b" was used in SetFoldingMarkers()
+					textBox.CollapseFoldingBlock(iLine);
 			}
 		}
 
@@ -157,21 +157,21 @@ namespace ClVi
 		{
 			//this example shows how to expand all #region blocks (C#)
 			if (!_lang.StartsWith("CSharp")) return;
-			for (int iLine = 0; iLine < _textBox.LinesCount; iLine++)
+			for (int iLine = 0; iLine < textBox.LinesCount; iLine++)
 			{
-				if (_textBox[iLine].FoldingStartMarker == @"#region\b")//marker @"#region\b" was used in SetFoldingMarkers()
-					_textBox.ExpandFoldedBlock(iLine);
+				if (textBox[iLine].FoldingStartMarker == @"#region\b")//marker @"#region\b" was used in SetFoldingMarkers()
+					textBox.ExpandFoldedBlock(iLine);
 			}
 		}
 
 		private void increaseIndentSiftTabToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.IncreaseIndent();
+			textBox.IncreaseIndent();
 		}
 
 		private void decreaseIndentTabToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.DecreaseIndent();
+			textBox.DecreaseIndent();
 		}
 
 		private void hTMLToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -184,7 +184,7 @@ namespace ClVi
 
 				if (sfd.FilterIndex == 1)
 				{
-					html = _textBox.Html;
+					html = textBox.Html;
 				}
 				if (sfd.FilterIndex == 2)
 				{
@@ -194,7 +194,7 @@ namespace ClVi
 					exporter.UseNbsp = false;
 					exporter.UseForwardNbsp = true;
 					exporter.UseStyleTag = true;
-					html = exporter.GetHtml(_textBox);
+					html = exporter.GetHtml(textBox);
 				}
 				File.WriteAllText(sfd.FileName, html);
 			}
@@ -202,17 +202,17 @@ namespace ClVi
 
 		private void fctb_SelectionChangedDelayed(object sender, EventArgs e)
 		{
-			_textBox.VisibleRange.ClearStyle(SameWordsStyle);
-			if (!_textBox.Selection.IsEmpty)
+			textBox.VisibleRange.ClearStyle(SameWordsStyle);
+			if (!textBox.Selection.IsEmpty)
 				return;//user selected diapason
 
 			//get fragment around caret
-			var fragment = _textBox.Selection.GetFragment(@"\w");
+			var fragment = textBox.Selection.GetFragment(@"\w");
 			string text = fragment.Text;
 			if (text.Length == 0)
 				return;
 			//highlight same words
-			var ranges = _textBox.VisibleRange.GetRanges("\\b" + text + "\\b").ToArray();
+			var ranges = textBox.VisibleRange.GetRanges("\\b" + text + "\\b").ToArray();
 			if (ranges.Length > 1)
 				foreach (var r in ranges)
 					r.SetStyle(SameWordsStyle);
@@ -220,17 +220,17 @@ namespace ClVi
 
 		private void goForwardCtrlShiftToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.NavigateForward();
+			textBox.NavigateForward();
 		}
 
 		private void goBackwardCtrlToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.NavigateBackward();
+			textBox.NavigateBackward();
 		}
 
 		private void autoIndentToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.DoAutoIndent();
+			textBox.DoAutoIndent();
 		}
 
 		const int maxBracketSearchIterations = 2000;
@@ -285,12 +285,12 @@ namespace ClVi
 
 		private void goLeftBracketToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			GoLeftBracket(_textBox, '{', '}');
+			GoLeftBracket(textBox, '{', '}');
 		}
 
 		private void goRightBracketToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			GoRightBracket(_textBox, '{', '}');
+			GoRightBracket(textBox, '{', '}');
 		}
 
 		private void textBox_AutoIndentNeeded(object sender, AutoIndentEventArgs args)
@@ -335,50 +335,50 @@ namespace ClVi
 
 		private void miPrint_Click(object sender, EventArgs e)
 		{
-			_textBox.Print(new PrintDialogSettings() { ShowPrintPreviewDialog = true });
+			textBox.Print(new PrintDialogSettings() { ShowPrintPreviewDialog = true });
 		}
 
 		Random rnd = new Random();
 
 		private void miChangeColors_Click(object sender, EventArgs e)
 		{
-			var styles = new Style[] { _textBox.SyntaxHighlighter.BlueBoldStyle, _textBox.SyntaxHighlighter.BlueStyle, _textBox.SyntaxHighlighter.BoldStyle, _textBox.SyntaxHighlighter.BrownStyle, _textBox.SyntaxHighlighter.GrayStyle, _textBox.SyntaxHighlighter.GreenStyle, _textBox.SyntaxHighlighter.MagentaStyle, _textBox.SyntaxHighlighter.MaroonStyle, _textBox.SyntaxHighlighter.RedStyle };
-			_textBox.SyntaxHighlighter.AttributeStyle = styles[rnd.Next(styles.Length)];
-			_textBox.SyntaxHighlighter.ClassNameStyle = styles[rnd.Next(styles.Length)];
-			_textBox.SyntaxHighlighter.CommentStyle = styles[rnd.Next(styles.Length)];
-			_textBox.SyntaxHighlighter.CommentTagStyle = styles[rnd.Next(styles.Length)];
-			_textBox.SyntaxHighlighter.KeywordStyle = styles[rnd.Next(styles.Length)];
-			_textBox.SyntaxHighlighter.NumberStyle = styles[rnd.Next(styles.Length)];
-			_textBox.SyntaxHighlighter.StringStyle = styles[rnd.Next(styles.Length)];
+			var styles = new Style[] { textBox.SyntaxHighlighter.BlueBoldStyle, textBox.SyntaxHighlighter.BlueStyle, textBox.SyntaxHighlighter.BoldStyle, textBox.SyntaxHighlighter.BrownStyle, textBox.SyntaxHighlighter.GrayStyle, textBox.SyntaxHighlighter.GreenStyle, textBox.SyntaxHighlighter.MagentaStyle, textBox.SyntaxHighlighter.MaroonStyle, textBox.SyntaxHighlighter.RedStyle };
+			textBox.SyntaxHighlighter.AttributeStyle = styles[rnd.Next(styles.Length)];
+			textBox.SyntaxHighlighter.ClassNameStyle = styles[rnd.Next(styles.Length)];
+			textBox.SyntaxHighlighter.CommentStyle = styles[rnd.Next(styles.Length)];
+			textBox.SyntaxHighlighter.CommentTagStyle = styles[rnd.Next(styles.Length)];
+			textBox.SyntaxHighlighter.KeywordStyle = styles[rnd.Next(styles.Length)];
+			textBox.SyntaxHighlighter.NumberStyle = styles[rnd.Next(styles.Length)];
+			textBox.SyntaxHighlighter.StringStyle = styles[rnd.Next(styles.Length)];
 
-			_textBox.OnSyntaxHighlight(new TextChangedEventArgs(_textBox.Range));
+			textBox.OnSyntaxHighlight(new TextChangedEventArgs(textBox.Range));
 		}
 
 		private void setSelectedAsReadonlyToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.Selection.ReadOnly = true;
+			textBox.Selection.ReadOnly = true;
 		}
 
 		private void setSelectedAsWritableToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.Selection.ReadOnly = false;
+			textBox.Selection.ReadOnly = false;
 		}
 
 		private void startStopMacroRecordingToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.MacrosManager.IsRecording = !_textBox.MacrosManager.IsRecording;
+			textBox.MacrosManager.IsRecording = !textBox.MacrosManager.IsRecording;
 		}
 
 		private void executeMacroToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.MacrosManager.ExecuteMacros();
+			textBox.MacrosManager.ExecuteMacros();
 		}
 
 		private void changeHotkeysToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			var form = new HotkeysEditorForm(_textBox.HotkeysMapping);
+			var form = new HotkeysEditorForm(textBox.HotkeysMapping);
 			if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-				_textBox.HotkeysMapping = form.GetHotkeys();
+				textBox.HotkeysMapping = form.GetHotkeys();
 		}
 
 		private void rTFToolStripMenuItem_Click(object sender, EventArgs e)
@@ -387,7 +387,7 @@ namespace ClVi
 			sfd.Filter = "RTF|*.rtf";
 			if (sfd.ShowDialog() == DialogResult.OK)
 			{
-				string rtf = _textBox.Rtf;
+				string rtf = textBox.Rtf;
 				File.WriteAllText(sfd.FileName, rtf);
 			}
 		}
@@ -399,12 +399,12 @@ namespace ClVi
 
 		private void commentSelectedLinesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.InsertLinePrefix(_textBox.CommentPrefix);
+			textBox.InsertLinePrefix(textBox.CommentPrefix);
 		}
 
 		private void uncommentSelectedLinesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.RemoveLinePrefix(_textBox.CommentPrefix);
+			textBox.RemoveLinePrefix(textBox.CommentPrefix);
 		}
 
 		private void clipboardChanged(object sender, SharpClipboard.ClipboardChangedEventArgs e)
@@ -430,22 +430,22 @@ namespace ClVi
 	
 				switch (_lang)
 				{
-					//case "CSharp": _textBox.Language = Language.CSharp;
+					//case "CSharp": textBox.Language = Language.CSharp;
 					//	break;
-					//case "VB": _textBox.Language = Language.VB;
+					//case "VB": textBox.Language = Language.VB;
 					//	break;
-					//case "HTML": _textBox.Language = Language.HTML; 
+					//case "HTML": textBox.Language = Language.HTML; 
 					//	break;
 					case "XML":
 						text = System.Xml.Linq.XDocument.Parse(text).ToString();
 						break;
-					//case "SQL": _textBox.Language = Language.SQL; 
+					//case "SQL": textBox.Language = Language.SQL; 
 					//	break;
-					//case "PHP": _textBox.Language = Language.PHP; 
+					//case "PHP": textBox.Language = Language.PHP; 
 					//	break;
-					//case "JS": _textBox.Language = Language.JS; 
+					//case "JS": textBox.Language = Language.JS; 
 					//	break;
-					//case "Lua": _textBox.Language = Language.Lua; 
+					//case "Lua": textBox.Language = Language.Lua; 
 					//	break;
 					case "JSON":
 						var serializerOptions = new JsonSerializerOptions { WriteIndented = true };
@@ -463,24 +463,26 @@ namespace ClVi
 			}
 			finally
 			{
-				_textBox.Text = text;
+				textBox.Text = text;
 			}
 		}
 
 		private void MainForm_Load(object sender, EventArgs e)
 		{
-			_textBox.Text = String.Empty;
+			this.textBox.Text = String.Empty;
 			//if (Keyboard.IsKeyDown(Key.LeftShift))
 			//	return;
 
 			this.WindowState = Properties.Settings.Default.AppState;
 			this.Location = Properties.Settings.Default.AppLocation;
 			this.Size = Properties.Settings.Default.AppSize;
+			this.documentMap.Size = Properties.Settings.Default.DocumentMapSize;
 		}
 
 		private void MainForm_Closing(object sender, FormClosingEventArgs e)
 		{
 			Properties.Settings.Default.AppState = this.WindowState;
+			Properties.Settings.Default.DocumentMapSize = this.documentMap.Size;
 			if (this.WindowState == FormWindowState.Normal)
 			{
 				// save location and size if the state is normal
@@ -500,10 +502,10 @@ namespace ClVi
 
 		private void foldAllToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			//for (int i = _textBox.LinesCount - 1; i >= 0; i--)
+			//for (int i = textBox.LinesCount - 1; i >= 0; i--)
 			//{
-			//	if (_textBox.TextSource.LineHasFoldingStartMarker(i))
-			//		_textBox.CollapseFoldingBlock(i);
+			//	if (textBox.TextSource.LineHasFoldingStartMarker(i))
+			//		textBox.CollapseFoldingBlock(i);
 			//}
 			Dictionary<int, List<int>> nestedFoldingMarkers = getNesteFoldingMarkerDictionary();
 
@@ -514,13 +516,13 @@ namespace ClVi
 			foreach (int i in layers)
 				foldNestedLayer(i);
 
-			_textBox.OnVisibleRangeChanged();
-			_textBox.UpdateScrollbars();
+			textBox.OnVisibleRangeChanged();
+			textBox.UpdateScrollbars();
 		}
 
 		private void unfoldAllToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_textBox.ExpandAllFoldingBlocks();
+			textBox.ExpandAllFoldingBlocks();
 		}
 
 		private void foldNestedLayer(int layer)
@@ -530,7 +532,7 @@ namespace ClVi
 			if (nestedFoldingMarkers.ContainsKey(layer))
 			{
 				foreach (int i in nestedFoldingMarkers[layer])
-					_textBox.CollapseFoldingBlock(i);
+					textBox.CollapseFoldingBlock(i);
 			}
 		}
 
@@ -538,9 +540,9 @@ namespace ClVi
 		{
 			Dictionary<int, List<int>> nestedFoldingMarkers = new Dictionary<int, List<int>>();
 			int nesting = 0;
-			for (int i = 0; i < _textBox.LinesCount; i++)
+			for (int i = 0; i < textBox.LinesCount; i++)
 			{
-				if (_textBox.TextSource.LineHasFoldingStartMarker(i))
+				if (textBox.TextSource.LineHasFoldingStartMarker(i))
 				{
 					if (nestedFoldingMarkers.ContainsKey(nesting))
 						nestedFoldingMarkers[nesting].Add(i);
@@ -549,7 +551,7 @@ namespace ClVi
 
 					nesting++;
 				}
-				if (_textBox.TextSource.LineHasFoldingEndMarker(i))
+				if (textBox.TextSource.LineHasFoldingEndMarker(i))
 					nesting--;
 			}
 
@@ -559,32 +561,32 @@ namespace ClVi
 		{
 			foldNestedLayer(1);
 
-			_textBox.OnVisibleRangeChanged();
-			_textBox.UpdateScrollbars();
+			textBox.OnVisibleRangeChanged();
+			textBox.UpdateScrollbars();
 		}
 
 		private void fold2LayerToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			foldNestedLayer(2);
 
-			_textBox.OnVisibleRangeChanged();
-			_textBox.UpdateScrollbars();
+			textBox.OnVisibleRangeChanged();
+			textBox.UpdateScrollbars();
 		}
 
 		private void fold3LayerToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			foldNestedLayer(3);
 
-			_textBox.OnVisibleRangeChanged();
-			_textBox.UpdateScrollbars();
+			textBox.OnVisibleRangeChanged();
+			textBox.UpdateScrollbars();
 		}
 
 		private void fold4LayerToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			foldNestedLayer(4);
 
-			_textBox.OnVisibleRangeChanged();
-			_textBox.UpdateScrollbars();
+			textBox.OnVisibleRangeChanged();
+			textBox.UpdateScrollbars();
 		}
 
 		private void _documentMap_Click(object sender, EventArgs e)
@@ -595,6 +597,11 @@ namespace ClVi
 		private void tbFind_Click(object sender, EventArgs e)
 		{
 
+		}
+
+		private void documentMap1_Resize(object sender, EventArgs e)
+		{
+			documentMap.Scale = ((float)documentMap.Width) / ((float)400);
 		}
 	}
 }

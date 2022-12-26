@@ -127,6 +127,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClipboardViewer.ico" />
+    <None Include="Resources\magnifying_glass.png" />
+    <None Include="Resources\navigate_cross.png" />
+    <None Include="Resources\navigate_up.png" />
+    <None Include="Resources\navigate_down.png" />
+    <None Include="Resources\navigate_minus.png" />
+    <None Include="Resources\navigate_plus.png" />
     <None Include="Resources\eye.png" />
     <None Include="Resources\eye_blind.png" />
     <None Include="Resources\text_tree.png" />

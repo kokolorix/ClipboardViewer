@@ -19,6 +19,7 @@ using System.Runtime.InteropServices;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Xml;
 using static System.Net.Mime.MediaTypeNames;
+using MouseEventArgs = System.Windows.Forms.MouseEventArgs;
 
 namespace ClVi
 {
@@ -398,9 +399,32 @@ namespace ClVi
 			}
 		}
 
-		private void fctb_CustomAction(object sender, CustomActionEventArgs e)
+		private void textBox_CustomAction(object sender, CustomActionEventArgs e)
 		{
-			MessageBox.Show(e.Action.ToString());
+			if(e.Action.ToString() == "CustomAction1")
+				ToggleBookmark(textBox.Selection.Start.iLine);
+
+			else if (e.Action.ToString() == "CustomAction2")
+			{
+				toolFindNext_Click(sender, e);
+			}
+
+			else if (e.Action.ToString() == "CustomAction3")
+			{
+				toolFindNextSelected_Click(sender, e);
+			}
+
+			else if (e.Action.ToString() == "CustomAction4")
+			{
+				toolFindPrevious_Click(sender, e);
+			}
+
+			else if (e.Action.ToString() == "CustomAction5")
+			{
+				toolFindPreviousSelected_Click(sender, e);
+			}
+
+			//MessageBox.Show(e.Action.ToString());
 		}
 
 		private void commentSelectedLinesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -713,6 +737,188 @@ namespace ClVi
 		{
 			textBox.Text = getClipboardText();
 		}
+
+		private void btAddBookmark_Click(object sender, EventArgs e)
+		{
+			textBox.Bookmarks.Add(textBox.Selection.Start.iLine);
+		}
+
+		private void btRemoveBookmark_Click(object sender, EventArgs e)
+		{
+			textBox.Bookmarks.Remove(textBox.Selection.Start.iLine);
+		}
+
+		private void btGo_DropDownOpening(object sender, EventArgs e)
+		{
+			btGo.DropDownItems.Clear();
+			foreach (var bookmark in textBox.Bookmarks)
+			{
+				string name = textBox.Lines[bookmark.LineIndex];
+				ToolStripItem item = btGo.DropDownItems.Add(name.Substring(0, Math.Min(name.Length, 80)));
+				item.Tag = bookmark;
+				item.Click += (o, a) => ((Bookmark)(o as ToolStripItem).Tag).DoVisible();
+			}
+		}
+
+		private void textBox_DoubleClick(object sender, MouseEventArgs e)
+		{
+			if (e.X < textBox.LeftIndent)
+			{
+				var place = textBox.PointToPlace(e.Location);
+				var iLine = place.iLine;
+				ToggleBookmark(iLine);
+			}
+		}
+
+		private void ToggleBookmark(int iLine)
+		{
+			if (textBox.Bookmarks.Contains(iLine))
+				textBox.Bookmarks.Remove(iLine);
+			else
+				textBox.Bookmarks.Add(iLine);
+		}
+
+		private void btNextBookmark_Click(object sender, EventArgs e)
+		{
+			textBox.GotoNextBookmark(textBox.Selection.Start.iLine);
+		}
+
+		private void btPreviousBookmark_Click(object sender, EventArgs e)
+		{
+			textBox.GotoPrevBookmark(textBox.Selection.Start.iLine);
+		}
+
+		private void tsClearBookmarks_Click(object sender, EventArgs e)
+		{
+			textBox.Bookmarks.Clear();
+			textBox.Invalidate();
+		}
+
+		private bool tbFindChanged = false;
+		private void tbFind_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (e.KeyChar == '\r')
+			{
+				string findText = tbFind.Text;
+				Range range = tbFindChanged ? textBox.Range.Clone() : textBox.Selection.Clone();
+				tbFindChanged = false;
+				bool found = FindNextPattern(findText, range);
+				if (!found)
+					MessageBox.Show("Not found.");
+			}
+			else
+				tbFindChanged = true;
+		}
+
+		private bool FindNextPattern(string findText, Range range)
+		{
+			range.End = new Place(textBox[textBox.LinesCount - 1].Count, textBox.LinesCount - 1);
+			var pattern = Regex.Escape(findText);
+			foreach (var f in range.GetRanges(pattern))
+			{
+				f.Inverse();
+				textBox.Selection = f;
+				textBox.DoSelectionVisible();
+				return true;
+			}
+
+			return false;
+		}
+
+		private bool FindPreviousPattern(string findText, Range range)
+		{
+			 range = new Range(textBox, 0, 0, range.Start.iChar, range.Start.iLine );
+			var pattern = Regex.Escape(findText);
+			var ranges = range.GetRanges(pattern).ToList();
+			ranges.Reverse();
+			foreach (var f in ranges)
+			{
+				f.Inverse();
+				textBox.Selection = f;
+				textBox.DoSelectionVisible();
+				return true;
+			}
+
+			return false;
+		}
+
+		private void toolFindNext_Click(object sender, EventArgs e)
+		{
+			string findText = tbFind.Text;
+
+			Range range = textBox.Selection.Clone();
+			bool found = FindNextPattern(findText, range);
+			if(!found)
+			{
+				range = textBox.Range.Clone();
+				FindNextPattern(findText, range);
+			}
+		}
+
+		private void toolFindNextSelected_Click(object sender, EventArgs e)
+		{
+			string findText = tbFind.Text;
+			if(findText != textBox.Selection.Text)
+				findText = tbFind.Text = textBox.Selection.Text;
+
+			Range range = textBox.Selection.Clone();
+			bool found = FindNextPattern(findText, range);
+			if(!found)
+			{
+				range = textBox.Range.Clone();
+				FindNextPattern(findText, range);
+			}
+		}
+
+		private void toolFindPrevious_Click(object sender, EventArgs e)
+		{
+			string findText = tbFind.Text;
+
+			Range range = textBox.Selection.Clone();
+			range.Normalize();
+			bool found = FindPreviousPattern(findText, range);
+			if(!found)
+			{
+				range = textBox.Range.Clone();
+				range.Normalize();
+				range.Start = range.End;
+				FindPreviousPattern(findText, range);
+			}
+		}
+
+		private void toolFindPreviousSelected_Click(object sender, EventArgs e)
+		{
+			string findText = tbFind.Text;
+			if(findText != textBox.Selection.Text)
+				findText = tbFind.Text = textBox.Selection.Text;
+
+			Range range = textBox.Selection.Clone();
+			range.Normalize();
+			bool found = FindPreviousPattern(findText, range);
+			if(!found)
+			{
+				range = textBox.Range.Clone();
+				range.Normalize();
+				range.Start = range.End;
+				FindPreviousPattern(findText, range);
+			}
+		}
+
+		private void tbContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			mainToolStripMenuItem.Checked = tsMain.Visible;
+			bookmarksToolStripMenuItem.Checked = tsBookmark.Visible;
+		}
+
+		private void mainToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			tsMain.Visible = !tsMain.Visible;
+		}
+
+		private void bookmarksToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			tsBookmark.Visible = !tsBookmark.Visible;
+		}
 	}
 
 	public class InvisibleCharsRenderer : Style
@@ -748,5 +954,4 @@ namespace ClVi
 				}
 		}
 	}
-
 }

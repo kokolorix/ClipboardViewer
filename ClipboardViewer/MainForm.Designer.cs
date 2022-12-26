@@ -40,6 +40,9 @@ namespace ClVi
 			this.textBox = new FastColoredTextBoxNS.FastColoredTextBox();
 			this.splitter = new System.Windows.Forms.Splitter();
 			this.documentMap = new FastColoredTextBoxNS.DocumentMap();
+			this.tbContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.mainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.bookmarksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip = new System.Windows.Forms.MenuStrip();
 			this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -88,29 +91,39 @@ namespace ClVi
 			this.tsMain = new System.Windows.Forms.ToolStrip();
 			this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+			this.btShowFoldingLines = new System.Windows.Forms.ToolStripButton();
+			this.btHighlightCurrentLine = new System.Windows.Forms.ToolStripButton();
+			this.btInvisibleChars = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolObserveClipboard = new System.Windows.Forms.ToolStripButton();
 			this.copyToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
-			this.btInvisibleChars = new System.Windows.Forms.ToolStripButton();
-			this.btHighlightCurrentLine = new System.Windows.Forms.ToolStripButton();
-			this.btShowFoldingLines = new System.Windows.Forms.ToolStripButton();
-			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+			this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
 			this.undoStripButton = new System.Windows.Forms.ToolStripButton();
 			this.redoStripButton = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
 			this.backStripButton = new System.Windows.Forms.ToolStripButton();
 			this.forwardStripButton = new System.Windows.Forms.ToolStripButton();
+			this.toolFindNext = new System.Windows.Forms.ToolStripButton();
 			this.tbFind = new System.Windows.Forms.ToolStripTextBox();
 			this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
 			this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-			this.bookmarkPlusButton = new System.Windows.Forms.ToolStripButton();
-			this.bookmarkMinusButton = new System.Windows.Forms.ToolStripButton();
+			this.tsBookmark = new System.Windows.Forms.ToolStrip();
+			this.btAddBookmark = new System.Windows.Forms.ToolStripButton();
+			this.btRemoveBookmark = new System.Windows.Forms.ToolStripButton();
+			this.btNextBookmark = new System.Windows.Forms.ToolStripButton();
+			this.btPreviousBookmark = new System.Windows.Forms.ToolStripButton();
+			this.btGo = new System.Windows.Forms.ToolStripDropDownButton();
+			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+			this.tsClearBookmarks = new System.Windows.Forms.ToolStripButton();
 			this.toolStripContainer.ContentPanel.SuspendLayout();
 			this.toolStripContainer.TopToolStripPanel.SuspendLayout();
 			this.toolStripContainer.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.textBox)).BeginInit();
+			this.tbContextMenu.SuspendLayout();
 			this.menuStrip.SuspendLayout();
 			this.tsMain.SuspendLayout();
+			this.tsBookmark.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// sharpClipboard
@@ -133,7 +146,7 @@ namespace ClVi
 			this.toolStripContainer.ContentPanel.Controls.Add(this.textBox);
 			this.toolStripContainer.ContentPanel.Controls.Add(this.splitter);
 			this.toolStripContainer.ContentPanel.Controls.Add(this.documentMap);
-			this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(584, 512);
+			this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(584, 487);
 			this.toolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.toolStripContainer.Location = new System.Drawing.Point(0, 0);
 			this.toolStripContainer.Name = "toolStripContainer";
@@ -143,8 +156,10 @@ namespace ClVi
 			// 
 			// toolStripContainer.TopToolStripPanel
 			// 
+			this.toolStripContainer.TopToolStripPanel.ContextMenuStrip = this.tbContextMenu;
 			this.toolStripContainer.TopToolStripPanel.Controls.Add(this.menuStrip);
 			this.toolStripContainer.TopToolStripPanel.Controls.Add(this.tsMain);
+			this.toolStripContainer.TopToolStripPanel.Controls.Add(this.tsBookmark);
 			// 
 			// textBox
 			// 
@@ -162,9 +177,10 @@ namespace ClVi
 			this.textBox.AutoIndentCharsPatterns = "^\\s*[\\w\\.]+(\\s\\w+)?\\s*(?<range>=)\\s*(?<range>[^;=]+);\r\n^\\s*(case|default)\\s*[^:]*" +
     "(?<range>:)\\s*(?<range>[^;]+);";
 			this.textBox.AutoIndentExistingLines = false;
-			this.textBox.AutoScrollMinSize = new System.Drawing.Size(39, 15);
+			this.textBox.AutoScrollMinSize = new System.Drawing.Size(56, 15);
 			this.textBox.AutoSize = true;
 			this.textBox.BackBrush = null;
+			this.textBox.BookmarkColor = System.Drawing.Color.DeepSkyBlue;
 			this.textBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.textBox.CharHeight = 15;
 			this.textBox.CharWidth = 7;
@@ -175,8 +191,10 @@ namespace ClVi
 			this.textBox.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
 			this.textBox.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.textBox.Font = new System.Drawing.Font("Consolas", 9.75F);
+			this.textBox.Hotkeys = resources.GetString("textBox.Hotkeys");
 			this.textBox.ImeMode = System.Windows.Forms.ImeMode.Off;
 			this.textBox.IsReplaceMode = false;
+			this.textBox.LeftPadding = 17;
 			this.textBox.Location = new System.Drawing.Point(0, 0);
 			this.textBox.Margin = new System.Windows.Forms.Padding(4);
 			this.textBox.Name = "textBox";
@@ -184,20 +202,21 @@ namespace ClVi
 			this.textBox.ReservedCountOfLineNumberChars = 3;
 			this.textBox.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
 			this.textBox.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("textBox.ServiceColors")));
-			this.textBox.Size = new System.Drawing.Size(501, 512);
+			this.textBox.Size = new System.Drawing.Size(501, 487);
 			this.textBox.TabIndex = 8;
 			this.textBox.Zoom = 100;
 			this.textBox.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.textBox_TextChanged);
 			this.textBox.SelectionChangedDelayed += new System.EventHandler(this.fctb_SelectionChangedDelayed);
 			this.textBox.AutoIndentNeeded += new System.EventHandler<FastColoredTextBoxNS.AutoIndentEventArgs>(this.textBox_AutoIndentNeeded);
-			this.textBox.CustomAction += new System.EventHandler<FastColoredTextBoxNS.CustomActionEventArgs>(this.fctb_CustomAction);
+			this.textBox.CustomAction += new System.EventHandler<FastColoredTextBoxNS.CustomActionEventArgs>(this.textBox_CustomAction);
+			this.textBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.textBox_DoubleClick);
 			// 
 			// splitter
 			// 
 			this.splitter.Dock = System.Windows.Forms.DockStyle.Right;
 			this.splitter.Location = new System.Drawing.Point(501, 0);
 			this.splitter.Name = "splitter";
-			this.splitter.Size = new System.Drawing.Size(3, 512);
+			this.splitter.Size = new System.Drawing.Size(3, 487);
 			this.splitter.TabIndex = 9;
 			this.splitter.TabStop = false;
 			// 
@@ -208,11 +227,34 @@ namespace ClVi
 			this.documentMap.Location = new System.Drawing.Point(504, 0);
 			this.documentMap.Name = "documentMap";
 			this.documentMap.Scale = 0.2F;
-			this.documentMap.Size = new System.Drawing.Size(80, 512);
+			this.documentMap.Size = new System.Drawing.Size(80, 487);
 			this.documentMap.TabIndex = 10;
 			this.documentMap.Target = this.textBox;
 			this.documentMap.Text = "documentMap";
 			this.documentMap.Resize += new System.EventHandler(this.documentMap1_Resize);
+			// 
+			// tbContextMenu
+			// 
+			this.tbContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mainToolStripMenuItem,
+            this.bookmarksToolStripMenuItem});
+			this.tbContextMenu.Name = "contextMenuStrip1";
+			this.tbContextMenu.Size = new System.Drawing.Size(134, 48);
+			this.tbContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.tbContextMenu_Opening);
+			// 
+			// mainToolStripMenuItem
+			// 
+			this.mainToolStripMenuItem.Name = "mainToolStripMenuItem";
+			this.mainToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+			this.mainToolStripMenuItem.Text = "Main";
+			this.mainToolStripMenuItem.Click += new System.EventHandler(this.mainToolStripMenuItem_Click);
+			// 
+			// bookmarksToolStripMenuItem
+			// 
+			this.bookmarksToolStripMenuItem.Name = "bookmarksToolStripMenuItem";
+			this.bookmarksToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+			this.bookmarksToolStripMenuItem.Text = "Bookmarks";
+			this.bookmarksToolStripMenuItem.Click += new System.EventHandler(this.bookmarksToolStripMenuItem_Click);
 			// 
 			// menuStrip
 			// 
@@ -560,31 +602,32 @@ namespace ClVi
 			// 
 			// tsMain
 			// 
+			this.tsMain.ContextMenuStrip = this.tbContextMenu;
 			this.tsMain.Dock = System.Windows.Forms.DockStyle.None;
 			this.tsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.printToolStripButton,
             this.toolStripSeparator3,
+            this.btShowFoldingLines,
+            this.btHighlightCurrentLine,
+            this.btInvisibleChars,
+            this.toolStripSeparator2,
             this.toolObserveClipboard,
             this.copyToolStripButton,
             this.pasteToolStripButton,
-            this.btInvisibleChars,
-            this.btHighlightCurrentLine,
-            this.btShowFoldingLines,
-            this.toolStripSeparator4,
+            this.toolStripSeparator7,
             this.undoStripButton,
             this.redoStripButton,
             this.toolStripSeparator5,
             this.backStripButton,
             this.forwardStripButton,
+            this.toolFindNext,
             this.tbFind,
             this.toolStripLabel1,
-            this.toolStripSeparator6,
-            this.bookmarkPlusButton,
-            this.bookmarkMinusButton});
+            this.toolStripSeparator6});
 			this.tsMain.Location = new System.Drawing.Point(3, 24);
 			this.tsMain.Name = "tsMain";
 			this.tsMain.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-			this.tsMain.Size = new System.Drawing.Size(514, 25);
+			this.tsMain.Size = new System.Drawing.Size(497, 25);
 			this.tsMain.TabIndex = 9;
 			this.tsMain.Text = "toolStrip1";
 			// 
@@ -602,6 +645,50 @@ namespace ClVi
 			// 
 			this.toolStripSeparator3.Name = "toolStripSeparator3";
 			this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+			// 
+			// btShowFoldingLines
+			// 
+			this.btShowFoldingLines.Checked = true;
+			this.btShowFoldingLines.CheckOnClick = true;
+			this.btShowFoldingLines.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.btShowFoldingLines.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btShowFoldingLines.Image = global::ClVi.Properties.Resources.text_tree1;
+			this.btShowFoldingLines.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btShowFoldingLines.Name = "btShowFoldingLines";
+			this.btShowFoldingLines.Size = new System.Drawing.Size(23, 22);
+			this.btShowFoldingLines.Text = "Show folding lines";
+			this.btShowFoldingLines.Click += new System.EventHandler(this.btShowFoldingLines_Click);
+			// 
+			// btHighlightCurrentLine
+			// 
+			this.btHighlightCurrentLine.Checked = true;
+			this.btHighlightCurrentLine.CheckOnClick = true;
+			this.btHighlightCurrentLine.CheckState = System.Windows.Forms.CheckState.Indeterminate;
+			this.btHighlightCurrentLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btHighlightCurrentLine.Image = global::ClVi.Properties.Resources.code_line;
+			this.btHighlightCurrentLine.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btHighlightCurrentLine.Name = "btHighlightCurrentLine";
+			this.btHighlightCurrentLine.Size = new System.Drawing.Size(23, 22);
+			this.btHighlightCurrentLine.Text = "Highlight current line";
+			this.btHighlightCurrentLine.ToolTipText = "Highlight current line";
+			this.btHighlightCurrentLine.Click += new System.EventHandler(this.btHighlightCurrentLine_Click);
+			// 
+			// btInvisibleChars
+			// 
+			this.btInvisibleChars.CheckOnClick = true;
+			this.btInvisibleChars.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.btInvisibleChars.Image = ((System.Drawing.Image)(resources.GetObject("btInvisibleChars.Image")));
+			this.btInvisibleChars.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btInvisibleChars.Name = "btInvisibleChars";
+			this.btInvisibleChars.Size = new System.Drawing.Size(23, 22);
+			this.btInvisibleChars.Text = "¶";
+			this.btInvisibleChars.ToolTipText = "Show invisible chars";
+			this.btInvisibleChars.Click += new System.EventHandler(this.btInvisibleChars_Click);
+			// 
+			// toolStripSeparator2
+			// 
+			this.toolStripSeparator2.Name = "toolStripSeparator2";
+			this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
 			// 
 			// toolObserveClipboard
 			// 
@@ -637,49 +724,10 @@ namespace ClVi
 			this.pasteToolStripButton.Text = "&Paste";
 			this.pasteToolStripButton.Click += new System.EventHandler(this.pasteToolStripButton_Click);
 			// 
-			// btInvisibleChars
+			// toolStripSeparator7
 			// 
-			this.btInvisibleChars.CheckOnClick = true;
-			this.btInvisibleChars.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-			this.btInvisibleChars.Image = ((System.Drawing.Image)(resources.GetObject("btInvisibleChars.Image")));
-			this.btInvisibleChars.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btInvisibleChars.Name = "btInvisibleChars";
-			this.btInvisibleChars.Size = new System.Drawing.Size(23, 22);
-			this.btInvisibleChars.Text = "¶";
-			this.btInvisibleChars.ToolTipText = "Show invisible chars";
-			this.btInvisibleChars.Click += new System.EventHandler(this.btInvisibleChars_Click);
-			// 
-			// btHighlightCurrentLine
-			// 
-			this.btHighlightCurrentLine.Checked = true;
-			this.btHighlightCurrentLine.CheckOnClick = true;
-			this.btHighlightCurrentLine.CheckState = System.Windows.Forms.CheckState.Indeterminate;
-			this.btHighlightCurrentLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btHighlightCurrentLine.Image = global::ClVi.Properties.Resources.code_line;
-			this.btHighlightCurrentLine.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btHighlightCurrentLine.Name = "btHighlightCurrentLine";
-			this.btHighlightCurrentLine.Size = new System.Drawing.Size(23, 22);
-			this.btHighlightCurrentLine.Text = "Highlight current line";
-			this.btHighlightCurrentLine.ToolTipText = "Highlight current line";
-			this.btHighlightCurrentLine.Click += new System.EventHandler(this.btHighlightCurrentLine_Click);
-			// 
-			// btShowFoldingLines
-			// 
-			this.btShowFoldingLines.Checked = true;
-			this.btShowFoldingLines.CheckOnClick = true;
-			this.btShowFoldingLines.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.btShowFoldingLines.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btShowFoldingLines.Image = global::ClVi.Properties.Resources.text_tree1;
-			this.btShowFoldingLines.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btShowFoldingLines.Name = "btShowFoldingLines";
-			this.btShowFoldingLines.Size = new System.Drawing.Size(23, 22);
-			this.btShowFoldingLines.Text = "Show folding lines";
-			this.btShowFoldingLines.Click += new System.EventHandler(this.btShowFoldingLines_Click);
-			// 
-			// toolStripSeparator4
-			// 
-			this.toolStripSeparator4.Name = "toolStripSeparator4";
-			this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+			this.toolStripSeparator7.Name = "toolStripSeparator7";
+			this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
 			// 
 			// undoStripButton
 			// 
@@ -726,6 +774,18 @@ namespace ClVi
 			this.forwardStripButton.Text = "Navigate Forward (Ctrl+Shift+ -)";
 			this.forwardStripButton.Click += new System.EventHandler(this.goForwardCtrlShiftToolStripMenuItem_Click);
 			// 
+			// toolFindNext
+			// 
+			this.toolFindNext.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+			this.toolFindNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolFindNext.Image = global::ClVi.Properties.Resources.magnifying_glass;
+			this.toolFindNext.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolFindNext.Name = "toolFindNext";
+			this.toolFindNext.Size = new System.Drawing.Size(23, 22);
+			this.toolFindNext.Text = "Find Next";
+			this.toolFindNext.ToolTipText = "Find Next Match of current Pattern in Findbox";
+			this.toolFindNext.Click += new System.EventHandler(this.toolFindNext_Click);
+			// 
 			// tbFind
 			// 
 			this.tbFind.AcceptsReturn = true;
@@ -733,6 +793,7 @@ namespace ClVi
 			this.tbFind.Font = new System.Drawing.Font("Segoe UI", 9F);
 			this.tbFind.Name = "tbFind";
 			this.tbFind.Size = new System.Drawing.Size(140, 25);
+			this.tbFind.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbFind_KeyPress);
 			// 
 			// toolStripLabel1
 			// 
@@ -746,23 +807,91 @@ namespace ClVi
 			this.toolStripSeparator6.Name = "toolStripSeparator6";
 			this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
 			// 
-			// bookmarkPlusButton
+			// tsBookmark
 			// 
-			this.bookmarkPlusButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.bookmarkPlusButton.Image = global::ClVi.Properties.Resources.layer__plus;
-			this.bookmarkPlusButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.bookmarkPlusButton.Name = "bookmarkPlusButton";
-			this.bookmarkPlusButton.Size = new System.Drawing.Size(23, 22);
-			this.bookmarkPlusButton.Text = "Add bookmark (Ctrl-B)";
+			this.tsBookmark.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.tsBookmark.Dock = System.Windows.Forms.DockStyle.None;
+			this.tsBookmark.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btAddBookmark,
+            this.btRemoveBookmark,
+            this.btNextBookmark,
+            this.btPreviousBookmark,
+            this.btGo,
+            this.toolStripSeparator4,
+            this.tsClearBookmarks});
+			this.tsBookmark.Location = new System.Drawing.Point(3, 49);
+			this.tsBookmark.Name = "tsBookmark";
+			this.tsBookmark.Size = new System.Drawing.Size(194, 25);
+			this.tsBookmark.TabIndex = 11;
 			// 
-			// bookmarkMinusButton
+			// btAddBookmark
 			// 
-			this.bookmarkMinusButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.bookmarkMinusButton.Image = global::ClVi.Properties.Resources.layer__minus;
-			this.bookmarkMinusButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.bookmarkMinusButton.Name = "bookmarkMinusButton";
-			this.bookmarkMinusButton.Size = new System.Drawing.Size(23, 22);
-			this.bookmarkMinusButton.Text = "Remove bookmark (Ctrl-Shift-B)";
+			this.btAddBookmark.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btAddBookmark.Image = global::ClVi.Properties.Resources.navigate_plus;
+			this.btAddBookmark.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btAddBookmark.Name = "btAddBookmark";
+			this.btAddBookmark.Size = new System.Drawing.Size(23, 22);
+			this.btAddBookmark.Text = "Add";
+			this.btAddBookmark.ToolTipText = "Add Bookmark";
+			this.btAddBookmark.Click += new System.EventHandler(this.btAddBookmark_Click);
+			// 
+			// btRemoveBookmark
+			// 
+			this.btRemoveBookmark.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btRemoveBookmark.Image = global::ClVi.Properties.Resources.navigate_minus;
+			this.btRemoveBookmark.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btRemoveBookmark.Name = "btRemoveBookmark";
+			this.btRemoveBookmark.Size = new System.Drawing.Size(23, 22);
+			this.btRemoveBookmark.Text = "Remove";
+			this.btRemoveBookmark.ToolTipText = "Remove Bookmark";
+			this.btRemoveBookmark.Click += new System.EventHandler(this.btRemoveBookmark_Click);
+			// 
+			// btNextBookmark
+			// 
+			this.btNextBookmark.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btNextBookmark.Image = global::ClVi.Properties.Resources.navigate_down;
+			this.btNextBookmark.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btNextBookmark.Name = "btNextBookmark";
+			this.btNextBookmark.Size = new System.Drawing.Size(23, 22);
+			this.btNextBookmark.Text = "Next";
+			this.btNextBookmark.ToolTipText = "Next Bookmark";
+			this.btNextBookmark.Click += new System.EventHandler(this.btNextBookmark_Click);
+			// 
+			// btPreviousBookmark
+			// 
+			this.btPreviousBookmark.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btPreviousBookmark.Image = global::ClVi.Properties.Resources.navigate_up;
+			this.btPreviousBookmark.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btPreviousBookmark.Name = "btPreviousBookmark";
+			this.btPreviousBookmark.Size = new System.Drawing.Size(23, 22);
+			this.btPreviousBookmark.Text = "Previous";
+			this.btPreviousBookmark.ToolTipText = "Previous Bookmark";
+			this.btPreviousBookmark.Click += new System.EventHandler(this.btPreviousBookmark_Click);
+			// 
+			// btGo
+			// 
+			this.btGo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.btGo.Image = ((System.Drawing.Image)(resources.GetObject("btGo.Image")));
+			this.btGo.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btGo.Name = "btGo";
+			this.btGo.Size = new System.Drawing.Size(61, 22);
+			this.btGo.Text = "Go to ...";
+			this.btGo.DropDownOpening += new System.EventHandler(this.btGo_DropDownOpening);
+			// 
+			// toolStripSeparator4
+			// 
+			this.toolStripSeparator4.Name = "toolStripSeparator4";
+			this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+			// 
+			// tsClearBookmarks
+			// 
+			this.tsClearBookmarks.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.tsClearBookmarks.Image = global::ClVi.Properties.Resources.navigate_cross;
+			this.tsClearBookmarks.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.tsClearBookmarks.Name = "tsClearBookmarks";
+			this.tsClearBookmarks.Size = new System.Drawing.Size(23, 22);
+			this.tsClearBookmarks.Text = "Clear Bookmarks";
+			this.tsClearBookmarks.Click += new System.EventHandler(this.tsClearBookmarks_Click);
 			// 
 			// MainForm
 			// 
@@ -784,10 +913,13 @@ namespace ClVi
 			this.toolStripContainer.ResumeLayout(false);
 			this.toolStripContainer.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.textBox)).EndInit();
+			this.tbContextMenu.ResumeLayout(false);
 			this.menuStrip.ResumeLayout(false);
 			this.menuStrip.PerformLayout();
 			this.tsMain.ResumeLayout(false);
 			this.tsMain.PerformLayout();
+			this.tsBookmark.ResumeLayout(false);
+			this.tsBookmark.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -846,7 +978,6 @@ namespace ClVi
 		private System.Windows.Forms.ToolStripButton btInvisibleChars;
 		private System.Windows.Forms.ToolStripButton btHighlightCurrentLine;
 		private System.Windows.Forms.ToolStripButton btShowFoldingLines;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 		private System.Windows.Forms.ToolStripButton undoStripButton;
 		private System.Windows.Forms.ToolStripButton redoStripButton;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
@@ -855,13 +986,25 @@ namespace ClVi
 		private System.Windows.Forms.ToolStripTextBox tbFind;
 		private System.Windows.Forms.ToolStripLabel toolStripLabel1;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-		private System.Windows.Forms.ToolStripButton bookmarkPlusButton;
-		private System.Windows.Forms.ToolStripButton bookmarkMinusButton;
 		private System.Windows.Forms.Splitter splitter;
 		private DocumentMap documentMap;
 		private System.Windows.Forms.ToolStripButton copyToolStripButton;
 		private System.Windows.Forms.ToolStripButton pasteToolStripButton;
 		private System.Windows.Forms.ToolStripButton toolObserveClipboard;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+		private System.Windows.Forms.ToolStrip tsBookmark;
+		private System.Windows.Forms.ToolStripButton btAddBookmark;
+		private System.Windows.Forms.ToolStripButton btRemoveBookmark;
+		private System.Windows.Forms.ToolStripButton btNextBookmark;
+		private System.Windows.Forms.ToolStripButton btPreviousBookmark;
+		private System.Windows.Forms.ContextMenuStrip tbContextMenu;
+		private System.Windows.Forms.ToolStripMenuItem mainToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem bookmarksToolStripMenuItem;
+		private System.Windows.Forms.ToolStripDropDownButton btGo;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+		private System.Windows.Forms.ToolStripButton tsClearBookmarks;
+		private System.Windows.Forms.ToolStripButton toolFindNext;
 	}
 }
 

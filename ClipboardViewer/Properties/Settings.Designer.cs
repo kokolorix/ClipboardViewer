@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ClVi.Properties {
+namespace ClpView.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -68,6 +68,18 @@ namespace ClVi.Properties {
             }
             set {
                 this["DocumentMapSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int Zoom {
+            get {
+                return ((int)(this["Zoom"]));
+            }
+            set {
+                this["Zoom"] = value;
             }
         }
     }

@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C8281B07-E665-44A5-837B-B32123B55C25}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ClVi</RootNamespace>
+    <RootNamespace>ClpView</RootNamespace>
     <AssemblyName>ClipboardViewer</AssemblyName>
     <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -127,6 +127,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClipboardViewer.ico" />
+    <None Include="Resources\zoom_in.png" />
+    <None Include="Resources\zoom_out.png" />
+    <None Include="Resources\view_1_1.png" />
+    <None Include="Resources\arrow_merge_4.png" />
+    <None Include="Resources\arrow_merge_3.png" />
+    <None Include="Resources\arrow_merge_2.png" />
+    <None Include="Resources\arrow_merge_1.png" />
+    <None Include="Resources\arrow_fork.png" />
+    <None Include="Resources\arrow_merge.png" />
     <None Include="Resources\magnifying_glass.png" />
     <None Include="Resources\navigate_cross.png" />
     <None Include="Resources\navigate_up.png" />

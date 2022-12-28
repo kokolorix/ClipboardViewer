@@ -21,7 +21,7 @@ using System.Xml;
 using static System.Net.Mime.MediaTypeNames;
 using MouseEventArgs = System.Windows.Forms.MouseEventArgs;
 
-namespace ClVi
+namespace ClpView
 {
 	public partial class MainForm : Form
 	{
@@ -48,7 +48,7 @@ namespace ClVi
 
 			textBox.CurrentLineColor = btHighlightCurrentLine.Checked ? currentLineColor : Color.Transparent;
 			textBox.ShowFoldingLines = btShowFoldingLines.Checked;
-			copyToolStripButton.Enabled = !toolObserveClipboard.Checked;
+			//copyToolStripButton.Enabled = !toolObserveClipboard.Checked;
 			pasteToolStripButton.Enabled = !toolObserveClipboard.Checked;
 			//AdjustClientWidthToDPIScale();
 		}
@@ -447,6 +447,8 @@ namespace ClVi
 
 		private void clipboardChanged(object sender, SharpClipboard.ClipboardChangedEventArgs e)
 		{
+			textBox.Bookmarks.Clear();
+
 			ClipboardType ct = ClipboardType.Unknown;
 
 			switch (e.ContentType)
@@ -538,12 +540,17 @@ namespace ClVi
 			this.Location = Properties.Settings.Default.AppLocation;
 			this.Size = Properties.Settings.Default.AppSize;
 			this.documentMap.Size = Properties.Settings.Default.DocumentMapSize;
+			this.textBox.Zoom = Properties.Settings.Default.Zoom;
+			ToolStripManager.LoadSettings(this);
 		}
 
 		private void MainForm_Closing(object sender, FormClosingEventArgs e)
 		{
 			Properties.Settings.Default.AppState = this.WindowState;
 			Properties.Settings.Default.DocumentMapSize = this.documentMap.Size;
+			Properties.Settings.Default.Zoom = this.textBox.Zoom;
+
+
 			if (this.WindowState == FormWindowState.Normal)
 			{
 				// save location and size if the state is normal
@@ -557,6 +564,7 @@ namespace ClVi
 				Properties.Settings.Default.AppSize = this.RestoreBounds.Size;
 			}
 
+			ToolStripManager.SaveSettings(this);
 			// don't forget to save the settings
 			Properties.Settings.Default.Save();
 		}
@@ -702,17 +710,17 @@ namespace ClVi
 		private void toolObserveClipboard_Click(object sender, EventArgs e)
 		{
 			sharpClipboard.MonitorClipboard = toolObserveClipboard.Checked;
-			copyToolStripButton.Enabled = !toolObserveClipboard.Checked;
+			//copyToolStripButton.Enabled = !toolObserveClipboard.Checked;
 			pasteToolStripButton.Enabled = !toolObserveClipboard.Checked;
 
 			if (toolObserveClipboard.Checked)
 			{
-				toolObserveClipboard.Image = global::ClVi.Properties.Resources.eye;
+				toolObserveClipboard.Image = global::ClpView.Properties.Resources.eye;
 				textBox.Text = getClipboardText();
 			}
 			else
 			{
-				toolObserveClipboard.Image = global::ClVi.Properties.Resources.eye_blind;
+				toolObserveClipboard.Image = global::ClpView.Properties.Resources.eye_blind;
 			}
 		}
 
@@ -764,9 +772,10 @@ namespace ClVi
 		{
 			if (e.X < textBox.LeftIndent)
 			{
-				var place = textBox.PointToPlace(e.Location);
-				var iLine = place.iLine;
-				ToggleBookmark(iLine);
+				//var place = textBox.PointToPlace(e.Location);
+				//var iLine = place.iLine;
+				//ToggleBookmark(iLine);
+				ToggleBookmark(textBox.Selection.Start.iLine);
 			}
 		}
 
@@ -915,9 +924,39 @@ namespace ClVi
 			tsMain.Visible = !tsMain.Visible;
 		}
 
+		private void viewToolStripMenuItem1_Click(object sender, EventArgs e)
+		{
+			tsView.Visible = !tsMain.Visible;
+		}
+
 		private void bookmarksToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			tsBookmark.Visible = !tsBookmark.Visible;
+		}
+
+		private void foldingToolStripMenuItem1_Click(object sender, EventArgs e)
+		{
+			tsFolding.Visible = !tsBookmark.Visible;
+		}
+
+		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			System.Windows.Forms.Application.Exit();
+		}
+
+		private void zoomNormalToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			textBox.Zoom = 100;
+		}
+
+		private void zoomInToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			textBox.ChangeFontSize(2);
+		}
+
+		private void zoomOutToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			textBox.ChangeFontSize(-2);
 		}
 	}
 

@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ClVi.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ClpView.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="AppState" Type="System.Windows.Forms.FormWindowState" Scope="User">
@@ -13,6 +13,9 @@
     </Setting>
     <Setting Name="DocumentMapSize" Type="System.Drawing.Size" Scope="User">
       <Value Profile="(Default)">80, 412</Value>
+    </Setting>
+    <Setting Name="Zoom" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">100</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -1,9 +1,9 @@
-using ClVi.Properties;
+using ClpView.Properties;
 using FastColoredTextBoxNS;
 using System;
 using WK.Libraries.SharpClipboardNS;
 
-namespace ClVi
+namespace ClpView
 {
 	partial class MainForm
 	{
@@ -42,6 +42,8 @@ namespace ClVi
 			this.documentMap = new FastColoredTextBoxNS.DocumentMap();
 			this.tbContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.mainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.viewToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.foldingToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.bookmarksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip = new System.Windows.Forms.MenuStrip();
 			this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,6 +73,11 @@ namespace ClVi
 			this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
 			this.miPrint = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripSeparator();
+			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.zoomNormalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.zoomInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.zoomOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.miLanguage = new System.Windows.Forms.ToolStripMenuItem();
 			this.cSharpbuiltinHighlighterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.miVB = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,6 +95,12 @@ namespace ClVi
 			this.fold2LayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.fold3LayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.fold4LayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.bookmarksToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.nextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.previousToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsMain = new System.Windows.Forms.ToolStrip();
 			this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -116,6 +129,17 @@ namespace ClVi
 			this.btGo = new System.Windows.Forms.ToolStripDropDownButton();
 			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
 			this.tsClearBookmarks = new System.Windows.Forms.ToolStripButton();
+			this.tsFolding = new System.Windows.Forms.ToolStrip();
+			this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+			this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+			this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+			this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+			this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+			this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+			this.tsView = new System.Windows.Forms.ToolStrip();
+			this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
+			this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
+			this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
 			this.toolStripContainer.ContentPanel.SuspendLayout();
 			this.toolStripContainer.TopToolStripPanel.SuspendLayout();
 			this.toolStripContainer.SuspendLayout();
@@ -124,6 +148,8 @@ namespace ClVi
 			this.menuStrip.SuspendLayout();
 			this.tsMain.SuspendLayout();
 			this.tsBookmark.SuspendLayout();
+			this.tsFolding.SuspendLayout();
+			this.tsView.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// sharpClipboard
@@ -160,6 +186,8 @@ namespace ClVi
 			this.toolStripContainer.TopToolStripPanel.Controls.Add(this.menuStrip);
 			this.toolStripContainer.TopToolStripPanel.Controls.Add(this.tsMain);
 			this.toolStripContainer.TopToolStripPanel.Controls.Add(this.tsBookmark);
+			this.toolStripContainer.TopToolStripPanel.Controls.Add(this.tsFolding);
+			this.toolStripContainer.TopToolStripPanel.Controls.Add(this.tsView);
 			// 
 			// textBox
 			// 
@@ -237,9 +265,11 @@ namespace ClVi
 			// 
 			this.tbContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mainToolStripMenuItem,
+            this.viewToolStripMenuItem1,
+            this.foldingToolStripMenuItem1,
             this.bookmarksToolStripMenuItem});
 			this.tbContextMenu.Name = "contextMenuStrip1";
-			this.tbContextMenu.Size = new System.Drawing.Size(134, 48);
+			this.tbContextMenu.Size = new System.Drawing.Size(134, 92);
 			this.tbContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.tbContextMenu_Opening);
 			// 
 			// mainToolStripMenuItem
@@ -248,6 +278,20 @@ namespace ClVi
 			this.mainToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
 			this.mainToolStripMenuItem.Text = "Main";
 			this.mainToolStripMenuItem.Click += new System.EventHandler(this.mainToolStripMenuItem_Click);
+			// 
+			// viewToolStripMenuItem1
+			// 
+			this.viewToolStripMenuItem1.Name = "viewToolStripMenuItem1";
+			this.viewToolStripMenuItem1.Size = new System.Drawing.Size(133, 22);
+			this.viewToolStripMenuItem1.Text = "View";
+			this.viewToolStripMenuItem1.Click += new System.EventHandler(this.viewToolStripMenuItem1_Click);
+			// 
+			// foldingToolStripMenuItem1
+			// 
+			this.foldingToolStripMenuItem1.Name = "foldingToolStripMenuItem1";
+			this.foldingToolStripMenuItem1.Size = new System.Drawing.Size(133, 22);
+			this.foldingToolStripMenuItem1.Text = "Folding";
+			this.foldingToolStripMenuItem1.Click += new System.EventHandler(this.foldingToolStripMenuItem1_Click);
 			// 
 			// bookmarksToolStripMenuItem
 			// 
@@ -263,8 +307,10 @@ namespace ClVi
 			this.menuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
 			this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editToolStripMenuItem,
+            this.viewToolStripMenuItem,
             this.miLanguage,
-            this.foldingToolStripMenuItem});
+            this.foldingToolStripMenuItem,
+            this.bookmarksToolStripMenuItem1});
 			this.menuStrip.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip.Name = "menuStrip";
 			this.menuStrip.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
@@ -300,7 +346,8 @@ namespace ClVi
             this.goRightBracketToolStripMenuItem,
             this.toolStripMenuItem7,
             this.miPrint,
-            this.toolStripMenuItem9});
+            this.toolStripMenuItem9,
+            this.exitToolStripMenuItem});
 			this.editToolStripMenuItem.Name = "editToolStripMenuItem";
 			this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
 			this.editToolStripMenuItem.Text = "&Edit";
@@ -308,162 +355,214 @@ namespace ClVi
 			// toolStripSeparator1
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(222, 6);
+			this.toolStripSeparator1.Size = new System.Drawing.Size(316, 6);
 			// 
 			// findToolStripMenuItem
 			// 
 			this.findToolStripMenuItem.Name = "findToolStripMenuItem";
-			this.findToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-			this.findToolStripMenuItem.Text = "&Find [Ctrl+F]";
+			this.findToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+			this.findToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
+			this.findToolStripMenuItem.Text = "&Find";
 			this.findToolStripMenuItem.Click += new System.EventHandler(this.findToolStripMenuItem_Click);
 			// 
 			// replaceToolStripMenuItem
 			// 
 			this.replaceToolStripMenuItem.Name = "replaceToolStripMenuItem";
-			this.replaceToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-			this.replaceToolStripMenuItem.Text = "&Replace [Ctrl+H]";
+			this.replaceToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
+			this.replaceToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
+			this.replaceToolStripMenuItem.Text = "&Replace";
 			this.replaceToolStripMenuItem.Click += new System.EventHandler(this.replaceToolStripMenuItem_Click);
 			// 
 			// toolStripMenuItem1
 			// 
 			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-			this.toolStripMenuItem1.Size = new System.Drawing.Size(222, 6);
+			this.toolStripMenuItem1.Size = new System.Drawing.Size(316, 6);
 			// 
 			// toolStripMenuItem8
 			// 
 			this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-			this.toolStripMenuItem8.Size = new System.Drawing.Size(222, 6);
+			this.toolStripMenuItem8.Size = new System.Drawing.Size(316, 6);
 			// 
 			// collapseSelectedBlockToolStripMenuItem
 			// 
 			this.collapseSelectedBlockToolStripMenuItem.Name = "collapseSelectedBlockToolStripMenuItem";
-			this.collapseSelectedBlockToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+			this.collapseSelectedBlockToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
 			this.collapseSelectedBlockToolStripMenuItem.Text = "Collapse selected block";
 			this.collapseSelectedBlockToolStripMenuItem.Click += new System.EventHandler(this.collapseSelectedBlockToolStripMenuItem_Click);
 			// 
 			// toolStripMenuItem3
 			// 
 			this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-			this.toolStripMenuItem3.Size = new System.Drawing.Size(222, 6);
+			this.toolStripMenuItem3.Size = new System.Drawing.Size(316, 6);
 			// 
 			// collapseAllregionToolStripMenuItem
 			// 
 			this.collapseAllregionToolStripMenuItem.Name = "collapseAllregionToolStripMenuItem";
-			this.collapseAllregionToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+			this.collapseAllregionToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
 			this.collapseAllregionToolStripMenuItem.Text = "Collapse all #region";
 			this.collapseAllregionToolStripMenuItem.Click += new System.EventHandler(this.collapseAllregionToolStripMenuItem_Click);
 			// 
 			// exapndAllregionToolStripMenuItem
 			// 
 			this.exapndAllregionToolStripMenuItem.Name = "exapndAllregionToolStripMenuItem";
-			this.exapndAllregionToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+			this.exapndAllregionToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
 			this.exapndAllregionToolStripMenuItem.Text = "Exapnd all #region";
 			this.exapndAllregionToolStripMenuItem.Click += new System.EventHandler(this.exapndAllregionToolStripMenuItem_Click);
 			// 
 			// toolStripMenuItem2
 			// 
 			this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-			this.toolStripMenuItem2.Size = new System.Drawing.Size(222, 6);
+			this.toolStripMenuItem2.Size = new System.Drawing.Size(316, 6);
 			// 
 			// increaseIndentSiftTabToolStripMenuItem
 			// 
 			this.increaseIndentSiftTabToolStripMenuItem.Name = "increaseIndentSiftTabToolStripMenuItem";
-			this.increaseIndentSiftTabToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+			this.increaseIndentSiftTabToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
 			this.increaseIndentSiftTabToolStripMenuItem.Text = "Increase Indent [Tab]";
 			this.increaseIndentSiftTabToolStripMenuItem.Click += new System.EventHandler(this.increaseIndentSiftTabToolStripMenuItem_Click);
 			// 
 			// decreaseIndentTabToolStripMenuItem
 			// 
 			this.decreaseIndentTabToolStripMenuItem.Name = "decreaseIndentTabToolStripMenuItem";
-			this.decreaseIndentTabToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+			this.decreaseIndentTabToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
 			this.decreaseIndentTabToolStripMenuItem.Text = "Decrease Indent [Shift + Tab]";
 			this.decreaseIndentTabToolStripMenuItem.Click += new System.EventHandler(this.decreaseIndentTabToolStripMenuItem_Click);
 			// 
 			// toolStripMenuItem10
 			// 
 			this.toolStripMenuItem10.Name = "toolStripMenuItem10";
-			this.toolStripMenuItem10.Size = new System.Drawing.Size(222, 6);
+			this.toolStripMenuItem10.Size = new System.Drawing.Size(316, 6);
 			// 
 			// commentSelectedLinesToolStripMenuItem
 			// 
 			this.commentSelectedLinesToolStripMenuItem.Name = "commentSelectedLinesToolStripMenuItem";
-			this.commentSelectedLinesToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+			this.commentSelectedLinesToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
 			this.commentSelectedLinesToolStripMenuItem.Text = "Comment selected lines";
 			this.commentSelectedLinesToolStripMenuItem.Click += new System.EventHandler(this.commentSelectedLinesToolStripMenuItem_Click);
 			// 
 			// uncommentSelectedLinesToolStripMenuItem
 			// 
 			this.uncommentSelectedLinesToolStripMenuItem.Name = "uncommentSelectedLinesToolStripMenuItem";
-			this.uncommentSelectedLinesToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+			this.uncommentSelectedLinesToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
 			this.uncommentSelectedLinesToolStripMenuItem.Text = "Uncomment selected lines";
 			this.uncommentSelectedLinesToolStripMenuItem.Click += new System.EventHandler(this.uncommentSelectedLinesToolStripMenuItem_Click);
 			// 
 			// toolStripMenuItem4
 			// 
 			this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-			this.toolStripMenuItem4.Size = new System.Drawing.Size(222, 6);
+			this.toolStripMenuItem4.Size = new System.Drawing.Size(316, 6);
 			// 
 			// goBackwardCtrlToolStripMenuItem
 			// 
 			this.goBackwardCtrlToolStripMenuItem.Name = "goBackwardCtrlToolStripMenuItem";
-			this.goBackwardCtrlToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-			this.goBackwardCtrlToolStripMenuItem.Text = "Go Backward [Ctrl+ -]";
+			this.goBackwardCtrlToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.OemMinus)));
+			this.goBackwardCtrlToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
+			this.goBackwardCtrlToolStripMenuItem.Text = "Go Backward";
 			this.goBackwardCtrlToolStripMenuItem.Click += new System.EventHandler(this.goBackwardCtrlToolStripMenuItem_Click);
 			// 
 			// goForwardCtrlShiftToolStripMenuItem
 			// 
 			this.goForwardCtrlShiftToolStripMenuItem.Name = "goForwardCtrlShiftToolStripMenuItem";
-			this.goForwardCtrlShiftToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-			this.goForwardCtrlShiftToolStripMenuItem.Text = "Go Forward [Ctrl+Shift+ -]";
+			this.goForwardCtrlShiftToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.OemMinus)));
+			this.goForwardCtrlShiftToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
+			this.goForwardCtrlShiftToolStripMenuItem.Text = "Go Forward";
 			this.goForwardCtrlShiftToolStripMenuItem.Click += new System.EventHandler(this.goForwardCtrlShiftToolStripMenuItem_Click);
 			// 
 			// toolStripMenuItem5
 			// 
 			this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-			this.toolStripMenuItem5.Size = new System.Drawing.Size(222, 6);
+			this.toolStripMenuItem5.Size = new System.Drawing.Size(316, 6);
 			// 
 			// autoIndentToolStripMenuItem
 			// 
 			this.autoIndentToolStripMenuItem.Name = "autoIndentToolStripMenuItem";
-			this.autoIndentToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+			this.autoIndentToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
 			this.autoIndentToolStripMenuItem.Text = "Auto Indent selected text";
 			this.autoIndentToolStripMenuItem.Click += new System.EventHandler(this.autoIndentToolStripMenuItem_Click);
 			// 
 			// toolStripMenuItem6
 			// 
 			this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-			this.toolStripMenuItem6.Size = new System.Drawing.Size(222, 6);
+			this.toolStripMenuItem6.Size = new System.Drawing.Size(316, 6);
 			// 
 			// goLeftBracketToolStripMenuItem
 			// 
 			this.goLeftBracketToolStripMenuItem.Name = "goLeftBracketToolStripMenuItem";
-			this.goLeftBracketToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+			this.goLeftBracketToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.OemOpenBrackets)));
+			this.goLeftBracketToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
 			this.goLeftBracketToolStripMenuItem.Text = "Go Left Bracket";
 			this.goLeftBracketToolStripMenuItem.Click += new System.EventHandler(this.goLeftBracketToolStripMenuItem_Click);
 			// 
 			// goRightBracketToolStripMenuItem
 			// 
 			this.goRightBracketToolStripMenuItem.Name = "goRightBracketToolStripMenuItem";
-			this.goRightBracketToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+			this.goRightBracketToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.OemOpenBrackets)));
+			this.goRightBracketToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
 			this.goRightBracketToolStripMenuItem.Text = "Go Right Bracket";
 			this.goRightBracketToolStripMenuItem.Click += new System.EventHandler(this.goRightBracketToolStripMenuItem_Click);
 			// 
 			// toolStripMenuItem7
 			// 
 			this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-			this.toolStripMenuItem7.Size = new System.Drawing.Size(222, 6);
+			this.toolStripMenuItem7.Size = new System.Drawing.Size(316, 6);
 			// 
 			// miPrint
 			// 
 			this.miPrint.Name = "miPrint";
-			this.miPrint.Size = new System.Drawing.Size(225, 22);
+			this.miPrint.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+			this.miPrint.Size = new System.Drawing.Size(319, 22);
 			this.miPrint.Text = "Print...";
 			this.miPrint.Click += new System.EventHandler(this.miPrint_Click);
 			// 
 			// toolStripMenuItem9
 			// 
 			this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-			this.toolStripMenuItem9.Size = new System.Drawing.Size(222, 6);
+			this.toolStripMenuItem9.Size = new System.Drawing.Size(316, 6);
+			// 
+			// exitToolStripMenuItem
+			// 
+			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+			this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
+			this.exitToolStripMenuItem.Text = "Exit";
+			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+			// 
+			// viewToolStripMenuItem
+			// 
+			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.zoomNormalToolStripMenuItem,
+            this.zoomInToolStripMenuItem,
+            this.zoomOutToolStripMenuItem});
+			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+			this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+			this.viewToolStripMenuItem.Text = "View";
+			// 
+			// zoomNormalToolStripMenuItem
+			// 
+			this.zoomNormalToolStripMenuItem.Image = global::ClpView.Properties.Resources.view_1_1;
+			this.zoomNormalToolStripMenuItem.Name = "zoomNormalToolStripMenuItem";
+			this.zoomNormalToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D0)));
+			this.zoomNormalToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+			this.zoomNormalToolStripMenuItem.Text = "Zoom normal";
+			this.zoomNormalToolStripMenuItem.Click += new System.EventHandler(this.zoomNormalToolStripMenuItem_Click);
+			// 
+			// zoomInToolStripMenuItem
+			// 
+			this.zoomInToolStripMenuItem.Image = global::ClpView.Properties.Resources.zoom_in;
+			this.zoomInToolStripMenuItem.Name = "zoomInToolStripMenuItem";
+			this.zoomInToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+			this.zoomInToolStripMenuItem.Text = "Zoom in";
+			this.zoomInToolStripMenuItem.Click += new System.EventHandler(this.zoomInToolStripMenuItem_Click);
+			// 
+			// zoomOutToolStripMenuItem
+			// 
+			this.zoomOutToolStripMenuItem.Image = global::ClpView.Properties.Resources.zoom_out;
+			this.zoomOutToolStripMenuItem.Name = "zoomOutToolStripMenuItem";
+			this.zoomOutToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+			this.zoomOutToolStripMenuItem.Text = "Zoom out";
+			this.zoomOutToolStripMenuItem.Click += new System.EventHandler(this.zoomOutToolStripMenuItem_Click);
 			// 
 			// miLanguage
 			// 
@@ -560,20 +659,23 @@ namespace ClVi
 			// 
 			// unfoldAllToolStripMenuItem
 			// 
+			this.unfoldAllToolStripMenuItem.Image = global::ClpView.Properties.Resources.arrow_fork;
 			this.unfoldAllToolStripMenuItem.Name = "unfoldAllToolStripMenuItem";
 			this.unfoldAllToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
-			this.unfoldAllToolStripMenuItem.Text = "Unfold All";
+			this.unfoldAllToolStripMenuItem.Text = "Unfold all";
 			this.unfoldAllToolStripMenuItem.Click += new System.EventHandler(this.unfoldAllToolStripMenuItem_Click);
 			// 
 			// foldAllToolStripMenuItem
 			// 
+			this.foldAllToolStripMenuItem.Image = global::ClpView.Properties.Resources.arrow_merge;
 			this.foldAllToolStripMenuItem.Name = "foldAllToolStripMenuItem";
 			this.foldAllToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
-			this.foldAllToolStripMenuItem.Text = "Fold All";
+			this.foldAllToolStripMenuItem.Text = "Fold all";
 			this.foldAllToolStripMenuItem.Click += new System.EventHandler(this.foldAllToolStripMenuItem_Click);
 			// 
 			// fold1LayerToolStripMenuItem
 			// 
+			this.fold1LayerToolStripMenuItem.Image = global::ClpView.Properties.Resources.arrow_merge_1;
 			this.fold1LayerToolStripMenuItem.Name = "fold1LayerToolStripMenuItem";
 			this.fold1LayerToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
 			this.fold1LayerToolStripMenuItem.Text = "Fold 1 layer";
@@ -581,6 +683,7 @@ namespace ClVi
 			// 
 			// fold2LayerToolStripMenuItem
 			// 
+			this.fold2LayerToolStripMenuItem.Image = global::ClpView.Properties.Resources.arrow_merge_2;
 			this.fold2LayerToolStripMenuItem.Name = "fold2LayerToolStripMenuItem";
 			this.fold2LayerToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
 			this.fold2LayerToolStripMenuItem.Text = "Fold 2 layer";
@@ -588,6 +691,7 @@ namespace ClVi
 			// 
 			// fold3LayerToolStripMenuItem
 			// 
+			this.fold3LayerToolStripMenuItem.Image = global::ClpView.Properties.Resources.arrow_merge_3;
 			this.fold3LayerToolStripMenuItem.Name = "fold3LayerToolStripMenuItem";
 			this.fold3LayerToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
 			this.fold3LayerToolStripMenuItem.Text = "Fold 3 layer";
@@ -595,10 +699,58 @@ namespace ClVi
 			// 
 			// fold4LayerToolStripMenuItem
 			// 
+			this.fold4LayerToolStripMenuItem.Image = global::ClpView.Properties.Resources.arrow_merge_4;
 			this.fold4LayerToolStripMenuItem.Name = "fold4LayerToolStripMenuItem";
 			this.fold4LayerToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
 			this.fold4LayerToolStripMenuItem.Text = "Fold 4 layer";
 			this.fold4LayerToolStripMenuItem.Click += new System.EventHandler(this.fold4LayerToolStripMenuItem_Click);
+			// 
+			// bookmarksToolStripMenuItem1
+			// 
+			this.bookmarksToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addToolStripMenuItem,
+            this.removeToolStripMenuItem,
+            this.nextToolStripMenuItem,
+            this.previousToolStripMenuItem,
+            this.clearToolStripMenuItem});
+			this.bookmarksToolStripMenuItem1.Name = "bookmarksToolStripMenuItem1";
+			this.bookmarksToolStripMenuItem1.Size = new System.Drawing.Size(78, 20);
+			this.bookmarksToolStripMenuItem1.Text = "Bookmarks";
+			// 
+			// addToolStripMenuItem
+			// 
+			this.addToolStripMenuItem.Image = global::ClpView.Properties.Resources.navigate_plus;
+			this.addToolStripMenuItem.Name = "addToolStripMenuItem";
+			this.addToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+			this.addToolStripMenuItem.Text = "Add";
+			// 
+			// removeToolStripMenuItem
+			// 
+			this.removeToolStripMenuItem.Image = global::ClpView.Properties.Resources.navigate_minus;
+			this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
+			this.removeToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+			this.removeToolStripMenuItem.Text = "Remove";
+			// 
+			// nextToolStripMenuItem
+			// 
+			this.nextToolStripMenuItem.Image = global::ClpView.Properties.Resources.navigate_down;
+			this.nextToolStripMenuItem.Name = "nextToolStripMenuItem";
+			this.nextToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+			this.nextToolStripMenuItem.Text = "Next";
+			// 
+			// previousToolStripMenuItem
+			// 
+			this.previousToolStripMenuItem.Image = global::ClpView.Properties.Resources.navigate_up;
+			this.previousToolStripMenuItem.Name = "previousToolStripMenuItem";
+			this.previousToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+			this.previousToolStripMenuItem.Text = "Previous";
+			// 
+			// clearToolStripMenuItem
+			// 
+			this.clearToolStripMenuItem.Image = global::ClpView.Properties.Resources.navigate_cross;
+			this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+			this.clearToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+			this.clearToolStripMenuItem.Text = "Clear";
 			// 
 			// tsMain
 			// 
@@ -652,7 +804,7 @@ namespace ClVi
 			this.btShowFoldingLines.CheckOnClick = true;
 			this.btShowFoldingLines.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.btShowFoldingLines.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btShowFoldingLines.Image = global::ClVi.Properties.Resources.text_tree1;
+			this.btShowFoldingLines.Image = global::ClpView.Properties.Resources.text_tree1;
 			this.btShowFoldingLines.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btShowFoldingLines.Name = "btShowFoldingLines";
 			this.btShowFoldingLines.Size = new System.Drawing.Size(23, 22);
@@ -665,7 +817,7 @@ namespace ClVi
 			this.btHighlightCurrentLine.CheckOnClick = true;
 			this.btHighlightCurrentLine.CheckState = System.Windows.Forms.CheckState.Indeterminate;
 			this.btHighlightCurrentLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btHighlightCurrentLine.Image = global::ClVi.Properties.Resources.code_line;
+			this.btHighlightCurrentLine.Image = global::ClpView.Properties.Resources.code_line;
 			this.btHighlightCurrentLine.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btHighlightCurrentLine.Name = "btHighlightCurrentLine";
 			this.btHighlightCurrentLine.Size = new System.Drawing.Size(23, 22);
@@ -696,7 +848,7 @@ namespace ClVi
 			this.toolObserveClipboard.CheckOnClick = true;
 			this.toolObserveClipboard.CheckState = System.Windows.Forms.CheckState.Indeterminate;
 			this.toolObserveClipboard.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.toolObserveClipboard.Image = global::ClVi.Properties.Resources.eye;
+			this.toolObserveClipboard.Image = global::ClpView.Properties.Resources.eye;
 			this.toolObserveClipboard.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolObserveClipboard.Name = "toolObserveClipboard";
 			this.toolObserveClipboard.Size = new System.Drawing.Size(23, 22);
@@ -732,7 +884,7 @@ namespace ClVi
 			// undoStripButton
 			// 
 			this.undoStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.undoStripButton.Image = global::ClVi.Properties.Resources.undo_16x16;
+			this.undoStripButton.Image = global::ClpView.Properties.Resources.undo_16x16;
 			this.undoStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.undoStripButton.Name = "undoStripButton";
 			this.undoStripButton.Size = new System.Drawing.Size(23, 22);
@@ -742,7 +894,7 @@ namespace ClVi
 			// redoStripButton
 			// 
 			this.redoStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.redoStripButton.Image = global::ClVi.Properties.Resources.redo_16x16;
+			this.redoStripButton.Image = global::ClpView.Properties.Resources.redo_16x16;
 			this.redoStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.redoStripButton.Name = "redoStripButton";
 			this.redoStripButton.Size = new System.Drawing.Size(23, 22);
@@ -757,7 +909,7 @@ namespace ClVi
 			// backStripButton
 			// 
 			this.backStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.backStripButton.Image = global::ClVi.Properties.Resources.backward0_16x16;
+			this.backStripButton.Image = global::ClpView.Properties.Resources.backward0_16x16;
 			this.backStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.backStripButton.Name = "backStripButton";
 			this.backStripButton.Size = new System.Drawing.Size(23, 22);
@@ -767,7 +919,7 @@ namespace ClVi
 			// forwardStripButton
 			// 
 			this.forwardStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.forwardStripButton.Image = global::ClVi.Properties.Resources.forward_16x16;
+			this.forwardStripButton.Image = global::ClpView.Properties.Resources.forward_16x16;
 			this.forwardStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.forwardStripButton.Name = "forwardStripButton";
 			this.forwardStripButton.Size = new System.Drawing.Size(23, 22);
@@ -778,7 +930,7 @@ namespace ClVi
 			// 
 			this.toolFindNext.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
 			this.toolFindNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.toolFindNext.Image = global::ClVi.Properties.Resources.magnifying_glass;
+			this.toolFindNext.Image = global::ClpView.Properties.Resources.magnifying_glass;
 			this.toolFindNext.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolFindNext.Name = "toolFindNext";
 			this.toolFindNext.Size = new System.Drawing.Size(23, 22);
@@ -827,7 +979,7 @@ namespace ClVi
 			// btAddBookmark
 			// 
 			this.btAddBookmark.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btAddBookmark.Image = global::ClVi.Properties.Resources.navigate_plus;
+			this.btAddBookmark.Image = global::ClpView.Properties.Resources.navigate_plus;
 			this.btAddBookmark.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btAddBookmark.Name = "btAddBookmark";
 			this.btAddBookmark.Size = new System.Drawing.Size(23, 22);
@@ -838,7 +990,7 @@ namespace ClVi
 			// btRemoveBookmark
 			// 
 			this.btRemoveBookmark.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btRemoveBookmark.Image = global::ClVi.Properties.Resources.navigate_minus;
+			this.btRemoveBookmark.Image = global::ClpView.Properties.Resources.navigate_minus;
 			this.btRemoveBookmark.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btRemoveBookmark.Name = "btRemoveBookmark";
 			this.btRemoveBookmark.Size = new System.Drawing.Size(23, 22);
@@ -849,7 +1001,7 @@ namespace ClVi
 			// btNextBookmark
 			// 
 			this.btNextBookmark.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btNextBookmark.Image = global::ClVi.Properties.Resources.navigate_down;
+			this.btNextBookmark.Image = global::ClpView.Properties.Resources.navigate_down;
 			this.btNextBookmark.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btNextBookmark.Name = "btNextBookmark";
 			this.btNextBookmark.Size = new System.Drawing.Size(23, 22);
@@ -860,7 +1012,7 @@ namespace ClVi
 			// btPreviousBookmark
 			// 
 			this.btPreviousBookmark.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btPreviousBookmark.Image = global::ClVi.Properties.Resources.navigate_up;
+			this.btPreviousBookmark.Image = global::ClpView.Properties.Resources.navigate_up;
 			this.btPreviousBookmark.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btPreviousBookmark.Name = "btPreviousBookmark";
 			this.btPreviousBookmark.Size = new System.Drawing.Size(23, 22);
@@ -886,12 +1038,130 @@ namespace ClVi
 			// tsClearBookmarks
 			// 
 			this.tsClearBookmarks.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.tsClearBookmarks.Image = global::ClVi.Properties.Resources.navigate_cross;
+			this.tsClearBookmarks.Image = global::ClpView.Properties.Resources.navigate_cross;
 			this.tsClearBookmarks.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.tsClearBookmarks.Name = "tsClearBookmarks";
 			this.tsClearBookmarks.Size = new System.Drawing.Size(23, 22);
 			this.tsClearBookmarks.Text = "Clear Bookmarks";
 			this.tsClearBookmarks.Click += new System.EventHandler(this.tsClearBookmarks_Click);
+			// 
+			// tsFolding
+			// 
+			this.tsFolding.Dock = System.Windows.Forms.DockStyle.None;
+			this.tsFolding.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1,
+            this.toolStripButton2,
+            this.toolStripButton3,
+            this.toolStripButton4,
+            this.toolStripButton5,
+            this.toolStripButton6});
+			this.tsFolding.Location = new System.Drawing.Point(197, 49);
+			this.tsFolding.Name = "tsFolding";
+			this.tsFolding.Size = new System.Drawing.Size(150, 25);
+			this.tsFolding.TabIndex = 12;
+			// 
+			// toolStripButton1
+			// 
+			this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolStripButton1.Image = global::ClpView.Properties.Resources.arrow_fork;
+			this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripButton1.Name = "toolStripButton1";
+			this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+			this.toolStripButton1.Text = "Unfold all";
+			this.toolStripButton1.Click += new System.EventHandler(this.unfoldAllToolStripMenuItem_Click);
+			// 
+			// toolStripButton2
+			// 
+			this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolStripButton2.Image = global::ClpView.Properties.Resources.arrow_merge;
+			this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripButton2.Name = "toolStripButton2";
+			this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
+			this.toolStripButton2.Text = "Fold all";
+			this.toolStripButton2.Click += new System.EventHandler(this.foldAllToolStripMenuItem_Click);
+			// 
+			// toolStripButton3
+			// 
+			this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolStripButton3.Image = global::ClpView.Properties.Resources.arrow_merge_1;
+			this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripButton3.Name = "toolStripButton3";
+			this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
+			this.toolStripButton3.Text = "Fold 1 layer";
+			this.toolStripButton3.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+			this.toolStripButton3.Click += new System.EventHandler(this.fold1LayerToolStripMenuItem_Click);
+			// 
+			// toolStripButton4
+			// 
+			this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolStripButton4.Image = global::ClpView.Properties.Resources.arrow_merge_2;
+			this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripButton4.Name = "toolStripButton4";
+			this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
+			this.toolStripButton4.Text = "Fold 2 layer";
+			this.toolStripButton4.Click += new System.EventHandler(this.fold2LayerToolStripMenuItem_Click);
+			// 
+			// toolStripButton5
+			// 
+			this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolStripButton5.Image = global::ClpView.Properties.Resources.arrow_merge_3;
+			this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripButton5.Name = "toolStripButton5";
+			this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
+			this.toolStripButton5.Text = "Fold 3 layer";
+			this.toolStripButton5.Click += new System.EventHandler(this.fold3LayerToolStripMenuItem_Click);
+			// 
+			// toolStripButton6
+			// 
+			this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolStripButton6.Image = global::ClpView.Properties.Resources.arrow_merge_4;
+			this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripButton6.Name = "toolStripButton6";
+			this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
+			this.toolStripButton6.Text = "Fold 4 layer";
+			this.toolStripButton6.Click += new System.EventHandler(this.fold4LayerToolStripMenuItem_Click);
+			// 
+			// tsView
+			// 
+			this.tsView.Dock = System.Windows.Forms.DockStyle.None;
+			this.tsView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton7,
+            this.toolStripButton8,
+            this.toolStripButton9});
+			this.tsView.Location = new System.Drawing.Point(386, 49);
+			this.tsView.Name = "tsView";
+			this.tsView.Size = new System.Drawing.Size(81, 25);
+			this.tsView.TabIndex = 13;
+			// 
+			// toolStripButton7
+			// 
+			this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolStripButton7.Image = global::ClpView.Properties.Resources.view_1_1;
+			this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripButton7.Name = "toolStripButton7";
+			this.toolStripButton7.Size = new System.Drawing.Size(23, 22);
+			this.toolStripButton7.Text = "toolStripButton7";
+			this.toolStripButton7.Click += new System.EventHandler(this.zoomNormalToolStripMenuItem_Click);
+			// 
+			// toolStripButton8
+			// 
+			this.toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolStripButton8.Image = global::ClpView.Properties.Resources.zoom_in;
+			this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripButton8.Name = "toolStripButton8";
+			this.toolStripButton8.Size = new System.Drawing.Size(23, 22);
+			this.toolStripButton8.Text = "Zoom in";
+			this.toolStripButton8.Click += new System.EventHandler(this.zoomInToolStripMenuItem_Click);
+			// 
+			// toolStripButton9
+			// 
+			this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolStripButton9.Image = global::ClpView.Properties.Resources.zoom_out;
+			this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripButton9.Name = "toolStripButton9";
+			this.toolStripButton9.Size = new System.Drawing.Size(23, 22);
+			this.toolStripButton9.Text = "Zoom out";
+			this.toolStripButton9.Click += new System.EventHandler(this.zoomOutToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -920,6 +1190,10 @@ namespace ClVi
 			this.tsMain.PerformLayout();
 			this.tsBookmark.ResumeLayout(false);
 			this.tsBookmark.PerformLayout();
+			this.tsFolding.ResumeLayout(false);
+			this.tsFolding.PerformLayout();
+			this.tsView.ResumeLayout(false);
+			this.tsView.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -1005,6 +1279,30 @@ namespace ClVi
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 		private System.Windows.Forms.ToolStripButton tsClearBookmarks;
 		private System.Windows.Forms.ToolStripButton toolFindNext;
+		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem bookmarksToolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem nextToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem previousToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
+		private System.Windows.Forms.ToolStrip tsFolding;
+		private System.Windows.Forms.ToolStripButton toolStripButton1;
+		private System.Windows.Forms.ToolStripMenuItem foldingToolStripMenuItem1;
+		private System.Windows.Forms.ToolStripButton toolStripButton2;
+		private System.Windows.Forms.ToolStripButton toolStripButton3;
+		private System.Windows.Forms.ToolStripButton toolStripButton4;
+		private System.Windows.Forms.ToolStripButton toolStripButton5;
+		private System.Windows.Forms.ToolStripButton toolStripButton6;
+		private System.Windows.Forms.ToolStrip tsView;
+		private System.Windows.Forms.ToolStripButton toolStripButton7;
+		private System.Windows.Forms.ToolStripButton toolStripButton8;
+		private System.Windows.Forms.ToolStripButton toolStripButton9;
+		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem zoomNormalToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem zoomInToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem zoomOutToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem1;
 	}
 }
 

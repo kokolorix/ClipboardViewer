@@ -1,14 +1,15 @@
-FastColoredTextBox
-==================
+# Clipboard Viewer
 
-Fast Colored TextBox is text editor component for .NET.
-Allows you to create custom text editor with syntax highlighting.
-It works well with small, medium, large and very-very large files.
+Clipboard preview with code syntax highlighting.
 
-It has such settings as foreground color, font style, background color which can be adjusted for arbitrarily selected text symbols. One can easily gain access to a text with the use of regular expressions. WordWrap, Find/Replace, Code folding and multilevel Undo/Redo are supported as well. 
+- Display and monitoring of copied files.
+- Support of bookmarks.
+- Navigation between visited lines.
+- Code folding based on layers.
+- Temporary disabling of clipboard monitoring.
+- Flexible display size.
+- Document map.
 
-![Fast Colored TextBox](http://www.codeproject.com/KB/edit/FastColoredTextBox_/fastcoloredtextbox2.png)
+![Clipboard Viewer 1](images/f1b3b60f1a00503df946cd8c20da55c808024fb068ff177ed8f65ade0d85de5b.png)  
 
-More details http://www.codeproject.com/Articles/161871/Fast-Colored-TextBox-for-syntax-highlighting
-
-Nuget package https://www.nuget.org/packages/FCTB/
+Based on [FastColoredTextBox component](https://github.com/PavelTorgashov/FastColoredTextBox).

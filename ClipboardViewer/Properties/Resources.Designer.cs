@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Tester.Properties {
+namespace ClpView.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Tester.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Tester.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ClpView.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,66 @@ namespace Tester.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap arrow_fork {
+            get {
+                object obj = ResourceManager.GetObject("arrow_fork", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap arrow_merge {
+            get {
+                object obj = ResourceManager.GetObject("arrow_merge", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap arrow_merge_1 {
+            get {
+                object obj = ResourceManager.GetObject("arrow_merge_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap arrow_merge_2 {
+            get {
+                object obj = ResourceManager.GetObject("arrow_merge_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap arrow_merge_3 {
+            get {
+                object obj = ResourceManager.GetObject("arrow_merge_3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap arrow_merge_4 {
+            get {
+                object obj = ResourceManager.GetObject("arrow_merge_4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -83,29 +143,9 @@ namespace Tester.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap box {
+        internal static System.Drawing.Bitmap code_line {
             get {
-                object obj = ResourceManager.GetObject("box", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap bye {
-            get {
-                object obj = ResourceManager.GetObject("bye", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap class_libraries {
-            get {
-                object obj = ResourceManager.GetObject("class_libraries", resourceCulture);
+                object obj = ResourceManager.GetObject("code_line", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -116,6 +156,26 @@ namespace Tester.Properties {
         internal static System.Drawing.Bitmap edit_padding_top {
             get {
                 object obj = ResourceManager.GetObject("edit-padding-top", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap eye {
+            get {
+                object obj = ResourceManager.GetObject("eye", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap eye_blind {
+            get {
+                object obj = ResourceManager.GetObject("eye_blind", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,9 +213,9 @@ namespace Tester.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap lightning {
+        internal static System.Drawing.Bitmap magnifying_glass {
             get {
-                object obj = ResourceManager.GetObject("lightning", resourceCulture);
+                object obj = ResourceManager.GetObject("magnifying_glass", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -163,9 +223,9 @@ namespace Tester.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap lol {
+        internal static System.Drawing.Bitmap navigate_cross {
             get {
-                object obj = ResourceManager.GetObject("lol", resourceCulture);
+                object obj = ResourceManager.GetObject("navigate_cross", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -173,9 +233,39 @@ namespace Tester.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap property {
+        internal static System.Drawing.Bitmap navigate_down {
             get {
-                object obj = ResourceManager.GetObject("property", resourceCulture);
+                object obj = ResourceManager.GetObject("navigate_down", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap navigate_minus {
+            get {
+                object obj = ResourceManager.GetObject("navigate_minus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap navigate_plus {
+            get {
+                object obj = ResourceManager.GetObject("navigate_plus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap navigate_up {
+            get {
+                object obj = ResourceManager.GetObject("navigate_up", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -193,9 +283,9 @@ namespace Tester.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap rolleyes {
+        internal static System.Drawing.Bitmap text_tree {
             get {
-                object obj = ResourceManager.GetObject("rolleyes", resourceCulture);
+                object obj = ResourceManager.GetObject("text_tree", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -203,19 +293,9 @@ namespace Tester.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap sad_16x16 {
+        internal static System.Drawing.Bitmap text_tree1 {
             get {
-                object obj = ResourceManager.GetObject("sad_16x16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap smile_16x16 {
-            get {
-                object obj = ResourceManager.GetObject("smile_16x16", resourceCulture);
+                object obj = ResourceManager.GetObject("text_tree1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -233,9 +313,29 @@ namespace Tester.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap unsure {
+        internal static System.Drawing.Bitmap view_1_1 {
             get {
-                object obj = ResourceManager.GetObject("unsure", resourceCulture);
+                object obj = ResourceManager.GetObject("view_1_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap zoom_in {
+            get {
+                object obj = ResourceManager.GetObject("zoom_in", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap zoom_out {
+            get {
+                object obj = ResourceManager.GetObject("zoom_out", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

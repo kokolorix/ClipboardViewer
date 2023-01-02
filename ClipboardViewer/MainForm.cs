@@ -20,6 +20,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Xml;
 using static System.Net.Mime.MediaTypeNames;
 using MouseEventArgs = System.Windows.Forms.MouseEventArgs;
+using System.Collections.Specialized;
 
 namespace ClpView
 {
@@ -445,9 +446,16 @@ namespace ClpView
 			Image = 3,
 		}
 
+		private void fileSystemWatcher_Changed(object sender, FileSystemEventArgs e)
+		{
+			//Clipboard.SetFileDropList(new StringCollection{e.FullPath });
+			Clipboard.SetFileDropList(Clipboard.GetFileDropList());
+		}
+
 		private void clipboardChanged(object sender, SharpClipboard.ClipboardChangedEventArgs e)
 		{
 			textBox.Bookmarks.Clear();
+			fileSystemWatcher.EnableRaisingEvents = false;
 
 			ClipboardType ct = ClipboardType.Unknown;
 
@@ -468,6 +476,15 @@ namespace ClpView
 
 			string text = getTextFromClipboard(ct);
 			textBox.Text = text;
+
+			if(ct == ClipboardType.File && Clipboard.GetFileDropList().Count == 1)
+			{
+				var filePath = Clipboard.GetFileDropList().Cast<string>().First();
+				var dirPath = Path.GetDirectoryName(filePath);
+				fileSystemWatcher.Filter = Path.GetFileName(filePath);
+				fileSystemWatcher.Path= dirPath;
+				fileSystemWatcher.EnableRaisingEvents = true;
+			}
 		}
 
 		private string getTextFromClipboard(ClipboardType ct)
@@ -532,16 +549,30 @@ namespace ClpView
 
 		private void MainForm_Load(object sender, EventArgs e)
 		{
-			this.textBox.Text = String.Empty;
+			//this.textBox.Text = String.Empty;
 			//if (Keyboard.IsKeyDown(Key.LeftShift))
 			//	return;
 
-			this.WindowState = Properties.Settings.Default.AppState;
-			this.Location = Properties.Settings.Default.AppLocation;
-			this.Size = Properties.Settings.Default.AppSize;
 			this.documentMap.Size = Properties.Settings.Default.DocumentMapSize;
 			this.textBox.Zoom = Properties.Settings.Default.Zoom;
-			ToolStripManager.LoadSettings(this);
+
+			this.Location = Properties.Settings.Default.AppLocation;
+			this.Size = Properties.Settings.Default.AppSize;
+			this.WindowState = Properties.Settings.Default.AppState;
+
+			ToolStripManager.LoadSettings(this, "Toolbars");
+			// this botch is necessary, because the LoadSettings is little buggy
+			if (menuStrip.Parent == this) // first load, without config. Build two lines of toolbars
+			{
+				menuStrip.Parent = toolStripContainer.TopToolStripPanel;
+				tsMain.Parent = toolStripContainer.TopToolStripPanel;
+				tsView.Parent = toolStripContainer.TopToolStripPanel;
+				tsFolding.Location = new Point(tsView.Location.X + tsView.Size.Width, tsView.Location.Y);
+				tsFolding.Parent = toolStripContainer.TopToolStripPanel;
+				tsBookmark.Location = new Point(tsFolding.Location.X + tsFolding.Size.Width, tsView.Location.Y);
+				tsBookmark.Parent = toolStripContainer.TopToolStripPanel;
+				this.toolStripContainer.ResumeLayout(true);
+			}
 		}
 
 		private void MainForm_Closing(object sender, FormClosingEventArgs e)
@@ -564,9 +595,19 @@ namespace ClpView
 				Properties.Settings.Default.AppSize = this.RestoreBounds.Size;
 			}
 
-			ToolStripManager.SaveSettings(this);
+			ToolStripManager.SaveSettings(this, "Toolbars");
 			// don't forget to save the settings
 			Properties.Settings.Default.Save();
+		}
+
+		private void saveSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			MainForm_Closing(null, null);
+		}
+
+		private void loadSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			MainForm_Load(null, null);
 		}
 
 		private void foldAllToolStripMenuItem_Click(object sender, EventArgs e)
@@ -709,6 +750,7 @@ namespace ClpView
 
 		private void toolObserveClipboard_Click(object sender, EventArgs e)
 		{
+			fileSystemWatcher.EnableRaisingEvents = false;
 			sharpClipboard.MonitorClipboard = toolObserveClipboard.Checked;
 			//copyToolStripButton.Enabled = !toolObserveClipboard.Checked;
 			pasteToolStripButton.Enabled = !toolObserveClipboard.Checked;
@@ -917,6 +959,8 @@ namespace ClpView
 		{
 			mainToolStripMenuItem.Checked = tsMain.Visible;
 			bookmarksToolStripMenuItem.Checked = tsBookmark.Visible;
+			foldingToolStripMenuItem.Checked = tsFolding.Visible;
+			viewToolStripMenuItem.Checked = tsView.Visible;
 		}
 
 		private void mainToolStripMenuItem_Click(object sender, EventArgs e)
@@ -926,7 +970,7 @@ namespace ClpView
 
 		private void viewToolStripMenuItem1_Click(object sender, EventArgs e)
 		{
-			tsView.Visible = !tsMain.Visible;
+			tsView.Visible = !tsView.Visible;
 		}
 
 		private void bookmarksToolStripMenuItem_Click(object sender, EventArgs e)
@@ -936,7 +980,7 @@ namespace ClpView
 
 		private void foldingToolStripMenuItem1_Click(object sender, EventArgs e)
 		{
-			tsFolding.Visible = !tsBookmark.Visible;
+			tsFolding.Visible = !tsFolding.Visible;
 		}
 
 		private void exitToolStripMenuItem_Click(object sender, EventArgs e)

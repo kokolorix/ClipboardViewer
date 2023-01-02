@@ -42,9 +42,11 @@ namespace ClpView
 			this.documentMap = new FastColoredTextBoxNS.DocumentMap();
 			this.tbContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.mainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.viewToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-			this.foldingToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.foldingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.bookmarksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.saveSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.loadSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip = new System.Windows.Forms.MenuStrip();
 			this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -74,7 +76,7 @@ namespace ClpView
 			this.miPrint = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripSeparator();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.viewToolStripMenuItem_main = new System.Windows.Forms.ToolStripMenuItem();
 			this.zoomNormalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.zoomInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.zoomOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,14 +90,14 @@ namespace ClpView
 			this.jSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.luaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.jSONToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.foldingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.foldingToolStripMenuItem_main = new System.Windows.Forms.ToolStripMenuItem();
 			this.unfoldAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.foldAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.fold1LayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.fold2LayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.fold3LayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.fold4LayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.bookmarksToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.bookmarksToolStripMenuItem_main = new System.Windows.Forms.ToolStripMenuItem();
 			this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.nextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -121,6 +123,10 @@ namespace ClpView
 			this.tbFind = new System.Windows.Forms.ToolStripTextBox();
 			this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
 			this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+			this.tsView = new System.Windows.Forms.ToolStrip();
+			this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
+			this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
+			this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
 			this.tsBookmark = new System.Windows.Forms.ToolStrip();
 			this.btAddBookmark = new System.Windows.Forms.ToolStripButton();
 			this.btRemoveBookmark = new System.Windows.Forms.ToolStripButton();
@@ -136,20 +142,17 @@ namespace ClpView
 			this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
 			this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
 			this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
-			this.tsView = new System.Windows.Forms.ToolStrip();
-			this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
-			this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
-			this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
+			this.fileSystemWatcher = new System.IO.FileSystemWatcher();
 			this.toolStripContainer.ContentPanel.SuspendLayout();
-			this.toolStripContainer.TopToolStripPanel.SuspendLayout();
 			this.toolStripContainer.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.textBox)).BeginInit();
 			this.tbContextMenu.SuspendLayout();
 			this.menuStrip.SuspendLayout();
 			this.tsMain.SuspendLayout();
+			this.tsView.SuspendLayout();
 			this.tsBookmark.SuspendLayout();
 			this.tsFolding.SuspendLayout();
-			this.tsView.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// sharpClipboard
@@ -172,7 +175,7 @@ namespace ClpView
 			this.toolStripContainer.ContentPanel.Controls.Add(this.textBox);
 			this.toolStripContainer.ContentPanel.Controls.Add(this.splitter);
 			this.toolStripContainer.ContentPanel.Controls.Add(this.documentMap);
-			this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(584, 487);
+			this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(584, 536);
 			this.toolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.toolStripContainer.Location = new System.Drawing.Point(0, 0);
 			this.toolStripContainer.Name = "toolStripContainer";
@@ -183,11 +186,6 @@ namespace ClpView
 			// toolStripContainer.TopToolStripPanel
 			// 
 			this.toolStripContainer.TopToolStripPanel.ContextMenuStrip = this.tbContextMenu;
-			this.toolStripContainer.TopToolStripPanel.Controls.Add(this.menuStrip);
-			this.toolStripContainer.TopToolStripPanel.Controls.Add(this.tsMain);
-			this.toolStripContainer.TopToolStripPanel.Controls.Add(this.tsBookmark);
-			this.toolStripContainer.TopToolStripPanel.Controls.Add(this.tsFolding);
-			this.toolStripContainer.TopToolStripPanel.Controls.Add(this.tsView);
 			// 
 			// textBox
 			// 
@@ -230,7 +228,7 @@ namespace ClpView
 			this.textBox.ReservedCountOfLineNumberChars = 3;
 			this.textBox.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
 			this.textBox.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("textBox.ServiceColors")));
-			this.textBox.Size = new System.Drawing.Size(501, 487);
+			this.textBox.Size = new System.Drawing.Size(501, 536);
 			this.textBox.TabIndex = 8;
 			this.textBox.Zoom = 100;
 			this.textBox.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.textBox_TextChanged);
@@ -244,7 +242,7 @@ namespace ClpView
 			this.splitter.Dock = System.Windows.Forms.DockStyle.Right;
 			this.splitter.Location = new System.Drawing.Point(501, 0);
 			this.splitter.Name = "splitter";
-			this.splitter.Size = new System.Drawing.Size(3, 487);
+			this.splitter.Size = new System.Drawing.Size(3, 536);
 			this.splitter.TabIndex = 9;
 			this.splitter.TabStop = false;
 			// 
@@ -255,7 +253,7 @@ namespace ClpView
 			this.documentMap.Location = new System.Drawing.Point(504, 0);
 			this.documentMap.Name = "documentMap";
 			this.documentMap.Scale = 0.2F;
-			this.documentMap.Size = new System.Drawing.Size(80, 487);
+			this.documentMap.Size = new System.Drawing.Size(80, 536);
 			this.documentMap.TabIndex = 10;
 			this.documentMap.Target = this.textBox;
 			this.documentMap.Text = "documentMap";
@@ -265,40 +263,56 @@ namespace ClpView
 			// 
 			this.tbContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mainToolStripMenuItem,
-            this.viewToolStripMenuItem1,
-            this.foldingToolStripMenuItem1,
-            this.bookmarksToolStripMenuItem});
+            this.viewToolStripMenuItem,
+            this.foldingToolStripMenuItem,
+            this.bookmarksToolStripMenuItem,
+            this.saveSettingsToolStripMenuItem,
+            this.loadSettingsToolStripMenuItem});
 			this.tbContextMenu.Name = "contextMenuStrip1";
-			this.tbContextMenu.Size = new System.Drawing.Size(134, 92);
+			this.tbContextMenu.Size = new System.Drawing.Size(145, 136);
 			this.tbContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.tbContextMenu_Opening);
 			// 
 			// mainToolStripMenuItem
 			// 
 			this.mainToolStripMenuItem.Name = "mainToolStripMenuItem";
-			this.mainToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+			this.mainToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
 			this.mainToolStripMenuItem.Text = "Main";
 			this.mainToolStripMenuItem.Click += new System.EventHandler(this.mainToolStripMenuItem_Click);
 			// 
-			// viewToolStripMenuItem1
+			// viewToolStripMenuItem
 			// 
-			this.viewToolStripMenuItem1.Name = "viewToolStripMenuItem1";
-			this.viewToolStripMenuItem1.Size = new System.Drawing.Size(133, 22);
-			this.viewToolStripMenuItem1.Text = "View";
-			this.viewToolStripMenuItem1.Click += new System.EventHandler(this.viewToolStripMenuItem1_Click);
+			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+			this.viewToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+			this.viewToolStripMenuItem.Text = "View";
+			this.viewToolStripMenuItem.Click += new System.EventHandler(this.viewToolStripMenuItem1_Click);
 			// 
-			// foldingToolStripMenuItem1
+			// foldingToolStripMenuItem
 			// 
-			this.foldingToolStripMenuItem1.Name = "foldingToolStripMenuItem1";
-			this.foldingToolStripMenuItem1.Size = new System.Drawing.Size(133, 22);
-			this.foldingToolStripMenuItem1.Text = "Folding";
-			this.foldingToolStripMenuItem1.Click += new System.EventHandler(this.foldingToolStripMenuItem1_Click);
+			this.foldingToolStripMenuItem.Name = "foldingToolStripMenuItem";
+			this.foldingToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+			this.foldingToolStripMenuItem.Text = "Folding";
+			this.foldingToolStripMenuItem.Click += new System.EventHandler(this.foldingToolStripMenuItem1_Click);
 			// 
 			// bookmarksToolStripMenuItem
 			// 
 			this.bookmarksToolStripMenuItem.Name = "bookmarksToolStripMenuItem";
-			this.bookmarksToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+			this.bookmarksToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
 			this.bookmarksToolStripMenuItem.Text = "Bookmarks";
 			this.bookmarksToolStripMenuItem.Click += new System.EventHandler(this.bookmarksToolStripMenuItem_Click);
+			// 
+			// saveSettingsToolStripMenuItem
+			// 
+			this.saveSettingsToolStripMenuItem.Name = "saveSettingsToolStripMenuItem";
+			this.saveSettingsToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+			this.saveSettingsToolStripMenuItem.Text = "Save settings";
+			this.saveSettingsToolStripMenuItem.Click += new System.EventHandler(this.saveSettingsToolStripMenuItem_Click);
+			// 
+			// loadSettingsToolStripMenuItem
+			// 
+			this.loadSettingsToolStripMenuItem.Name = "loadSettingsToolStripMenuItem";
+			this.loadSettingsToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+			this.loadSettingsToolStripMenuItem.Text = "Load settings";
+			this.loadSettingsToolStripMenuItem.Click += new System.EventHandler(this.loadSettingsToolStripMenuItem_Click);
 			// 
 			// menuStrip
 			// 
@@ -307,14 +321,14 @@ namespace ClpView
 			this.menuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
 			this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editToolStripMenuItem,
-            this.viewToolStripMenuItem,
+            this.viewToolStripMenuItem_main,
             this.miLanguage,
-            this.foldingToolStripMenuItem,
-            this.bookmarksToolStripMenuItem1});
+            this.foldingToolStripMenuItem_main,
+            this.bookmarksToolStripMenuItem_main});
 			this.menuStrip.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip.Name = "menuStrip";
 			this.menuStrip.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-			this.menuStrip.Size = new System.Drawing.Size(584, 24);
+			this.menuStrip.Size = new System.Drawing.Size(304, 24);
 			this.menuStrip.TabIndex = 10;
 			this.menuStrip.Text = "menuStrip";
 			// 
@@ -529,15 +543,15 @@ namespace ClpView
 			this.exitToolStripMenuItem.Text = "Exit";
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
 			// 
-			// viewToolStripMenuItem
+			// viewToolStripMenuItem_main
 			// 
-			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.viewToolStripMenuItem_main.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.zoomNormalToolStripMenuItem,
             this.zoomInToolStripMenuItem,
             this.zoomOutToolStripMenuItem});
-			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-			this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-			this.viewToolStripMenuItem.Text = "View";
+			this.viewToolStripMenuItem_main.Name = "viewToolStripMenuItem_main";
+			this.viewToolStripMenuItem_main.Size = new System.Drawing.Size(44, 20);
+			this.viewToolStripMenuItem_main.Text = "View";
 			// 
 			// zoomNormalToolStripMenuItem
 			// 
@@ -644,18 +658,18 @@ namespace ClpView
 			this.jSONToolStripMenuItem.Text = "JSON";
 			this.jSONToolStripMenuItem.Click += new System.EventHandler(this.miCSharp_Click);
 			// 
-			// foldingToolStripMenuItem
+			// foldingToolStripMenuItem_main
 			// 
-			this.foldingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.foldingToolStripMenuItem_main.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.unfoldAllToolStripMenuItem,
             this.foldAllToolStripMenuItem,
             this.fold1LayerToolStripMenuItem,
             this.fold2LayerToolStripMenuItem,
             this.fold3LayerToolStripMenuItem,
             this.fold4LayerToolStripMenuItem});
-			this.foldingToolStripMenuItem.Name = "foldingToolStripMenuItem";
-			this.foldingToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
-			this.foldingToolStripMenuItem.Text = "Folding";
+			this.foldingToolStripMenuItem_main.Name = "foldingToolStripMenuItem_main";
+			this.foldingToolStripMenuItem_main.Size = new System.Drawing.Size(59, 20);
+			this.foldingToolStripMenuItem_main.Text = "Folding";
 			// 
 			// unfoldAllToolStripMenuItem
 			// 
@@ -705,17 +719,17 @@ namespace ClpView
 			this.fold4LayerToolStripMenuItem.Text = "Fold 4 layer";
 			this.fold4LayerToolStripMenuItem.Click += new System.EventHandler(this.fold4LayerToolStripMenuItem_Click);
 			// 
-			// bookmarksToolStripMenuItem1
+			// bookmarksToolStripMenuItem_main
 			// 
-			this.bookmarksToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.bookmarksToolStripMenuItem_main.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addToolStripMenuItem,
             this.removeToolStripMenuItem,
             this.nextToolStripMenuItem,
             this.previousToolStripMenuItem,
             this.clearToolStripMenuItem});
-			this.bookmarksToolStripMenuItem1.Name = "bookmarksToolStripMenuItem1";
-			this.bookmarksToolStripMenuItem1.Size = new System.Drawing.Size(78, 20);
-			this.bookmarksToolStripMenuItem1.Text = "Bookmarks";
+			this.bookmarksToolStripMenuItem_main.Name = "bookmarksToolStripMenuItem_main";
+			this.bookmarksToolStripMenuItem_main.Size = new System.Drawing.Size(78, 20);
+			this.bookmarksToolStripMenuItem_main.Text = "Bookmarks";
 			// 
 			// addToolStripMenuItem
 			// 
@@ -776,10 +790,10 @@ namespace ClpView
             this.tbFind,
             this.toolStripLabel1,
             this.toolStripSeparator6});
-			this.tsMain.Location = new System.Drawing.Point(3, 24);
+			this.tsMain.Location = new System.Drawing.Point(0, 30);
 			this.tsMain.Name = "tsMain";
 			this.tsMain.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-			this.tsMain.Size = new System.Drawing.Size(497, 25);
+			this.tsMain.Size = new System.Drawing.Size(528, 25);
 			this.tsMain.TabIndex = 9;
 			this.tsMain.Text = "toolStrip1";
 			// 
@@ -945,6 +959,7 @@ namespace ClpView
 			this.tbFind.Font = new System.Drawing.Font("Segoe UI", 9F);
 			this.tbFind.Name = "tbFind";
 			this.tbFind.Size = new System.Drawing.Size(140, 25);
+			this.tbFind.Text = "-";
 			this.tbFind.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbFind_KeyPress);
 			// 
 			// toolStripLabel1
@@ -959,6 +974,48 @@ namespace ClpView
 			this.toolStripSeparator6.Name = "toolStripSeparator6";
 			this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
 			// 
+			// tsView
+			// 
+			this.tsView.Dock = System.Windows.Forms.DockStyle.None;
+			this.tsView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton7,
+            this.toolStripButton8,
+            this.toolStripButton9});
+			this.tsView.Location = new System.Drawing.Point(0, 60);
+			this.tsView.Name = "tsView";
+			this.tsView.Size = new System.Drawing.Size(81, 25);
+			this.tsView.TabIndex = 13;
+			// 
+			// toolStripButton7
+			// 
+			this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolStripButton7.Image = global::ClpView.Properties.Resources.view_1_1;
+			this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripButton7.Name = "toolStripButton7";
+			this.toolStripButton7.Size = new System.Drawing.Size(23, 22);
+			this.toolStripButton7.Text = "toolStripButton7";
+			this.toolStripButton7.Click += new System.EventHandler(this.zoomNormalToolStripMenuItem_Click);
+			// 
+			// toolStripButton8
+			// 
+			this.toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolStripButton8.Image = global::ClpView.Properties.Resources.zoom_in;
+			this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripButton8.Name = "toolStripButton8";
+			this.toolStripButton8.Size = new System.Drawing.Size(23, 22);
+			this.toolStripButton8.Text = "Zoom in";
+			this.toolStripButton8.Click += new System.EventHandler(this.zoomInToolStripMenuItem_Click);
+			// 
+			// toolStripButton9
+			// 
+			this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.toolStripButton9.Image = global::ClpView.Properties.Resources.zoom_out;
+			this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripButton9.Name = "toolStripButton9";
+			this.toolStripButton9.Size = new System.Drawing.Size(23, 22);
+			this.toolStripButton9.Text = "Zoom out";
+			this.toolStripButton9.Click += new System.EventHandler(this.zoomOutToolStripMenuItem_Click);
+			// 
 			// tsBookmark
 			// 
 			this.tsBookmark.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -971,7 +1028,7 @@ namespace ClpView
             this.btGo,
             this.toolStripSeparator4,
             this.tsClearBookmarks});
-			this.tsBookmark.Location = new System.Drawing.Point(3, 49);
+			this.tsBookmark.Location = new System.Drawing.Point(300, 60);
 			this.tsBookmark.Name = "tsBookmark";
 			this.tsBookmark.Size = new System.Drawing.Size(194, 25);
 			this.tsBookmark.TabIndex = 11;
@@ -1055,7 +1112,7 @@ namespace ClpView
             this.toolStripButton4,
             this.toolStripButton5,
             this.toolStripButton6});
-			this.tsFolding.Location = new System.Drawing.Point(197, 49);
+			this.tsFolding.Location = new System.Drawing.Point(120, 60);
 			this.tsFolding.Name = "tsFolding";
 			this.tsFolding.Size = new System.Drawing.Size(150, 25);
 			this.tsFolding.TabIndex = 12;
@@ -1121,47 +1178,12 @@ namespace ClpView
 			this.toolStripButton6.Text = "Fold 4 layer";
 			this.toolStripButton6.Click += new System.EventHandler(this.fold4LayerToolStripMenuItem_Click);
 			// 
-			// tsView
+			// fileSystemWatcher
 			// 
-			this.tsView.Dock = System.Windows.Forms.DockStyle.None;
-			this.tsView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton7,
-            this.toolStripButton8,
-            this.toolStripButton9});
-			this.tsView.Location = new System.Drawing.Point(386, 49);
-			this.tsView.Name = "tsView";
-			this.tsView.Size = new System.Drawing.Size(81, 25);
-			this.tsView.TabIndex = 13;
-			// 
-			// toolStripButton7
-			// 
-			this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.toolStripButton7.Image = global::ClpView.Properties.Resources.view_1_1;
-			this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.toolStripButton7.Name = "toolStripButton7";
-			this.toolStripButton7.Size = new System.Drawing.Size(23, 22);
-			this.toolStripButton7.Text = "toolStripButton7";
-			this.toolStripButton7.Click += new System.EventHandler(this.zoomNormalToolStripMenuItem_Click);
-			// 
-			// toolStripButton8
-			// 
-			this.toolStripButton8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.toolStripButton8.Image = global::ClpView.Properties.Resources.zoom_in;
-			this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.toolStripButton8.Name = "toolStripButton8";
-			this.toolStripButton8.Size = new System.Drawing.Size(23, 22);
-			this.toolStripButton8.Text = "Zoom in";
-			this.toolStripButton8.Click += new System.EventHandler(this.zoomInToolStripMenuItem_Click);
-			// 
-			// toolStripButton9
-			// 
-			this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.toolStripButton9.Image = global::ClpView.Properties.Resources.zoom_out;
-			this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.toolStripButton9.Name = "toolStripButton9";
-			this.toolStripButton9.Size = new System.Drawing.Size(23, 22);
-			this.toolStripButton9.Text = "Zoom out";
-			this.toolStripButton9.Click += new System.EventHandler(this.zoomOutToolStripMenuItem_Click);
+			this.fileSystemWatcher.EnableRaisingEvents = true;
+			this.fileSystemWatcher.NotifyFilter = System.IO.NotifyFilters.LastWrite;
+			this.fileSystemWatcher.SynchronizingObject = this;
+			this.fileSystemWatcher.Changed += new System.IO.FileSystemEventHandler(this.fileSystemWatcher_Changed);
 			// 
 			// MainForm
 			// 
@@ -1169,6 +1191,11 @@ namespace ClpView
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.ClientSize = new System.Drawing.Size(584, 561);
+			this.Controls.Add(this.menuStrip);
+			this.Controls.Add(this.tsMain);
+			this.Controls.Add(this.tsView);
+			this.Controls.Add(this.tsFolding);
+			this.Controls.Add(this.tsBookmark);
 			this.Controls.Add(this.toolStripContainer);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.ImeMode = System.Windows.Forms.ImeMode.Hiragana;
@@ -1178,8 +1205,6 @@ namespace ClpView
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.toolStripContainer.ContentPanel.ResumeLayout(false);
 			this.toolStripContainer.ContentPanel.PerformLayout();
-			this.toolStripContainer.TopToolStripPanel.ResumeLayout(false);
-			this.toolStripContainer.TopToolStripPanel.PerformLayout();
 			this.toolStripContainer.ResumeLayout(false);
 			this.toolStripContainer.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.textBox)).EndInit();
@@ -1188,13 +1213,15 @@ namespace ClpView
 			this.menuStrip.PerformLayout();
 			this.tsMain.ResumeLayout(false);
 			this.tsMain.PerformLayout();
+			this.tsView.ResumeLayout(false);
+			this.tsView.PerformLayout();
 			this.tsBookmark.ResumeLayout(false);
 			this.tsBookmark.PerformLayout();
 			this.tsFolding.ResumeLayout(false);
 			this.tsFolding.PerformLayout();
-			this.tsView.ResumeLayout(false);
-			this.tsView.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher)).EndInit();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -1239,7 +1266,7 @@ namespace ClpView
 		private System.Windows.Forms.ToolStripMenuItem jSToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem luaToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem jSONToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem foldingToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem foldingToolStripMenuItem_main;
 		private System.Windows.Forms.ToolStripMenuItem unfoldAllToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem foldAllToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem fold1LayerToolStripMenuItem;
@@ -1280,7 +1307,7 @@ namespace ClpView
 		private System.Windows.Forms.ToolStripButton tsClearBookmarks;
 		private System.Windows.Forms.ToolStripButton toolFindNext;
 		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem bookmarksToolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem bookmarksToolStripMenuItem_main;
 		private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem nextToolStripMenuItem;
@@ -1288,7 +1315,7 @@ namespace ClpView
 		private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
 		private System.Windows.Forms.ToolStrip tsFolding;
 		private System.Windows.Forms.ToolStripButton toolStripButton1;
-		private System.Windows.Forms.ToolStripMenuItem foldingToolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem foldingToolStripMenuItem;
 		private System.Windows.Forms.ToolStripButton toolStripButton2;
 		private System.Windows.Forms.ToolStripButton toolStripButton3;
 		private System.Windows.Forms.ToolStripButton toolStripButton4;
@@ -1298,11 +1325,14 @@ namespace ClpView
 		private System.Windows.Forms.ToolStripButton toolStripButton7;
 		private System.Windows.Forms.ToolStripButton toolStripButton8;
 		private System.Windows.Forms.ToolStripButton toolStripButton9;
-		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem_main;
 		private System.Windows.Forms.ToolStripMenuItem zoomNormalToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem zoomInToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem zoomOutToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem saveSettingsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem loadSettingsToolStripMenuItem;
+		private System.IO.FileSystemWatcher fileSystemWatcher;
 	}
 }
 

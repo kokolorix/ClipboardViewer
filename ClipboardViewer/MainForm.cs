@@ -21,6 +21,8 @@ using System.Xml;
 using static System.Net.Mime.MediaTypeNames;
 using MouseEventArgs = System.Windows.Forms.MouseEventArgs;
 using System.Collections.Specialized;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 
 namespace ClpView
 {
@@ -531,11 +533,22 @@ namespace ClpView
 					//case "Lua": textBox.Language = Language.Lua; 
 					//	break;
 					case "JSON":
-						var serializerOptions = new JsonSerializerOptions { WriteIndented = true };
-						var documentOptions = new JsonDocumentOptions { AllowTrailingCommas = true };
-						using (var doc = System.Text.Json.JsonDocument.Parse(text, documentOptions))
+
+						var encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
+
+						var documentOptions = new JsonDocumentOptions { AllowTrailingCommas = true, CommentHandling = JsonCommentHandling.Skip };
+						using (JsonDocument doc = System.Text.Json.JsonDocument.Parse(text, documentOptions))
 						{
-							text = JsonSerializer.Serialize(doc, serializerOptions);
+							var writerOptions = new JsonWriterOptions() { Indented = true, Encoder = encoder  };
+							using(var stream = new MemoryStream())
+							{
+								using (var writer = new Utf8JsonWriter(stream, writerOptions))
+								{
+									doc.WriteTo(writer);
+									writer.Flush();
+									text = Encoding.UTF8.GetString(stream.ToArray());
+								}
+							}
 						}
 						break;
 				}

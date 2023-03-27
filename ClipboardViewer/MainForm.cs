@@ -1015,6 +1015,38 @@ namespace ClpView
 		{
 			textBox.ChangeFontSize(-2);
 		}
+
+		private void fold5LayerToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			foldNestedLayer(5);
+
+			textBox.OnVisibleRangeChanged();
+			textBox.UpdateScrollbars();
+		}
+
+		private void fold6LayerToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			foldNestedLayer(6);
+
+			textBox.OnVisibleRangeChanged();
+			textBox.UpdateScrollbars();
+		}
+
+		private void fold7LayerToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			foldNestedLayer(7);
+
+			textBox.OnVisibleRangeChanged();
+			textBox.UpdateScrollbars();
+		}
+
+		private void fold8LayerToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			foldNestedLayer(8);
+
+			textBox.OnVisibleRangeChanged();
+			textBox.UpdateScrollbars();
+		}
 	}
 
 	public class InvisibleCharsRenderer : Style

@@ -97,6 +97,10 @@ namespace ClpView
 			this.fold2LayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.fold3LayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.fold4LayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.fold5LayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.fold6LayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.fold7LayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.fold8LayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.bookmarksToolStripMenuItem_main = new System.Windows.Forms.ToolStripMenuItem();
 			this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -666,7 +670,11 @@ namespace ClpView
             this.fold1LayerToolStripMenuItem,
             this.fold2LayerToolStripMenuItem,
             this.fold3LayerToolStripMenuItem,
-            this.fold4LayerToolStripMenuItem});
+            this.fold4LayerToolStripMenuItem,
+				this.fold5LayerToolStripMenuItem,
+				this.fold6LayerToolStripMenuItem,
+				this.fold7LayerToolStripMenuItem,
+				this.fold8LayerToolStripMenuItem});
 			this.foldingToolStripMenuItem_main.Name = "foldingToolStripMenuItem_main";
 			this.foldingToolStripMenuItem_main.Size = new System.Drawing.Size(59, 20);
 			this.foldingToolStripMenuItem_main.Text = "Folding";
@@ -718,6 +726,34 @@ namespace ClpView
 			this.fold4LayerToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
 			this.fold4LayerToolStripMenuItem.Text = "Fold 4 layer";
 			this.fold4LayerToolStripMenuItem.Click += new System.EventHandler(this.fold4LayerToolStripMenuItem_Click);
+			// 
+			// fold5LayerToolStripMenuItem
+			// 
+			this.fold5LayerToolStripMenuItem.Name = "fold5LayerToolStripMenuItem";
+			this.fold5LayerToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+			this.fold5LayerToolStripMenuItem.Text = "Fold 5 layer";
+			this.fold5LayerToolStripMenuItem.Click += new System.EventHandler(this.fold5LayerToolStripMenuItem_Click);
+			// 
+			// fold6LayerToolStripMenuItem
+			// 
+			this.fold6LayerToolStripMenuItem.Name = "fold6LayerToolStripMenuItem";
+			this.fold6LayerToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+			this.fold6LayerToolStripMenuItem.Text = "Fold 6 layer";
+			this.fold6LayerToolStripMenuItem.Click += new System.EventHandler(this.fold6LayerToolStripMenuItem_Click);
+			// 
+			// fold7LayerToolStripMenuItem
+			// 
+			this.fold7LayerToolStripMenuItem.Name = "fold7LayerToolStripMenuItem";
+			this.fold7LayerToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+			this.fold7LayerToolStripMenuItem.Text = "Fold 7 layer";
+			this.fold7LayerToolStripMenuItem.Click += new System.EventHandler(this.fold7LayerToolStripMenuItem_Click);
+			// 
+			// fold8LayerToolStripMenuItem
+			// 
+			this.fold8LayerToolStripMenuItem.Name = "fold8LayerToolStripMenuItem";
+			this.fold8LayerToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+			this.fold8LayerToolStripMenuItem.Text = "Fold 8 layer";
+			this.fold8LayerToolStripMenuItem.Click += new System.EventHandler(this.fold8LayerToolStripMenuItem_Click);
 			// 
 			// bookmarksToolStripMenuItem_main
 			// 
@@ -1333,6 +1369,10 @@ namespace ClpView
 		private System.Windows.Forms.ToolStripMenuItem saveSettingsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem loadSettingsToolStripMenuItem;
 		private System.IO.FileSystemWatcher fileSystemWatcher;
+		private System.Windows.Forms.ToolStripMenuItem fold5LayerToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem fold6LayerToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem fold7LayerToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem fold8LayerToolStripMenuItem;
 	}
 }
 

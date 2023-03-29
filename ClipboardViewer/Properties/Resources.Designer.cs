@@ -123,6 +123,56 @@ namespace ClpView.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap arrow_merge_5 {
+            get {
+                object obj = ResourceManager.GetObject("arrow_merge_5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap arrow_merge_6 {
+            get {
+                object obj = ResourceManager.GetObject("arrow_merge_6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap arrow_merge_7 {
+            get {
+                object obj = ResourceManager.GetObject("arrow_merge_7", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap arrow_merge_8 {
+            get {
+                object obj = ResourceManager.GetObject("arrow_merge_8", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap arrow_merge_9 {
+            get {
+                object obj = ResourceManager.GetObject("arrow_merge_9", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap backward0_16x16 {
             get {
                 object obj = ResourceManager.GetObject("backward0_16x16", resourceCulture);
@@ -316,6 +366,26 @@ namespace ClpView.Properties {
         internal static System.Drawing.Bitmap view_1_1 {
             get {
                 object obj = ResourceManager.GetObject("view_1_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap view_next {
+            get {
+                object obj = ResourceManager.GetObject("view_next", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap view_previous {
+            get {
+                object obj = ResourceManager.GetObject("view_previous", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -553,7 +553,7 @@ namespace ClpView
 						break;
 				}
 			}
-			catch (System.Exception ex)
+			catch (System.Exception)
 			{
 
 			}
@@ -1047,7 +1047,15 @@ namespace ClpView
 			textBox.OnVisibleRangeChanged();
 			textBox.UpdateScrollbars();
 		}
-	}
+	
+		private void fold9LayerToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			foldNestedLayer(9);
+
+			textBox.OnVisibleRangeChanged();
+			textBox.UpdateScrollbars();
+		}
+}
 
 	public class InvisibleCharsRenderer : Style
 	{

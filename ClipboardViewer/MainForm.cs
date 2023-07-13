@@ -793,12 +793,32 @@ namespace ClpView
 
 		private void copyToolStripButton_Click(object sender, EventArgs e)
 		{
-			Clipboard.SetText(textBox.Text);
+			if (String.IsNullOrEmpty(textBox.SelectedText))
+			{
+				Clipboard.SetText(textBox.Text);
+			}
+			else
+			{
+				String text = textBox.SelectedText;
+				if (toolObserveClipboard.Checked)
+				{
+					toolObserveClipboard.Checked = false;
+					toolObserveClipboard_Click(null, null);
+				}
+				Clipboard.SetText(text);
+			}
 		}
 
 		private void pasteToolStripButton_Click(object sender, EventArgs e)
 		{
-			textBox.Text = getClipboardText();
+			if(tbFind.Focused && Clipboard.ContainsText())
+			{
+				tbFind.Text = Clipboard.GetText();
+			}
+			else
+			{
+				textBox.Text = getClipboardText();
+			}
 		}
 
 		private void btAddBookmark_Click(object sender, EventArgs e)

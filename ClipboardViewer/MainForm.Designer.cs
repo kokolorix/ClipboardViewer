@@ -249,6 +249,7 @@ namespace ClpView
 			this.textBox.SelectionChangedDelayed += new System.EventHandler(this.fctb_SelectionChangedDelayed);
 			this.textBox.AutoIndentNeeded += new System.EventHandler<FastColoredTextBoxNS.AutoIndentEventArgs>(this.textBox_AutoIndentNeeded);
 			this.textBox.CustomAction += new System.EventHandler<FastColoredTextBoxNS.CustomActionEventArgs>(this.textBox_CustomAction);
+			this.textBox.Paint += new System.Windows.Forms.PaintEventHandler(this.textBox_Paint);
 			this.textBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.textBox_DoubleClick);
 			// 
 			// splitter

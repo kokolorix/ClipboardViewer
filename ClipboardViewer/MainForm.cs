@@ -23,6 +23,8 @@ using MouseEventArgs = System.Windows.Forms.MouseEventArgs;
 using System.Collections.Specialized;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using System.Drawing.Imaging;
+using Image = System.Drawing.Image;
 
 namespace ClpView
 {
@@ -43,6 +45,8 @@ namespace ClpView
 		Color currentLineColor = Color.Orange;
 
 		private SharpClipboard sharpClipboard;
+
+		private Image image;
 
 
 		public MainForm()
@@ -473,11 +477,12 @@ namespace ClpView
 
 				case SharpClipboard.ContentTypes.Image:
 					ct = ClipboardType.Image;
-					break;
+					PasteImage(Clipboard.GetImage());
+					return;
 			}
 
 			string text = getTextFromClipboard(ct);
-			textBox.Text = text;
+			PasteText(text);
 
 			if(ct == ClipboardType.File && Clipboard.GetFileDropList().Count == 1)
 			{
@@ -771,7 +776,7 @@ namespace ClpView
 			if (toolObserveClipboard.Checked)
 			{
 				toolObserveClipboard.Image = global::ClpView.Properties.Resources.eye;
-				textBox.Text = getClipboardText();
+				PasteText(getClipboardText());
 			}
 			else
 			{
@@ -809,6 +814,19 @@ namespace ClpView
 			}
 		}
 
+		private void PasteText(string text)
+		{
+			this.image = null;
+			textBox.Text = text;
+		}
+		private void PasteImage(System.Drawing.Image image)
+		{
+			this.image = image;
+			textBox.Text = null;
+			textBox.Invalidate();
+		}
+
+
 		private void pasteToolStripButton_Click(object sender, EventArgs e)
 		{
 			if(tbFind.Focused && Clipboard.ContainsText())
@@ -817,7 +835,11 @@ namespace ClpView
 			}
 			else
 			{
-				textBox.Text = getClipboardText();
+				var text = getClipboardText();
+				if(Clipboard.ContainsImage())
+					PasteImage(Clipboard.GetImage());
+				else
+					PasteText(text);
 			}
 		}
 
@@ -1090,6 +1112,21 @@ namespace ClpView
 			textBox.WordWrap = btn.Checked;
 			textBox.OnVisibleRangeChanged();
 			textBox.UpdateScrollbars();
+		}
+
+		private void textBox_Paint(object sender, PaintEventArgs e)
+		{
+			if(!(this.image is null))
+			{
+				var graph = e.Graphics;
+				graph.Clear(textBox.BackColor);
+				using (var bitmap = new Bitmap(image))
+				{
+					graph.InterpolationMode = InterpolationMode.HighQualityBicubic;
+					bitmap.MakeTransparent();
+					graph.DrawImageUnscaled(bitmap, new Point(10, 10));
+				}
+			}
 		}
 	}
 

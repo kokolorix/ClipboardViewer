@@ -1055,7 +1055,23 @@ namespace ClpView
 			textBox.OnVisibleRangeChanged();
 			textBox.UpdateScrollbars();
 		}
-}
+
+		private void wrapToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+		{
+			ToolStripMenuItem itm = sender as ToolStripMenuItem;
+			textBox.WordWrap = itm.Checked;
+			textBox.OnVisibleRangeChanged();
+			textBox.UpdateScrollbars();
+		}
+
+		private void btWordWrap_CheckedChanged(object sender, EventArgs e)
+		{
+			ToolStripButton btn = sender as ToolStripButton;
+			textBox.WordWrap = btn.Checked;
+			textBox.OnVisibleRangeChanged();
+			textBox.UpdateScrollbars();
+		}
+	}
 
 	public class InvisibleCharsRenderer : Style
 	{

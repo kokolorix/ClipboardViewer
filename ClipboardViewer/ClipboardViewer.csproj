@@ -142,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClipboardViewer.ico" />
+    <None Include="Resources\word_wrap.png" />
     <None Include="Resources\view_previous.png" />
     <None Include="Resources\view_next.png" />
     <None Include="Resources\arrow_merge_9.png" />

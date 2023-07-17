@@ -472,11 +472,19 @@ namespace ClpView
 					break;
 
 				case SharpClipboard.ContentTypes.Files:
-					ct = ClipboardType.File;
-					break;
+					//ct = ClipboardType.File;
+					{
+						var cnt = getContentFromClipboardFiles();
+						if(!(cnt.txt is null))
+							PasteText(cnt.txt);
+						if(!(cnt.img is null))
+							PasteImage(cnt.img);
+						return;
+
+					}
 
 				case SharpClipboard.ContentTypes.Image:
-					ct = ClipboardType.Image;
+					//ct = ClipboardType.Image;
 					PasteImage(Clipboard.GetImage());
 					return;
 			}
@@ -492,6 +500,64 @@ namespace ClpView
 				fileSystemWatcher.Path= dirPath;
 				fileSystemWatcher.EnableRaisingEvents = true;
 			}
+		}
+
+		private (String txt, Image img) getContentFromClipboardFiles()
+		{
+			String text = null;
+			Image image = null;
+			List<String> imagePaths = Clipboard.GetFileDropList()
+				.OfType<String>()
+				.ToList()
+				.FindAll(fp => IsImageExtension(Path.GetExtension(fp)));
+
+			if (imagePaths.Any())
+			{
+				Image firstImage = Image.FromFile(imagePaths[0]);
+				int totalWidth = firstImage.Width;
+				int totalHeight = firstImage.Height;
+
+				// Create a bitmap with the total dimensions
+				Bitmap finalImage = new Bitmap(totalWidth, totalHeight);
+				using(Graphics graphics = Graphics.FromImage(finalImage))
+				{
+					int currentHeight = 0;
+
+					foreach (var fp in imagePaths)
+					{
+
+						// Append each image vertically
+						foreach (string imagePath in imagePaths)
+						{
+							using(Image img = Image.FromFile(imagePath))
+							{
+								//finalImage.Height += img.Height;
+									// Draw the image onto the final image
+								graphics.DrawImage(img, 0, currentHeight);
+
+								// Update the current height
+								currentHeight += img.Height;
+
+							}
+						}
+					}
+
+					image = finalImage;
+				}
+			}
+			else
+			{
+				foreach (var fp in Clipboard.GetFileDropList())
+					text += File.ReadAllText(fp);
+			}
+
+			return (text, image);
+		}
+
+		static bool IsImageExtension(string extension)
+		{
+			string[] imageExtensions = { ".bmp", ".gif", ".jpg", ".jpeg", ".png", ".ico" };
+			return Array.Exists(imageExtensions, ext => ext.Equals(extension, StringComparison.OrdinalIgnoreCase));
 		}
 
 		private string getTextFromClipboard(ClipboardType ct)

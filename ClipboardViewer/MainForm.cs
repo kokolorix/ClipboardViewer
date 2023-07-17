@@ -458,6 +458,33 @@ namespace ClpView
 			Clipboard.SetFileDropList(Clipboard.GetFileDropList());
 		}
 
+		private void pasteFromClipboard(ClipboardType ct)
+		{
+			switch (ct)
+			{
+				case ClipboardType.Image:
+					{
+						pasteImage(Clipboard.GetImage());
+						break;
+					}
+				case ClipboardType.File:
+					{
+						var cnt = getContentFromClipboardFiles();
+						if (!(cnt.txt is null))
+							pasteText(cnt.txt);
+						if (!(cnt.img is null))
+							pasteImage(cnt.img);
+						break;
+					}
+				default:
+					{
+						string text = getTextFromClipboard(ct);
+						pasteText(text);
+						break;
+					}
+			}
+		}
+
 		private void clipboardChanged(object sender, SharpClipboard.ClipboardChangedEventArgs e)
 		{
 			textBox.Bookmarks.Clear();
@@ -472,27 +499,18 @@ namespace ClpView
 					break;
 
 				case SharpClipboard.ContentTypes.Files:
-					//ct = ClipboardType.File;
-					{
-						var cnt = getContentFromClipboardFiles();
-						if(!(cnt.txt is null))
-							PasteText(cnt.txt);
-						if(!(cnt.img is null))
-							PasteImage(cnt.img);
-						return;
-
-					}
+					ct = ClipboardType.File;
+					break;
 
 				case SharpClipboard.ContentTypes.Image:
-					//ct = ClipboardType.Image;
-					PasteImage(Clipboard.GetImage());
-					return;
+					ct = ClipboardType.Image;
+					break;
 			}
 
-			string text = getTextFromClipboard(ct);
-			PasteText(text);
+			pasteFromClipboard(ct);
 
-			if(ct == ClipboardType.File && Clipboard.GetFileDropList().Count == 1)
+
+			if (ct == ClipboardType.File && Clipboard.GetFileDropList().Count == 1)
 			{
 				var filePath = Clipboard.GetFileDropList().Cast<string>().First();
 				var dirPath = Path.GetDirectoryName(filePath);
@@ -513,33 +531,42 @@ namespace ClpView
 
 			if (imagePaths.Any())
 			{
-				Image firstImage = Image.FromFile(imagePaths[0]);
-				int totalWidth = firstImage.Width;
-				int totalHeight = firstImage.Height;
+				int totalWidth = 0;
+				int totalHeight = 0;
+				List<Image> images = new List<Image>(imagePaths.Count);
+				foreach (string imagePath in imagePaths)
+				{
+					Image img = Image.FromFile(imagePath);
+					if(img.HorizontalResolution != 96)
+					{
+						var bmp = new Bitmap(img);
+						bmp.SetResolution(96,96);
+						images.Add(bmp);
+					}
+					else
+					{
+						images.Add(img);
+					}
+					totalHeight += img.Height;
+					totalWidth = Math.Max(totalWidth, img.Width);
+				}
 
 				// Create a bitmap with the total dimensions
 				Bitmap finalImage = new Bitmap(totalWidth, totalHeight);
 				using(Graphics graphics = Graphics.FromImage(finalImage))
 				{
+					//SolidBrush blueBrush = new SolidBrush(Color.Blue);
+					//graphics.FillRectangle(blueBrush, 0, 0, totalWidth, totalHeight);
 					int currentHeight = 0;
 
-					foreach (var fp in imagePaths)
+					// Append each image vertically
+					foreach (Image img in images)
 					{
-
-						// Append each image vertically
-						foreach (string imagePath in imagePaths)
-						{
-							using(Image img = Image.FromFile(imagePath))
-							{
-								//finalImage.Height += img.Height;
-									// Draw the image onto the final image
-								graphics.DrawImage(img, 0, currentHeight);
-
-								// Update the current height
-								currentHeight += img.Height;
-
-							}
-						}
+						//Pen blackPen = new Pen(Color.Black, 3); ;
+						//graphics.DrawRectangle(blackPen, 0, currentHeight, img.Width, img.Height);
+						graphics.DrawImage(img, 0, currentHeight);
+						currentHeight += img.Height;
+						img.Dispose();
 					}
 
 					image = finalImage;
@@ -842,7 +869,8 @@ namespace ClpView
 			if (toolObserveClipboard.Checked)
 			{
 				toolObserveClipboard.Image = global::ClpView.Properties.Resources.eye;
-				PasteText(getClipboardText());
+				ClipboardType ct = getClipboardType();
+				pasteFromClipboard(ct);
 			}
 			else
 			{
@@ -850,23 +878,24 @@ namespace ClpView
 			}
 		}
 
-		private string getClipboardText()
+		private ClipboardType getClipboardType()
 		{
-			ClipboardType ct = ClipboardType.Unknown;
-			if (Clipboard.ContainsFileDropList())
-				ct = ClipboardType.File;
-			else if (Clipboard.ContainsText())
-				ct = ClipboardType.Text;
-			else if (Clipboard.ContainsImage())
-				ct = ClipboardType.Image;
-			return getTextFromClipboard(ct);
+				ClipboardType ct = ClipboardType.Unknown;
+				if (Clipboard.ContainsFileDropList())
+					ct = ClipboardType.File;
+				else if (Clipboard.ContainsText())
+					ct = ClipboardType.Text;
+				else if (Clipboard.ContainsImage())
+					ct = ClipboardType.Image;
+				return ct;
 		}
 
 		private void copyToolStripButton_Click(object sender, EventArgs e)
 		{
 			if (String.IsNullOrEmpty(textBox.SelectedText))
 			{
-				Clipboard.SetText(textBox.Text);
+				if(!(textBox.Text is null))
+					Clipboard.SetText(textBox.Text);
 			}
 			else
 			{
@@ -880,12 +909,12 @@ namespace ClpView
 			}
 		}
 
-		private void PasteText(string text)
+		private void pasteText(string text)
 		{
 			this.image = null;
 			textBox.Text = text;
 		}
-		private void PasteImage(System.Drawing.Image image)
+		private void pasteImage(System.Drawing.Image image)
 		{
 			this.image = image;
 			textBox.Text = null;
@@ -901,11 +930,8 @@ namespace ClpView
 			}
 			else
 			{
-				var text = getClipboardText();
-				if(Clipboard.ContainsImage())
-					PasteImage(Clipboard.GetImage());
-				else
-					PasteText(text);
+				ClipboardType ct = getClipboardType();
+				pasteFromClipboard(ct);
 			}
 		}
 

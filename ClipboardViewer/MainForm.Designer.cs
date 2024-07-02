@@ -157,6 +157,8 @@ namespace ClpView
 			this.toolStripButton11 = new System.Windows.Forms.ToolStripButton();
 			this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
 			this.fileSystemWatcher = new System.IO.FileSystemWatcher();
+			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+			this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.toolStripContainer.ContentPanel.SuspendLayout();
 			this.toolStripContainer.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.textBox)).BeginInit();
@@ -167,6 +169,7 @@ namespace ClpView
 			this.tsBookmark.SuspendLayout();
 			this.tsFolding.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher)).BeginInit();
+			this.statusStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// sharpClipboard
@@ -189,11 +192,11 @@ namespace ClpView
 			this.toolStripContainer.ContentPanel.Controls.Add(this.textBox);
 			this.toolStripContainer.ContentPanel.Controls.Add(this.splitter);
 			this.toolStripContainer.ContentPanel.Controls.Add(this.documentMap);
-			this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(650, 705);
+			this.toolStripContainer.ContentPanel.Size = new System.Drawing.Size(846, 705);
 			this.toolStripContainer.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.toolStripContainer.Location = new System.Drawing.Point(0, 0);
 			this.toolStripContainer.Name = "toolStripContainer";
-			this.toolStripContainer.Size = new System.Drawing.Size(650, 730);
+			this.toolStripContainer.Size = new System.Drawing.Size(846, 730);
 			this.toolStripContainer.TabIndex = 6;
 			this.toolStripContainer.Text = "toolStripContainer";
 			// 
@@ -242,10 +245,11 @@ namespace ClpView
 			this.textBox.ReservedCountOfLineNumberChars = 3;
 			this.textBox.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
 			this.textBox.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("textBox.ServiceColors")));
-			this.textBox.Size = new System.Drawing.Size(567, 705);
+			this.textBox.Size = new System.Drawing.Size(763, 705);
 			this.textBox.TabIndex = 8;
 			this.textBox.Zoom = 100;
 			this.textBox.TextChanged += new System.EventHandler<FastColoredTextBoxNS.TextChangedEventArgs>(this.textBox_TextChanged);
+			this.textBox.SelectionChanged += new System.EventHandler(this.textBox_SelectionChanged);
 			this.textBox.SelectionChangedDelayed += new System.EventHandler(this.fctb_SelectionChangedDelayed);
 			this.textBox.AutoIndentNeeded += new System.EventHandler<FastColoredTextBoxNS.AutoIndentEventArgs>(this.textBox_AutoIndentNeeded);
 			this.textBox.CustomAction += new System.EventHandler<FastColoredTextBoxNS.CustomActionEventArgs>(this.textBox_CustomAction);
@@ -255,7 +259,7 @@ namespace ClpView
 			// splitter
 			// 
 			this.splitter.Dock = System.Windows.Forms.DockStyle.Right;
-			this.splitter.Location = new System.Drawing.Point(567, 0);
+			this.splitter.Location = new System.Drawing.Point(763, 0);
 			this.splitter.Name = "splitter";
 			this.splitter.Size = new System.Drawing.Size(3, 705);
 			this.splitter.TabIndex = 9;
@@ -265,7 +269,7 @@ namespace ClpView
 			// 
 			this.documentMap.Dock = System.Windows.Forms.DockStyle.Right;
 			this.documentMap.ForeColor = System.Drawing.Color.Maroon;
-			this.documentMap.Location = new System.Drawing.Point(570, 0);
+			this.documentMap.Location = new System.Drawing.Point(766, 0);
 			this.documentMap.Name = "documentMap";
 			this.documentMap.Scale = 0.2F;
 			this.documentMap.Size = new System.Drawing.Size(80, 705);
@@ -1064,7 +1068,6 @@ namespace ClpView
 			// 
 			this.tbFind.AcceptsReturn = true;
 			this.tbFind.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-			this.tbFind.Font = new System.Drawing.Font("Segoe UI", 9F);
 			this.tbFind.Name = "tbFind";
 			this.tbFind.Size = new System.Drawing.Size(140, 25);
 			this.tbFind.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbFind_KeyPress);
@@ -1135,7 +1138,7 @@ namespace ClpView
             this.btGo,
             this.toolStripSeparator4,
             this.tsClearBookmarks});
-			this.tsBookmark.Location = new System.Drawing.Point(333, 145);
+			this.tsBookmark.Location = new System.Drawing.Point(431, 145);
 			this.tsBookmark.Name = "tsBookmark";
 			this.tsBookmark.Size = new System.Drawing.Size(194, 25);
 			this.tsBookmark.TabIndex = 11;
@@ -1347,12 +1350,29 @@ namespace ClpView
 			this.fileSystemWatcher.SynchronizingObject = this;
 			this.fileSystemWatcher.Changed += new System.IO.FileSystemEventHandler(this.fileSystemWatcher_Changed);
 			// 
+			// statusStrip1
+			// 
+			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusLabel});
+			this.statusStrip1.Location = new System.Drawing.Point(0, 708);
+			this.statusStrip1.Name = "statusStrip1";
+			this.statusStrip1.Size = new System.Drawing.Size(846, 22);
+			this.statusStrip1.TabIndex = 14;
+			this.statusStrip1.Text = "statusStrip1";
+			// 
+			// statusLabel
+			// 
+			this.statusLabel.Name = "statusLabel";
+			this.statusLabel.Size = new System.Drawing.Size(45, 17);
+			this.statusLabel.Text = "holdrio";
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
-			this.ClientSize = new System.Drawing.Size(650, 730);
+			this.ClientSize = new System.Drawing.Size(846, 730);
+			this.Controls.Add(this.statusStrip1);
 			this.Controls.Add(this.menuStrip);
 			this.Controls.Add(this.tsMain);
 			this.Controls.Add(this.tsView);
@@ -1382,6 +1402,8 @@ namespace ClpView
 			this.tsFolding.ResumeLayout(false);
 			this.tsFolding.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher)).EndInit();
+			this.statusStrip1.ResumeLayout(false);
+			this.statusStrip1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -1509,6 +1531,8 @@ namespace ClpView
 		private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+		private System.Windows.Forms.StatusStrip statusStrip1;
+		private System.Windows.Forms.ToolStripStatusLabel statusLabel;
 	}
 }
 

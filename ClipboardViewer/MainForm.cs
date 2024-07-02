@@ -214,9 +214,25 @@ namespace ClpView
 			}
 		}
 
+		private void textBox_SelectionChanged(object sender, EventArgs e)
+		{
+			setStatusLabel();
+		}
+
+		private void setStatusLabel()
+		{
+			int lnStart = textBox.Selection.Bounds.iStartLine;
+			int lnEnd = textBox.Selection.Bounds.iEndLine;
+			int chStart = textBox.Selection.Bounds.iStartChar;
+			int chEnd = textBox.Selection.Bounds.iEndChar;
+			int selLen = textBox.Selection.Length;
+			statusLabel.Text = String.Format("Ln: {{{0},{1}}}, Ch: {{{2},{3}}}, Sel: {4}", lnStart, lnEnd, chStart, chEnd, selLen);
+		}
+
 		private void fctb_SelectionChangedDelayed(object sender, EventArgs e)
 		{
 			textBox.VisibleRange.ClearStyle(SameWordsStyle);
+			setStatusLabel();
 			if (!textBox.Selection.IsEmpty)
 				return;//user selected diapason
 
